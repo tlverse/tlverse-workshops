@@ -95,25 +95,25 @@ as the best possible prediction algorithm in the library [@vdl2003unified;
 ### Why use the Super Learner? {-}
 
 - For prediction, one can use the cross-validated risk to empirically determine
-  the relative performance of SL and competing methods. 
+  the relative performance of SL and competing methods.
 - When we have tested different algorithms on actual
   data and looked at the performance (e.g., MSE of prediction), never does one
   algorithm always win (see below).
-- Below shows the results of such a study, comparing the fits of several 
+- Below shows the results of such a study, comparing the fits of several
   different learners, including the SL algorithms.
 
 ```{r why_sl, fig.show="hold", echo = FALSE}
-knitr::include_graphics("img/misc/ericSL.pdf")
+knitr::include_graphics("img/png/ericSL.png")
 ```
 
-- SL performs asymptotically as well as the best possible weighted combination. 
-- By including all competitors in the library of candidate estimators (glm, 
-  neural nets, SVMs, random forest, etc.), the SL will asymptotically 
-  outperform any of its competitors --- even if the set of competitors is 
-  allowed to grow polynomial in sample size. 
-- Motivates the name "Super Learner": it provides a system of combining many 
+- SL performs asymptotically as well as the best possible weighted combination.
+- By including all competitors in the library of candidate estimators (GLMs,
+  neural nets, SVMs, random forest, etc.), the SL will asymptotically outperform
+  any of its competitors --- even if the set of competitors is allowed to grow
+  polynomial in sample size. 
+- Motivates the name "Super Learner": it provides a system of combining many
   estimators into an improved estimator.
-  
+
 ### General Overview of the Algorithm {-}
 
 #### What is cross-validation and how does it work?
@@ -125,7 +125,7 @@ knitr::include_graphics("img/misc/ericSL.pdf")
   folds.
 
 ```{r cv_fig, fig.show="hold", echo = FALSE}
-knitr::include_graphics("img/misc/vs.pdf")
+knitr::include_graphics("img/png/vs.png")
 ```
 
 #### General step-by-step overview of the Super Learner algorithm
@@ -157,7 +157,7 @@ Note, this entire procedure can be itself cross-validated to get a consistent
 estimate of the future performance of the SL fit.
 
 ```{r cv_sl_alg, fig.show="hold", echo = FALSE}
-knitr::include_graphics("img/misc/SLKaiserNew.pdf")
+knitr::include_graphics("img/png/SLKaiserNew.png")
 ```
 
 #### How to pick a library of candidate learners?
@@ -237,7 +237,7 @@ such a study, comparing the fits of several different learners, including the SL
 algorithms.
 
 r cv_fig3, results="asis", echo = FALSE
-knitr::include_graphics("img/misc/ericSL.pdf")
+knitr::include_graphics("img/png/ericSL.png")
 
 
 For more detail on Super Learner we refer the reader to @vdl2007super and
