@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 5 Optimal Individualized Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4.9002/tabs.js"></script><script src="libs/bs3compat-0.2.4.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9000/tabs.js"></script><script src="libs/bs3compat-0.2.5.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><link href="libs/vis-4.20.1/vis.css" rel="stylesheet">
 <script src="libs/vis-4.20.1/vis.min.js"></script><script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
@@ -69,7 +69,7 @@
 <p><em>Ivana Malenica</em></p>
 <p>Based on the <a href="https://github.com/tlverse/tmle3mopttx"><code>tmle3mopttx</code> <code>R</code> package</a>
 by <em>Ivana Malenica, Jeremy Coyle, and Mark van der Laan</em>.</p>
-<p>Updated: 2021-04-11</p>
+<p>Updated: 2021-05-20</p>
 <div id="learning-objectives-3" class="section level2">
 <h2>
 <span class="header-section-number">5.1</span> Learning Objectives<a class="anchor" aria-label="anchor" href="#learning-objectives-3"><i class="fas fa-link"></i></a>
@@ -108,30 +108,30 @@ exposures we might be used to.</p></li>
 <li><p>In this chapter, we learn about dynamic
 (individualized) interventions that tailor the treatment decision based on the
 collected covariates.</p></li>
-<li><p>In the statistics community, such a treatment strategy is
-termed <strong>individualized treatment regimes</strong> (ITR), and the (counterfactual) population
-mean outcome under an ITR is the <strong>value of the ITR</strong>.</p></li>
-<li><p>Even more, suppose one wishes
-to maximize the population mean of an outcome, where for each individual we have
-access to some set of measured covariates. An ITR with the maximal value is referred
-to as an <strong>optimal ITR</strong> or the <strong>optimal individualized treatment</strong>.
-Consequently, the value of an optimal ITR is termed the <strong>optimal value</strong>, or the
-<strong>mean under the optimal individualized treatment</strong>.</p></li>
-<li><p>One opts to administer the intervention to individuals who will profit from it, instead of
-assigning treatment on a population level. But how do we know which intervention works for which
-patient?</p></li>
-<li><p>For example, one might seek to improve retention in
-HIV care. In a randomized clinical trial, several interventions show efficacy- including
-appointment reminders through text messages, small cash incentives for on time clinic
+<li><p>In the statistics community, such a treatment strategy is termed
+<strong>individualized treatment regimes</strong> (ITR), and the (counterfactual)
+population mean outcome under an ITR is the <strong>value of the ITR</strong>.</p></li>
+<li><p>Even more, suppose one wishes to maximize the population mean of an outcome,
+where for each individual we have access to some set of measured covariates.
+An ITR with the maximal value is referred to as an <strong>optimal ITR</strong> or the
+<strong>optimal individualized treatment</strong>. Consequently, the value of an optimal
+ITR is termed the <strong>optimal value</strong>, or the <strong>mean under the optimal
+individualized treatment</strong>.</p></li>
+<li><p>One opts to administer the intervention to individuals who will profit from
+it, instead of assigning treatment on a population level. But how do we know
+which intervention works for which patient?</p></li>
+<li><p>For example, one might seek to improve retention in HIV care. In a randomized
+clinical trial, several interventions show efficacy- including appointment
+reminders through text messages, small cash incentives for on time clinic
 visits, and peer health workers.</p></li>
-<li><p>Ideally, we want to improve effectiveness by assigning
-each patient the intervention they are most likely to benefit from, as well as improve
-efficiency by not allocating resources to individuals that do not need them, or would
-not benefit from an intervention.</p></li>
+<li><p>Ideally, we want to improve effectiveness by assigning each patient the
+intervention they are most likely to benefit from, as well as improve
+efficiency by not allocating resources to individuals that do not need them,
+or would not benefit from an intervention.</p></li>
 </ul>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-1"></span>
-<img src="img/image/DynamicA_Illustration.png" alt="Illustration of a Dynamic Treatment Regime in a Clinical Setting" width="60%"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="img/png/DynamicA_Illustration.png" alt="Illustration of a Dynamic Treatment Regime in a Clinical Setting" width="60%"><p class="caption">
 FIGURE 5.1: Illustration of a Dynamic Treatment Regime in a Clinical Setting
 </p>
 </div>
@@ -229,10 +229,10 @@ Estimator (CV-TMLE).</p></li>
 <span class="header-section-number">5.4.1</span> Why CV-TMLE?<a class="anchor" aria-label="anchor" href="#why-cv-tmle"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
-<li><p>CV-TMLE is necessary as the non-cross-validated TMLE
-is biased upward for the mean outcome under the rule, and therefore overly optimistic.</p></li>
-<li><p>More generally however, using CV-TMLE allows us more freedom in estimation and therefore greater
-data adaptivity, without sacrificing inference!</p></li>
+<li><p>CV-TMLE is necessary as the non-cross-validated TMLE is biased upward for the
+mean outcome under the rule, and therefore overly optimistic.</p></li>
+<li><p>More generally however, using CV-TMLE allows us more freedom in estimation and
+therefore greater data adaptivity, without sacrificing inference!</p></li>
 </ul>
 </div>
 </div>
@@ -241,24 +241,25 @@ data adaptivity, without sacrificing inference!</p></li>
 <span class="header-section-number">5.5</span> Binary Treatment<a class="anchor" aria-label="anchor" href="#binary-treatment"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li><p>How do we estimate the optimal individualized treatment regime? In the case of a
-binary treatment, a key quantity for optimal ITR is the <strong>blip</strong> function.</p></li>
-<li><p>Optimal ITR ideally assigns treatment to individuals falling in strata in which the
-stratum specific average treatment effect, the <strong>blip</strong> function, is positive and does not
-assign treatment to individuals for which this quantity is negative.</p></li>
-<li><p>We define the blip function as:
-<span class="math display">\[\bar{Q}_0(V) \equiv E_0[Y_1-Y_0|V] \equiv E_0[\bar{Q}_{Y,0}(1,W) - \bar{Q}_{Y,0}(0,W) | V], \]</span>
-or the average treatment effect within a stratum of <span class="math inline">\(V\)</span>.</p></li>
-<li><p>Optimal individualized
-rule can now be derived as <span class="math inline">\(d_{opt}(V) = I(\bar{Q}_{0}(V) &gt; 0)\)</span>.</p></li>
-<li><p>Relying on the Targeted Maximum Likelihood (TML) estimator and the Super Learner estimate of the
-blip function, we follow the below steps in order to obtain value of the ITR:</p></li>
+<li><p>How do we estimate the optimal individualized treatment regime? In the case of
+a binary treatment, a key quantity for optimal ITR is the <strong>blip</strong> function.</p></li>
+<li><p>Optimal ITR ideally assigns treatment to individuals falling in strata in
+which the stratum specific average treatment effect, the <strong>blip</strong> function, is
+positive and does not assign treatment to individuals for which this quantity
+is negative.</p></li>
+<li><p>We define the blip function as: <span class="math display">\[\bar{Q}_0(V) \equiv E_0[Y_1-Y_0|V] \equiv
+E_0[\bar{Q}_{Y,0}(1,W) - \bar{Q}_{Y,0}(0,W) | V], \]</span> or the average treatment
+effect within a stratum of <span class="math inline">\(V\)</span>.</p></li>
+<li><p>Optimal individualized rule can now be derived as <span class="math inline">\(d_{opt}(V) = I(\bar{Q}_{0}(V) &gt; 0)\)</span>.</p></li>
+<li><p>Relying on the Targeted Maximum Likelihood (TML) estimator and the Super
+Learner estimate of the blip function, we follow the below steps in order to
+obtain value of the ITR:</p></li>
 </ul>
 <ol style="list-style-type: decimal">
-<li><p>Estimate <span class="math inline">\(\bar{Q}_{Y,0}(A,W)\)</span> and <span class="math inline">\(g_0(A|W)\)</span> using <code>sl3</code>. We denote such estimates
-as <span class="math inline">\(\bar{Q}_{Y,n}(A,W)\)</span> and <span class="math inline">\(g_n(A|W)\)</span>.</p></li>
-<li><p>Apply the doubly robust Augmented-Inverse Probability Weighted (A-IPW) transform to
-our outcome, where we define:</p></li>
+<li><p>Estimate <span class="math inline">\(\bar{Q}_{Y,0}(A,W)\)</span> and <span class="math inline">\(g_0(A|W)\)</span> using <code>sl3</code>. We denote such
+estimates as <span class="math inline">\(\bar{Q}_{Y,n}(A,W)\)</span> and <span class="math inline">\(g_n(A|W)\)</span>.</p></li>
+<li><p>Apply the doubly robust Augmented-Inverse Probability Weighted (A-IPW)
+transform to our outcome, where we define:</p></li>
 </ol>
 <p><span class="math display">\[D_{\bar{Q}_Y,g,a}(O) \equiv \frac{I(A=a)}{g(A|W)} (Y-\bar{Q}_Y(A,W)) + \bar{Q}_Y(A=a,W)\]</span></p>
 <p>Note that under the randomization and positivity assumptions we have that
@@ -300,9 +301,10 @@ the specified <code>sl3</code> library of learners and an appropriate loss funct
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"data_bin"</span><span class="op">)</span></code></pre></div>
 <ul>
 <li><p>The above composes our observed data structure <span class="math inline">\(O = (W, A, Y)\)</span>.</p></li>
-<li><p>Note that the mean under the true optimal rule is <span class="math inline">\(\psi_0=0.578\)</span> for this data generating
-distribution.</p></li>
-<li><p>Next, we specify the role that each variable in the data set plays as the nodes in a DAG.</p></li>
+<li><p>Note that the mean under the true optimal rule is <span class="math inline">\(\psi_0=0.578\)</span> for this data
+generating distribution.</p></li>
+<li><p>Next, we specify the role that each variable in the data set plays as the
+nodes in a DAG.</p></li>
 </ul>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># organize data and nodes for tmle3</span>
@@ -313,8 +315,8 @@ distribution.</p></li>
   Y <span class="op">=</span> <span class="st">"Y"</span>
 <span class="op">)</span></code></pre></div>
 <ul>
-<li>We now have an observed data structure (<code>data</code>), and a specification of the role
-that each variable in the data set plays as the nodes in a DAG.</li>
+<li>We now have an observed data structure (<code>data</code>), and a specification of the
+role that each variable in the data set plays as the nodes in a DAG.</li>
 </ul>
 </div>
 <div id="constructing-optimal-stacked-regressions-with-sl3" class="section level4">
@@ -322,9 +324,9 @@ that each variable in the data set plays as the nodes in a DAG.</li>
 <span class="header-section-number">5.5.1.2</span> Constructing Optimal Stacked Regressions with <code>sl3</code><a class="anchor" aria-label="anchor" href="#constructing-optimal-stacked-regressions-with-sl3"><i class="fas fa-link"></i></a>
 </h4>
 <ul>
-<li>We generate three different ensemble learners that must be fit,
-corresponding to the learners for the outcome regression, propensity score, and
-the blip function.</li>
+<li>We generate three different ensemble learners that must be fit, corresponding
+to the learners for the outcome regression, propensity score, and the blip
+function.</li>
 </ul>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Define sl3 library and metalearners:</span>
@@ -370,19 +372,19 @@ notation by bundling the ensemble learners into a list object below:</p>
 <ul>
 <li><p>To start, we will initialize a specification for the TMLE of our parameter of
 interest simply by calling <code>tmle3_mopttx_blip_revere</code>.</p></li>
-<li><p>We specify the argument <code>V = c("W1", "W2", "W3")</code> when initializing the <code>tmle3_Spec</code>
-object in order to communicate that we’re interested in learning a rule dependent on <code>V</code>
-covariates.</p></li>
-<li><p>We also need to specify the type of blip we will use in this estimation problem, and
-the list of learners used to estimate relevant parts of the likelihood and the blip function.</p></li>
+<li><p>We specify the argument <code>V = c("W1", "W2", "W3")</code> when initializing the
+<code>tmle3_Spec</code> object in order to communicate that we’re interested in learning
+a rule dependent on <code>V</code> covariates.</p></li>
+<li><p>We also need to specify the type of blip we will use in this estimation
+problem, and the list of learners used to estimate relevant parts of the
+likelihood and the blip function.</p></li>
 <li><p>In addition, we need to specify whether we want to maximize or minimize the
 mean outcome under the rule (<code>maximize=TRUE</code>).</p></li>
-<li><p>If <code>complex=FALSE</code>, <code>tmle3mopttx</code> will consider all the possible rules under a smaller set of
-covariates including the static rules, and optimize the mean outcome over all the
-suboptimal rules dependent on <span class="math inline">\(V\)</span>.</p></li>
-<li><p>If <code>realistic=TRUE</code>, only treatments supported by the data
-will be considered, therefore alleviating concerns regarding practical positivity
-issues.</p></li>
+<li><p>If <code>complex=FALSE</code>, <code>tmle3mopttx</code> will consider all the possible rules under a
+smaller set of covariates including the static rules, and optimize the mean
+outcome over all the suboptimal rules dependent on <span class="math inline">\(V\)</span>.</p></li>
+<li><p>If <code>realistic=TRUE</code>, only treatments supported by the data will be considered,
+therefore alleviating concerns regarding practical positivity issues.</p></li>
 </ul>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># initialize a tmle specification</span>
@@ -413,32 +415,33 @@ individualized treatment!</p>
 <p><strong>QUESTION:</strong> Can we still use the blip function if the treatment is
 categorical?</p>
 <ul>
-<li><p>In this section, we consider how to evaluate the mean outcome under the optimal
-individualized treatment when <span class="math inline">\(A\)</span> has more than two categories!</p></li>
-<li><p>We define <strong>pseudo-blips</strong> as vector valued entities where the output for a given
-<span class="math inline">\(V\)</span> is a vector of length equal to the number of treatment categories, <span class="math inline">\(n_A\)</span>.
-As such, we define it as:
-<span class="math display">\[\bar{Q}_0^{pblip}(V) = \{\bar{Q}_{0,a}^{pblip}(V): a \in \mathcal{A} \}\]</span></p></li>
+<li><p>In this section, we consider how to evaluate the mean outcome under the
+optimal individualized treatment when <span class="math inline">\(A\)</span> has more than two categories!</p></li>
+<li><p>We define <strong>pseudo-blips</strong> as vector valued entities where the output for a
+given <span class="math inline">\(V\)</span> is a vector of length equal to the number of treatment categories,
+<span class="math inline">\(n_A\)</span>. As such, we define it as: <span class="math display">\[\bar{Q}_0^{pblip}(V) =
+\{\bar{Q}_{0,a}^{pblip}(V): a \in \mathcal{A} \}\]</span></p></li>
 <li><p>We implement three different pseudo-blips in <code>tmle3mopttx</code>.</p></li>
 </ul>
 <ol style="list-style-type: decimal">
 <li><p><strong>Blip1</strong> corresponds to choosing a reference category of treatment, and
-defining the blip for all other categories relative to the specified reference:
-<span class="math display">\[\bar{Q}_{0,a}^{pblip-ref}(V) \equiv E_0(Y_a-Y_0|V)\]</span></p></li>
-<li><p><strong>Blip2</strong> approach corresponds to defining the blip relative to the average of
-all categories:
+defining the blip for all other categories relative to the specified
+reference: <span class="math display">\[\bar{Q}_{0,a}^{pblip-ref}(V) \equiv E_0(Y_a-Y_0|V)\]</span></p></li>
+<li><p><strong>Blip2</strong> approach corresponds to defining the blip relative to the average
+of all categories:
 <span class="math display">\[\bar{Q}_{0,a}^{pblip-avg}(V) \equiv E_0(Y_a- \frac{1}{n_A} \sum_{a \in \mathcal{A}} Y_a|V)\]</span></p></li>
-<li><p><strong>Blip3</strong> reflects an extension of Blip2, where the average is now a weighted average:
-<span class="math display">\[\bar{Q}_{0,a}^{pblip-wavg}(V) \equiv E_0(Y_a- \frac{1}{n_A} \sum_{a \in \mathcal{A}} Y_{a} P(A=a|V)
-|V)\]</span></p></li>
+<li><p><strong>Blip3</strong> reflects an extension of Blip2, where the average is now a weighted
+average:
+<span class="math display">\[\bar{Q}_{0,a}^{pblip-wavg}(V) \equiv E_0(Y_a- \frac{1}{n_A}
+\sum_{a \in \mathcal{A}} Y_{a} P(A=a|V)|V)\]</span></p></li>
 </ol>
 <div id="evaluating-the-causal-effect-of-an-optimal-itr-with-categorical-treatment" class="section level3">
 <h3>
 <span class="header-section-number">5.6.1</span> Evaluating the Causal Effect of an optimal ITR with Categorical Treatment<a class="anchor" aria-label="anchor" href="#evaluating-the-causal-effect-of-an-optimal-itr-with-categorical-treatment"><i class="fas fa-link"></i></a>
 </h3>
 <p>While the procedure is analogous to the previously described binary treatment,
-we now need to pay attention to the type of blip we define in the estimation stage,
-as well as how we construct our learners.</p>
+we now need to pay attention to the type of blip we define in the estimation
+stage, as well as how we construct our learners.</p>
 <div id="simulated-data" class="section level4">
 <h4>
 <span class="header-section-number">5.6.1.1</span> Simulated Data<a class="anchor" aria-label="anchor" href="#simulated-data"><i class="fas fa-link"></i></a>
@@ -458,8 +461,8 @@ of the following form:</li>
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"data_cat_realistic"</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>The above composes our observed data structure <span class="math inline">\(O = (W, A, Y)\)</span>. Note that the
-mean under the true optimal rule is <span class="math inline">\(\psi_0=0.658\)</span>, which is the quantity we aim
-to estimate.</li>
+mean under the true optimal rule is <span class="math inline">\(\psi_0=0.658\)</span>, which is the quantity we
+aim to estimate.</li>
 </ul>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># organize data and nodes for tmle3</span>
@@ -945,7 +948,7 @@ and the corresponding value of the realistic ITR:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: April 11, 2021.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: May 20, 2021.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
