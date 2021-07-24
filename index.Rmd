@@ -184,9 +184,12 @@ network) and adaptive sequential designs.
 
 Rachael Phillips is a PhD student in biostatistics, advised by Alan Hubbard and
 Mark van der Laan. She has an MA in Biostatistics, BS in Biology, and BA in
-Mathematics. A student of targeted learning and causal inference; her research
-integrates personalized medicine, human-computer interaction, experimental
-design, and regulatory policy.
+Mathematics. A student of targeted learning and causal inference, Rachael’s 
+research integrates semiparametric statistical estimation and inference. She is 
+motivated by applied projects and some of her current work involves personalized 
+online learning from data streams of vital signs, human-computer interaction, 
+automated machine learning, and developing statistical analysis plans using 
+targeted learning.
 
 ## Reproduciblity with the `tlverse` {#repro}
 
