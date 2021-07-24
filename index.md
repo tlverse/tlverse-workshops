@@ -4,7 +4,7 @@ title: "[Workshop] Targeted Learning in the `tlverse`"
 subtitle: "Causal Inference Meets Machine Learning"
 author: "Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana
   Malenica, Rachael Phillips"
-date: "updated: May 20, 2021"
+date: "updated: July 24, 2021"
 documentclass: book
 site: bookdown::bookdown_site
 bibliography: [book.bib, packages.bib]
@@ -184,9 +184,12 @@ network) and adaptive sequential designs.
 
 Rachael Phillips is a PhD student in biostatistics, advised by Alan Hubbard and
 Mark van der Laan. She has an MA in Biostatistics, BS in Biology, and BA in
-Mathematics. A student of targeted learning and causal inference; her research
-integrates personalized medicine, human-computer interaction, experimental
-design, and regulatory policy.
+Mathematics. A student of targeted learning and causal inference, Rachael’s 
+research integrates semiparametric statistical estimation and inference. She is 
+motivated by applied projects and some of her current work involves personalized 
+online learning from data streams of vital signs, human-computer interaction, 
+automated machine learning, and developing statistical analysis plans using 
+targeted learning.
 
 ## Reproduciblity with the `tlverse` {#repro}
 
@@ -205,25 +208,25 @@ following packages:
 
 |package     |version    |source                                |
 |:-----------|:----------|:-------------------------------------|
-|bookdown    |0.22.2     |Github (rstudio/bookdown\@92de8a4)    |
-|bslib       |0.2.5.9000 |Github (rstudio/bslib\@9e60ac1)       |
+|bookdown    |0.22.15    |Github (rstudio/bookdown\@6ae8900)    |
+|bslib       |0.2.5.9002 |Github (rstudio/bslib\@78960cb)       |
 |data.table  |1.14.0     |CRAN (R 4.1.0)                        |
 |delayed     |0.3.0      |CRAN (R 4.1.0)                        |
-|devtools    |2.4.1      |CRAN (R 4.1.0)                        |
+|devtools    |2.4.2      |CRAN (R 4.1.0)                        |
 |downlit     |0.2.1      |CRAN (R 4.1.0)                        |
-|dplyr       |1.0.6      |CRAN (R 4.1.0)                        |
-|ggplot2     |3.3.3      |CRAN (R 4.1.0)                        |
+|dplyr       |1.0.7      |CRAN (R 4.1.0)                        |
+|ggplot2     |3.3.5      |CRAN (R 4.1.0)                        |
 |here        |1.0.1      |CRAN (R 4.1.0)                        |
 |kableExtra  |1.3.4      |CRAN (R 4.1.0)                        |
 |knitr       |1.33       |CRAN (R 4.1.0)                        |
-|mvtnorm     |1.1-1      |CRAN (R 4.1.0)                        |
+|mvtnorm     |1.1-2      |CRAN (R 4.1.0)                        |
 |origami     |1.0.3      |CRAN (R 4.1.0)                        |
-|readr       |1.4.0      |CRAN (R 4.1.0)                        |
-|rmarkdown   |2.8        |CRAN (R 4.1.0)                        |
+|readr       |2.0.0      |CRAN (R 4.1.0)                        |
+|rmarkdown   |2.9        |CRAN (R 4.1.0)                        |
 |skimr       |2.1.3      |CRAN (R 4.1.0)                        |
-|sl3         |1.4.3      |Github (tlverse/sl3\@6db1814)         |
+|sl3         |1.4.3      |Github (tlverse/sl3\@aeeb7e9)         |
 |stringr     |1.4.0      |CRAN (R 4.1.0)                        |
-|tibble      |3.1.2      |CRAN (R 4.1.0)                        |
+|tibble      |3.1.3      |CRAN (R 4.1.0)                        |
 |tidyr       |1.1.3      |CRAN (R 4.1.0)                        |
 |tidyverse   |1.3.1      |CRAN (R 4.1.0)                        |
 |tmle3       |0.2.0      |Github (tlverse/tmle3\@425e21c)       |

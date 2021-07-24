@@ -359,7 +359,7 @@ library(tidyverse)
 # read in data
 dat <- read_csv("https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv")
 dat
-#> # A tibble: 4,695 x 28
+#> # A tibble: 4,695 × 28
 #>     whz tr     fracode month  aged sex    momage momedu momheight hfiacat  Nlt18
 #>   <dbl> <chr>  <chr>   <dbl> <dbl> <chr>   <dbl> <chr>      <dbl> <chr>    <dbl>
 #> 1  0    Contr… N05265      9   268 male       30 Prima…      146. Food Se…     3
