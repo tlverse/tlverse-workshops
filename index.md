@@ -4,7 +4,7 @@ title: "[Workshop] Targeted Learning in the `tlverse`"
 subtitle: "Causal Inference Meets Machine Learning"
 author: "Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana
   Malenica, Rachael Phillips"
-date: "updated: July 24, 2021"
+date: "updated: August 16, 2021"
 documentclass: book
 site: bookdown::bookdown_site
 bibliography: [book.bib, packages.bib]
@@ -201,34 +201,34 @@ produce it.
 
 This book was written using [bookdown](http://bookdown.org/), and the complete
 source is available on [GitHub](https://github.com/tlverse/tlverse-handbook).
-This version of the book was built with R version 4.1.0 (2021-05-18),
+This version of the book was built with R version 4.1.1 (2021-08-10),
 [pandoc](https://pandoc.org/) version 2.7.3, and the
 following packages:
 
 
 |package     |version    |source                                |
 |:-----------|:----------|:-------------------------------------|
-|bookdown    |0.22.15    |Github (rstudio/bookdown\@6ae8900)    |
+|bookdown    |0.23.1     |Github (rstudio/bookdown\@01fae11)    |
 |bslib       |0.2.5.9002 |Github (rstudio/bslib\@78960cb)       |
-|data.table  |1.14.0     |CRAN (R 4.1.0)                        |
-|delayed     |0.3.0      |CRAN (R 4.1.0)                        |
-|devtools    |2.4.2      |CRAN (R 4.1.0)                        |
-|downlit     |0.2.1      |CRAN (R 4.1.0)                        |
-|dplyr       |1.0.7      |CRAN (R 4.1.0)                        |
-|ggplot2     |3.3.5      |CRAN (R 4.1.0)                        |
-|here        |1.0.1      |CRAN (R 4.1.0)                        |
-|kableExtra  |1.3.4      |CRAN (R 4.1.0)                        |
-|knitr       |1.33       |CRAN (R 4.1.0)                        |
-|mvtnorm     |1.1-2      |CRAN (R 4.1.0)                        |
-|origami     |1.0.3      |CRAN (R 4.1.0)                        |
-|readr       |2.0.0      |CRAN (R 4.1.0)                        |
-|rmarkdown   |2.9        |CRAN (R 4.1.0)                        |
-|skimr       |2.1.3      |CRAN (R 4.1.0)                        |
+|data.table  |1.14.0     |CRAN (R 4.1.1)                        |
+|delayed     |0.3.0      |CRAN (R 4.1.1)                        |
+|devtools    |2.4.2      |CRAN (R 4.1.1)                        |
+|downlit     |0.2.1      |CRAN (R 4.1.1)                        |
+|dplyr       |1.0.7      |CRAN (R 4.1.1)                        |
+|ggplot2     |3.3.5      |CRAN (R 4.1.1)                        |
+|here        |1.0.1      |CRAN (R 4.1.1)                        |
+|kableExtra  |1.3.4      |CRAN (R 4.1.1)                        |
+|knitr       |1.33       |CRAN (R 4.1.1)                        |
+|mvtnorm     |1.1-2      |CRAN (R 4.1.1)                        |
+|origami     |1.0.3      |CRAN (R 4.1.1)                        |
+|readr       |2.0.1      |CRAN (R 4.1.1)                        |
+|rmarkdown   |2.10       |CRAN (R 4.1.1)                        |
+|skimr       |2.1.3      |CRAN (R 4.1.1)                        |
 |sl3         |1.4.3      |Github (tlverse/sl3\@aeeb7e9)         |
-|stringr     |1.4.0      |CRAN (R 4.1.0)                        |
-|tibble      |3.1.3      |CRAN (R 4.1.0)                        |
-|tidyr       |1.1.3      |CRAN (R 4.1.0)                        |
-|tidyverse   |1.3.1      |CRAN (R 4.1.0)                        |
+|stringr     |1.4.0      |CRAN (R 4.1.1)                        |
+|tibble      |3.1.3      |CRAN (R 4.1.1)                        |
+|tidyr       |1.1.3      |CRAN (R 4.1.1)                        |
+|tidyverse   |1.3.1      |CRAN (R 4.1.1)                        |
 |tmle3       |0.2.0      |Github (tlverse/tmle3\@425e21c)       |
 |tmle3mopttx |0.1.0      |Github (tlverse/tmle3mopttx\@9fb1a3b) |
 |tmle3shift  |0.2.0      |Github (tlverse/tmle3shift\@43f6fc0)  |
