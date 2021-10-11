@@ -383,11 +383,13 @@ Using the [`skimr` package](https://CRAN.R-project.org/package=skimr), we can
 quickly summarize the variables measured in the WASH Benefits data set:
 
 ```{r skim_washb_data, results="asis", echo=FALSE}
+library(knitr)
 library(skimr)
+
 # optionally disable sparkline graphs for PDF output
-if (knitr::is_latex_output()) {
-  knitr::kable(skim_no_sparks(dat), format = "latex")
-} else {
+if (is_latex_output()) {
+  kable(skim_no_sparks(dat), format = "latex")
+} else if (is_html_output()) {
   skim(dat)
 }
 ```

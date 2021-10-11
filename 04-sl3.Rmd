@@ -11,18 +11,18 @@ Updated: `r Sys.Date()`
 
 By the end of this chapter you will be able to:
 
-1. Select an objective function that (i) aligns with the intention of the 
+1. Select an objective function that (i) aligns with the intention of the
    analysis and (ii) is optimized by the target parameter.
-2. Assemble a diverse library of learners to be considered in the Super Learner 
+2. Assemble a diverse library of learners to be considered in the Super Learner
    ensemble. In particular, you should be able to:
-   
+
      a. Customize a learner by modifying it's tuning parameters.
-     b. Create several different versions of the same learner at once by 
+     b. Create several different versions of the same learner at once by
         specifying a grid of tuning parameters.
-     c. Curate covariate screening pipelines in order to pass a screener's 
-        output, a subset of covariates, as input for another learner that will 
+     c. Curate covariate screening pipelines in order to pass a screener's
+        output, a subset of covariates, as input for another learner that will
         use the subset of covariates selected by the screener to model the data.
-        
+
 3. Specify the learner for ensembling (the metalearner) such that it corresponds 
    to your objective function. 
 4. Fit the Super Learner ensemble with nested cross-validation to obtain an 
@@ -32,12 +32,12 @@ By the end of this chapter you will be able to:
    cross-validated risk table and the coefficients.
 7. Justify the base library of machine learning algorithms and the ensembling 
    learner in terms of the prediction problem, statistical model $\M$, data 
-   sparsity, and the dimensionality of the covariates. 
-   
+   sparsity, and the dimensionality of the covariates.
+
 ## Motivation {-}
 
-- A common task in data analysis is prediction -- using the observed data (input 
-  variables and outcomes) to learn a function that can map new input variables 
+- A common task in data analysis is prediction -- using the observed data (input
+  variables and outcomes) to learn a function that can map new input variables
   into a predicted outcome.
   <!--
   Oftentimes, the scientific question of interest translates to a statistical
@@ -392,10 +392,15 @@ washb_data <- fread(
   ),
   stringsAsFactors = TRUE
 )
-head(washb_data) %>%
-  kable() %>%
-  kableExtra:::kable_styling(fixed_thead = T) %>%
-  scroll_box(width = "100%", height = "300px")
+if (is_latex_output()) {
+  head(washb_data) %>%
+    kable(format = "latex")
+} else if (is_html_output()) {
+   head(washb_data) %>%
+     kable() %>%
+     kable_styling(fixed_thead = TRUE) %>%
+     scroll_box(width = "100%", height = "300px")
+}
 ```
 
 ### 1. Define the machine learning task {-}
@@ -864,13 +869,20 @@ washb_task_new <- make_sl3_Task(
   outcome = outcome,
   folds = origami::make_folds(washb_data, fold_fun = folds_vfold, V = 2)
 )
+
 CVsl <- CV_lrnr_sl(
   lrnr_sl = sl_fit, task = washb_task_new, loss_fun = loss_squared_error
 )
-CVsl %>%
-  kable(digits = 4) %>%
-  kableExtra:::kable_styling(fixed_thead = T) %>%
-  scroll_box(width = "100%", height = "300px")
+
+if (is_latex_output()) {
+   CVsl %>%
+     kable(format = "latex")
+} else if (is_html_output()) {
+   CVsl %>%
+     kable() %>%
+     kable_styling(fixed_thead = TRUE) %>%
+     scroll_box(width = "100%", height = "300px")
+}
 ```
 <!-- Explain summary!!!! -->
 
@@ -904,10 +916,16 @@ Let's explore the `sl3` variable importance measurements for the `washb` data.
 
 ```{r varimp}
 washb_varimp <- importance(sl_fit, loss = loss_squared_error, type = "permute")
-washb_varimp %>%
-  kable(digits = 4) %>%
-  kableExtra:::kable_styling(fixed_thead = TRUE) %>%
-  scroll_box(width = "100%", height = "300px")
+
+if (is_latex_output()) {
+  washb_varimp %>%
+    kable(format = "latex")
+} else if (is_html_output()) {
+  washb_varimp %>%
+    kable() %>%
+    kable_styling(fixed_thead = TRUE) %>%
+    scroll_box(width = "100%", height = "300px")
+}
 ```
 
 ```{r varimp-plot, out.width = "100%"}
@@ -938,10 +956,15 @@ db_data <- url(
 chspred <- read_csv(file = db_data, col_names = TRUE)
 
 # take a quick peek
-head(chspred) %>%
-  kable(digits = 4) %>%
-  kableExtra:::kable_styling(fixed_thead = TRUE) %>%
-  scroll_box(width = "100%", height = "300px")
+if (is_latex_output()) {
+   head(chspred) %>%
+     kable(format = "latex")
+} else if (is_html_output()) {
+   head(chspred) %>%
+     kable() %>%
+     kable_styling(fixed_thead = TRUE) %>%
+     scroll_box(width = "100%", height = "300px")
+}
 ```
 
 1. Create an `sl3` task, setting myocardial infarction `mi` as the outcome and
