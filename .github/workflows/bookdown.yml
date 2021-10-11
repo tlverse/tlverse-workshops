@@ -87,7 +87,7 @@ jobs:
           path: _book                      # optional
 
       - name: Shorten commit hash
-        run: "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
+        run: echo "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
 
       - name: Commit message on pull request
         if: ${{ GITHUB_EVENT_NAME == 'pull request' }}
@@ -99,8 +99,6 @@ jobs:
 
       - name: Deploy to GitHub Pages
         uses: Cecilapp/GitHub-Pages-deploy@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           email: ${{ secrets.EMAIL }}      # must be a GitHub-verified email
           build_dir: _book/                # "_site/" by default
