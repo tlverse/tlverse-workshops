@@ -91,16 +91,18 @@ jobs:
 
       - name: Commit message on pull request
         if: ${{ GITHUB_EVENT_NAME == 'pull request' }}
-        run: echo "${{ PR from branch GITHUB_HEAD_REF (commit GITHUB_HASH) }}" >> $COMMIT_MSG
+        run: echo "${{ PR from branch $GITHUB_HEAD_REF (commit $GITHUB_HASH) }}" >> $COMMIT_MSG
 
       - name: Commit message on push
-        if: ${{ GITHUB_EVENT_NAME != 'pull request' }}
-        run: echo "${{ commit GITHUB_HASH }}" >> $COMMIT_MSG
+        if: ${{ $GITHUB_EVENT_NAME != 'pull request' }}
+        run: echo "${{ commit $GITHUB_HASH }}" >> $COMMIT_MSG
 
       - name: Deploy to GitHub Pages
         uses: Cecilapp/GitHub-Pages-deploy@v3
+        env:
+          GITHUB_TOKEN: ${{ env.GITHUB_PAT }}
         with:
           email: ${{ secrets.EMAIL }}      # must be a GitHub-verified email
           build_dir: _book/                # "_site/" by default
           branch: gh-pages
-          commit_message: Update book via ${{ COMMIT_MSG }}
+          commit_message: Update book via $COMMIT_MSG
