@@ -90,11 +90,11 @@ jobs:
         run: echo "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
 
       - name: Commit message on pull request
-        if: ${{ $GITHUB_EVENT_NAME == 'pull request' }}
+        if: github.event_name == 'pull request'
         run: echo "PR from branch $GITHUB_HEAD_REF (commit $GITHUB_HASH)" >> $COMMIT_MSG
 
       - name: Commit message on push
-        if: ${{ $GITHUB_EVENT_NAME != 'pull request' }}
+        if: ${{ github.event_name != 'pull request' }}
         run: echo "commit $GITHUB_HASH" >> $COMMIT_MSG
 
       - name: Deploy to GitHub Pages
