@@ -382,13 +382,18 @@ A_i, Y_i)$, for $i = 1, \ldots, n$.
 Using the [`skimr` package](https://CRAN.R-project.org/package=skimr), we can
 quickly summarize the variables measured in the WASH Benefits data set:
 
-```{r skim_washb_data, message=FALSE, warning=FALSE}
+```{r skim_washb_data, results="asis", echo=FALSE}
 library(skimr)
-skim(dat)
+# optionally disable sparkline graphs for PDF output
+if (knitr::is_latex_output()) {
+  knitr::kable(skim_no_sparks(dat), format = "latex")
+} else {
+  skim(dat)
+}
 ```
 
 A convenient summary of the relevant variables is given just above, complete
 with a small visualization describing the marginal characteristics of each
-covariate. Note that the *asset* variables reflect socio-economic status of the
+covariate. Note that the *asset* variables reflect socioeconomic status of the
 study participants. Notice also the uniform distribution of the treatment groups
 (with twice as many controls); this is, of course, by design.
