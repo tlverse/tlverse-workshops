@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      GITHUB_HASH: ${{ git rev-parse --short GITHUB_SHA }}
-      GITHUB_BRANCH: ${{ GITHUB_REF#refs/heads/ }}
       RENV_PATHS_ROOT: ~/.local/share/renv
 
     steps:
@@ -87,6 +85,9 @@ jobs:
           name: _book                      # optional
           # Destination path
           path: _book                      # optional
+
+      - name: Shorten commit hash
+        run: "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
 
       - name: Commit message on pull request
         if: ${{ GITHUB_EVENT_NAME == 'pull request' }}
