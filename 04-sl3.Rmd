@@ -793,7 +793,7 @@ point of this figure: we can see there are 10 realizations of the stack which
 represent the 10 cross-validation folds and there is a separate hold-out
 (top branch of the figure) that will not be used to fit the Super Learner.
 
-```{r make-sl-plot}
+```{r make-sl-plot, eval=FALSE}
 dt_sl <- delayed_learner_train(sl, washb_task)
 plot(dt_sl, color = FALSE, height = "400px", width = "90%")
 ```
@@ -829,7 +829,6 @@ learner on the block, main terms linear regression.
 
 
 ```{r, plot-predvobs-woohoo, eval=FALSE}
-
 # df_plot <- data.frame(Observed = washb_data[["whz"]], Predicted = sl_preds,
 #                        count = seq(1:nrow(washb_data))
 
@@ -969,13 +968,13 @@ if (is_latex_output()) {
 
 1. Create an `sl3` task, setting myocardial infarction `mi` as the outcome and
    using all available covariate data.
-2. Make a library of seven relatively fast base learning algorithms. Customize 
-   tuning parameters for one of your learners. Feel free to use learners from 
-   `sl3` or `SuperLearner`. You may use the same base learning library that is 
+2. Make a library of seven relatively fast base learning algorithms. Customize
+   tuning parameters for one of your learners. Feel free to use learners from
+   `sl3` or `SuperLearner`. You may use the same base learning library that is
    presented above.
 3. Incorporate at least one pipeline with feature selection. Any screener and
    learner(s) can be used.
-4. With the default metalearner and base learners, make the Super Learner (SL) 
+4. With the default metalearner and base learners, make the Super Learner (SL)
    and train it on the task.
 5. Print your SL fit by calling `print()` with `$`.
 6. Cross-validate your SL fit to see how well it performs on unseen
@@ -1151,19 +1150,19 @@ validation sample is $P_{n,B_n}^1$.
   of `mean(sl_fit$predict(A1_task)) - mean(sl_fit$predict(A0_task))` the
   estimated ATE. We would end up with an estimator for the ATE that was
   optimized for estimation of the prediction function, and not the ATE!
-- Ultimately, we want an estimator that is optimized for our target estimand of 
-  interest. Here, we cared about doing a good job estimating the ATE. The 
-  SL is an essential step to help us get there. In fact, we will use the 
-  counterfactual predicted outcomes that were explained at length above. 
-  However, SL might not be not the end of the estimation procedure. 
-  Plugging in the Super Learner in the target parameter representation would 
-  generally not result in an asymptotically linear estimator of the target 
-  estimand. This begs the question, why is it important for an estimator to 
+- Ultimately, we want an estimator that is optimized for our target estimand of
+  interest. Here, we cared about doing a good job estimating the ATE. The
+  SL is an essential step to help us get there. In fact, we will use the
+  counterfactual predicted outcomes that were explained at length above.
+  However, SL might not be not the end of the estimation procedure.
+  Plugging in the Super Learner in the target parameter representation would
+  generally not result in an asymptotically linear estimator of the target
+  estimand. This begs the question, why is it important for an estimator to
   possess these properties?
 
-  + An asymptotically linear estimator converges to the estimand at 
-    $\frac{1}{\sqrt{n}}$ rate --- and thus behaves as sample mean --- so it's 
-    sampling distribution can be estimated in order to conduct formal 
+  + An asymptotically linear estimator converges to the estimand at
+    $\frac{1}{\sqrt{n}}$ rate -- and thus behaves as sample mean -- so it's
+    sampling distribution can be estimated in order to conduct formal
     statistical inference (i.e., confidence intervals and $p$-values).
   + Substitution, or plug-in, estimators of the estimand are desirable because
     they respect both the local and global constraints of the statistical model
@@ -1188,7 +1187,7 @@ validation sample is $P_{n,B_n}^1$.
   estimate in the first step of TMLE, but we need the second step of TMLE to
   have the desirable statistical properties mentioned above.
 - In the chapters that follow, we focus on the Targeted Maximum Likelihood
-  Estimator and it's generalization to Targeted Minimum Loss-based Estimator, 
+  Estimator and it's generalization to Targeted Minimum Loss-based Estimator,
   both referred to as TMLE.
 
 <!--
@@ -1209,7 +1208,6 @@ db_data <- url(
   "https://raw.githubusercontent.com/benkeser/sllecture/master/chspred.csv"
 )
 chspred <- read_csv(file = db_data, col_names = TRUE)
-
 ```
 
 1. Create an `sl3` task, setting myocardial infarction `mi` as the outcome and
@@ -1220,8 +1218,8 @@ chspred_task <- make_sl3_Task(
 )
 ```
 
-2. Make a library of seven relatively fast base learning algorithms. Customize 
-   tuning parameters for one of your learners. Feel free to use learners from 
+2. Make a library of seven relatively fast base learning algorithms. Customize
+   tuning parameters for one of your learners. Feel free to use learners from
    `sl3` or `SuperLearner`.
 ```{r sl-ex1-2, eval=FALSE}
 lasso_learner <- Lrnr_glmnet$new(alpha = 1)
@@ -1243,7 +1241,7 @@ screen_cor <- make_learner(Lrnr_screener_correlation)
 glm_pipeline <- make_learner(Pipeline, screen_cor, glm_fast_learner)
 ```
 
-4. With the default metalearner and base learners, make the Super Learner (SL) 
+4. With the default metalearner and base learners, make the Super Learner (SL)
    and train it on the task.
 ```{r sl-ex1-4, eval=FALSE}
 # stack learners together
@@ -1273,8 +1271,8 @@ CVsl <- CV_lrnr_sl(sl_fit, chspred_task, loss_loglik_binomial)
 CVsl
 ```
 
-7. Use the `importance()` function to identify the "most important" predictor of
-   myocardial infarction, according to `sl3` importance metrics.
+7. Use the `importance()` function to identify the "most important" predictor
+   of myocardial infarction, according to `sl3` importance metrics.
 ```{r sl-ex1-7, eval=FALSE}
 varimp <- importance(sl_fit, type = "permute")
 varimp %>%
