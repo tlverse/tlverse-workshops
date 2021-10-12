@@ -17,6 +17,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+
       - name: Setup R
         uses: r-lib/actions/setup-r@master
         with:
@@ -97,6 +100,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ env.GITHUB_PAT }}
         with:
-          email: ${{ secrets.EMAIL }}      # must be a GitHub-verified email
+          email: nh@nimahejazi.org         # must be a GitHub-verified email
           build_dir: _book/                # "_site/" by default
           commit_message: Update book via ${{ env.GITHUB_HASH }}
