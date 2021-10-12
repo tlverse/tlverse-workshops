@@ -99,4 +99,4 @@ jobs:
         with:
           email: ${{ secrets.EMAIL }}      # must be a GitHub-verified email
           build_dir: _book/                # "_site/" by default
-          commit_message: Update book via ${{ GITHUB_HASH }}
+          commit_message: Update book via ${{ env.GITHUB_HASH }}
