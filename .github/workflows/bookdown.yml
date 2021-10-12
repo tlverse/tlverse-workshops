@@ -6,15 +6,16 @@ on:
 name: booklet
 
 jobs:
-  name: CI
-  on: [push]
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v2
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
+  test:
+    name: CI
+    on: [push]
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Setup upterm session
+          uses: lhotari/action-upterm@v1
 
 
   bookdown:
