@@ -60,7 +60,7 @@ jobs:
 
       - name: Render book PDF
         run: |
-          Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_document2")'
+          Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
 
       - uses: actions/upload-artifact@v1
         with:
