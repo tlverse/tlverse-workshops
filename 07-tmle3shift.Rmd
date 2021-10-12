@@ -130,11 +130,15 @@ individual level, and define novel shift intervention functions.
   in the case that the treatment is in the limits that arise from conditioning
   on $W$, i.e., for $A_i \in (u(w) - \delta, u(w))$.
 
+`r if (knitr::is_latex_output()) '<!--'`
+
 ### Interpreting the Causal Effect of a Stochastic Intervention
 
-```{r, fig.cap="Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention", echo=FALSE, eval=TRUE, out.width='60%'}
+```{r, fig.cap="Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention", results = "asis", echo=FALSE}
 knitr::include_graphics(path = "img/gif/shift_animation.gif")
 ```
+
+`r if (knitr::is_latex_output()) '-->'`
 
 ## Estimating the Causal Effect of a Stochastic Intervention with `tmle3shift`
 
