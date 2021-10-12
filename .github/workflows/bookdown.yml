@@ -17,8 +17,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
+      #- name: Setup upterm session
+        #uses: lhotari/action-upterm@v1
 
       - name: Setup R
         uses: r-lib/actions/setup-r@master
@@ -89,17 +89,12 @@ jobs:
           # Destination path
           path: _book                      # optional
 
-      - name: Shorten commit hash
-        run: GITHUB_HASH="$(git rev-parse --short "$GITHUB_SHA")"
-
-      #- name: Setup upterm session
-        #uses: lhotari/action-upterm@v1
-
       - name: Deploy to GitHub Pages
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
-          GITHUB_TOKEN: ${{ env.GITHUB_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_HASH: echo "$(git rev-parse --short ${GITHUB_SHA})"
         with:
-          email: nh@nimahejazi.org         # must be a GitHub-verified email
+          email: ${{ secrets.EMAIL }}      # must be a GitHub-verified email
           build_dir: _book/                # "_site/" by default
           commit_message: Update book via ${{ env.GITHUB_HASH }}
