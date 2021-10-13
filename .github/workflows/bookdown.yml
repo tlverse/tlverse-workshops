@@ -93,7 +93,7 @@ jobs:
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_HASH: echo "$(git rev-parse --short ${GITHUB_SHA})"
+          GITHUB_HASH: $(git rev-parse --short ${GITHUB_SHA})
         with:
           email: ${{ secrets.EMAIL }}      # must be a GitHub-verified email
           build_dir: _book/                # "_site/" by default
