@@ -5,7 +5,7 @@ _Ivana Malenica_
 Based on the [`tmle3mopttx` `R` package](https://github.com/tlverse/tmle3mopttx)
 by _Ivana Malenica, Jeremy Coyle, and Mark van der Laan_.
 
-Updated: 2021-08-16
+Updated: 2021-10-13
 
 ## Learning Objectives
 By the end of this lesson you will be able to:
@@ -66,10 +66,14 @@ collected covariates.
   efficiency by not allocating resources to individuals that do not need them,
   or would not benefit from an intervention.
 
-<div class="figure" style="text-align: center">
-<img src="img/png/DynamicA_Illustration.png" alt="Illustration of a Dynamic Treatment Regime in a Clinical Setting" width="60%" />
-<p class="caption">(\#fig:unnamed-chunk-1)Illustration of a Dynamic Treatment Regime in a Clinical Setting</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{img/png/DynamicA_Illustration} 
+
+}
+
+\caption{Illustration of a Dynamic Treatment Regime in a Clinical Setting}(\#fig:unnamed-chunk-1)
+\end{figure}
 
 This aim motivates a different type of intervention, as opposed to the static exposures we
 might be used to.
@@ -353,11 +357,11 @@ tmle_spec <- tmle3_mopttx_blip_revere(
 # fit the TML estimator
 fit <- tmle3(tmle_spec, data, node_list, learner_list)
 fit
-#> A tmle3_Fit that took 1 step(s)
-#>    type         param init_est tmle_est       se   lower   upper
-#> 1:  TSM E[Y_{A=NULL}]  0.43164  0.55855 0.027047 0.50554 0.61156
-#>    psi_transformed lower_transformed upper_transformed
-#> 1:         0.55855           0.50554           0.61156
+A tmle3_Fit that took 1 step(s)
+   type         param init_est tmle_est       se   lower   upper
+1:  TSM E[Y_{A=NULL}]  0.43164  0.55855 0.027047 0.50554 0.61156
+   psi_transformed lower_transformed upper_transformed
+1:         0.55855           0.50554           0.61156
 ```
 
 We can see that the confidence interval covers our true mean under the true optimal
@@ -479,18 +483,18 @@ be used to estimate $g_0(A|W)$ in `sl3`, we run the following:
 ```r
 # See which learners support multi-class classification:
 sl3_list_learners(c("categorical"))
-#>  [1] "Lrnr_bound"                "Lrnr_caret"               
-#>  [3] "Lrnr_cv_selector"          "Lrnr_glmnet"              
-#>  [5] "Lrnr_grf"                  "Lrnr_gru_keras"           
-#>  [7] "Lrnr_h2o_glm"              "Lrnr_h2o_grid"            
-#>  [9] "Lrnr_independent_binomial" "Lrnr_lightgbm"            
-#> [11] "Lrnr_lstm_keras"           "Lrnr_mean"                
-#> [13] "Lrnr_multivariate"         "Lrnr_nnet"                
-#> [15] "Lrnr_optim"                "Lrnr_polspline"           
-#> [17] "Lrnr_pooled_hazards"       "Lrnr_randomForest"        
-#> [19] "Lrnr_ranger"               "Lrnr_rpart"               
-#> [21] "Lrnr_screener_correlation" "Lrnr_solnp"               
-#> [23] "Lrnr_svm"                  "Lrnr_xgboost"
+ [1] "Lrnr_bound"                "Lrnr_caret"               
+ [3] "Lrnr_cv_selector"          "Lrnr_glmnet"              
+ [5] "Lrnr_grf"                  "Lrnr_gru_keras"           
+ [7] "Lrnr_h2o_glm"              "Lrnr_h2o_grid"            
+ [9] "Lrnr_independent_binomial" "Lrnr_lightgbm"            
+[11] "Lrnr_lstm_keras"           "Lrnr_mean"                
+[13] "Lrnr_multivariate"         "Lrnr_nnet"                
+[15] "Lrnr_optim"                "Lrnr_polspline"           
+[17] "Lrnr_pooled_hazards"       "Lrnr_randomForest"        
+[19] "Lrnr_ranger"               "Lrnr_rpart"               
+[21] "Lrnr_screener_correlation" "Lrnr_solnp"               
+[23] "Lrnr_svm"                  "Lrnr_xgboost"             
 ```
 
 
@@ -516,17 +520,17 @@ tmle_spec <- tmle3_mopttx_blip_revere(
 # fit the TML estimator
 fit <- tmle3(tmle_spec, data, node_list, learner_list)
 fit
-#> A tmle3_Fit that took 1 step(s)
-#>    type         param init_est tmle_est       se   lower   upper
-#> 1:  TSM E[Y_{A=NULL}]  0.54158  0.65915 0.068054 0.52577 0.79254
-#>    psi_transformed lower_transformed upper_transformed
-#> 1:         0.65915           0.52577           0.79254
+A tmle3_Fit that took 1 step(s)
+   type         param init_est tmle_est      se   lower   upper psi_transformed
+1:  TSM E[Y_{A=NULL}]  0.54926  0.62506 0.06366 0.50029 0.74983         0.62506
+   lower_transformed upper_transformed
+1:           0.50029           0.74983
 
 # How many individuals got assigned each treatment?
 table(tmle_spec$return_rule)
-#> 
-#>   1   2   3 
-#> 428 394 178
+
+  1   2   3 
+447 382 171 
 ```
 
 We can see that the confidence interval covers
@@ -572,11 +576,11 @@ tmle_spec <- tmle3_mopttx_blip_revere(
 # fit the TML estimator
 fit <- tmle3(tmle_spec, data, node_list, learner_list)
 fit
-#> A tmle3_Fit that took 1 step(s)
-#>    type         param init_est tmle_est       se   lower   upper
-#> 1:  TSM E[Y_{d(V=1)}]  0.48614  0.53913 0.093273 0.35632 0.72194
-#>    psi_transformed lower_transformed upper_transformed
-#> 1:         0.53913           0.35632           0.72194
+A tmle3_Fit that took 1 step(s)
+   type             param init_est tmle_est       se lower   upper
+1:  TSM E[Y_{d(V=W2,W1)}]  0.53979  0.61659 0.068671 0.482 0.75118
+   psi_transformed lower_transformed upper_transformed
+1:         0.61659             0.482           0.75118
 ```
 
 Even though the user specified all baseline covariates as the basis
@@ -615,17 +619,17 @@ tmle_spec <- tmle3_mopttx_blip_revere(
 # fit the TML estimator
 fit <- tmle3(tmle_spec, data, node_list, learner_list)
 fit
-#> A tmle3_Fit that took 1 step(s)
-#>    type         param init_est tmle_est       se   lower   upper
-#> 1:  TSM E[Y_{A=NULL}]  0.54869  0.58779 0.057258 0.47557 0.70001
-#>    psi_transformed lower_transformed upper_transformed
-#> 1:         0.58779           0.47557           0.70001
+A tmle3_Fit that took 1 step(s)
+   type         param init_est tmle_est       se   lower   upper
+1:  TSM E[Y_{A=NULL}]  0.54688  0.66017 0.021458 0.61812 0.70223
+   psi_transformed lower_transformed upper_transformed
+1:         0.66017           0.61812           0.70223
 
 # How many individuals got assigned each treatment?
 table(tmle_spec$return_rule)
-#> 
-#>   1   2   3 
-#>   4 502 494
+
+  2   3 
+516 484 
 ```
 
 **QUESTION:** Referring back to the data-generating distribution, why do you
@@ -691,15 +695,15 @@ vim_results <- tmle3_vim(tmle_spec, data, node_list, learner_list,
 )
 
 print(vim_results)
-#>    type                  param   init_est  tmle_est       se      lower
-#> 1:   RR RR(E[Y_{A=NULL}]/E[Y])  0.0052065  0.058406 0.034144 -0.0085144
-#> 2:   RR RR(E[Y_{A=NULL}]/E[Y]) -0.0239991 -0.067511 0.051592 -0.1686303
-#>       upper psi_transformed lower_transformed upper_transformed  A           W
-#> 1: 0.125327         1.06015           0.99152            1.1335  A W3,W4,W2,W1
-#> 2: 0.033608         0.93472           0.84482            1.0342 W1  W3,W4,W2,A
-#>     Z_stat     p_nz p_nz_corrected
-#> 1:  1.7106 0.043578       0.087156
-#> 2: -1.3085 0.095344       0.095344
+   type                  param   init_est tmle_est       se     lower    upper
+1:   RR RR(E[Y_{A=NULL}]/E[Y])  0.0011065  0.14769 0.032279  0.084421 0.210952
+2:   RR RR(E[Y_{A=NULL}]/E[Y]) -0.0227483 -0.01578 0.047608 -0.109090 0.077529
+   psi_transformed lower_transformed upper_transformed  A           W   Z_stat
+1:         1.15915           1.08809            1.2349  A W3,W4,W2,W1  4.57534
+2:         0.98434           0.89665            1.0806 W1  W3,W4,W2,A -0.33146
+         p_nz p_nz_corrected
+1: 2.3772e-06     4.7544e-06
+2: 3.7015e-01     3.7015e-01
 ```
 
 The final result of `tmle3_vim` with the `tmle3mopttx` spec is an ordered list

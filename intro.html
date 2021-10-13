@@ -7,7 +7,7 @@
 <title>Chapter 2 The Roadmap for Targeted Learning | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
 <meta name="description" content="2.1 Learning Objectives By the end of this chapter you will be able to: Translate scientific questions to statistical questions. Define a statistical model based on the knowledge of the experiment...">
-<meta name="generator" content="bookdown 0.23.1 with bs4_book()">
+<meta name="generator" content="bookdown 0.24.1 with bs4_book()">
 <meta property="og:title" content="Chapter 2 The Roadmap for Targeted Learning | [Workshop] Targeted Learning in the tlverse">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://tlverse.org/tlverse-workshops/intro.html">
@@ -17,9 +17,9 @@
 <meta name="twitter:description" content="2.1 Learning Objectives By the end of this chapter you will be able to: Translate scientific questions to statistical questions. Define a statistical model based on the knowledge of the experiment...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><link href="libs/vis-4.20.1/vis.css" rel="stylesheet">
-<script src="libs/vis-4.20.1/vis.min.js"></script><script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.0/visNetwork.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body>
 <span class="math inline">
@@ -432,25 +432,24 @@ supplements; and</li>
 <p>In the workshop, we concentrate on child growth (size for age) as the outcome of
 interest. For reference, this trial was registered with ClinicalTrials.gov as
 NCT01590095.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-
-<span class="co"># read in data</span>
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv"</span><span class="op">)</span>
-<span class="va">dat</span>
-<span class="co">#&gt; # A tibble: 4,695 × 28</span>
-<span class="co">#&gt;     whz tr      fracode month  aged sex    momage momedu momheight hfiacat Nlt18</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1  0    Control N05265      9   268 male       30 Prima…      146. Food S…     3</span>
-<span class="co">#&gt; 2 -1.16 Control N05265      9   286 male       25 Prima…      149. Modera…     2</span>
-<span class="co">#&gt; 3 -1.05 Control N08002      9   264 male       25 Prima…      152. Food S…     1</span>
-<span class="co">#&gt; 4 -1.26 Control N08002      9   252 female     28 Prima…      140. Food S…     3</span>
-<span class="co">#&gt; 5 -0.59 Control N06531      9   336 female     19 Secon…      151. Food S…     2</span>
-<span class="co">#&gt; # … with 4,690 more rows, and 17 more variables: Ncomp &lt;dbl&gt;, watmin &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   elec &lt;dbl&gt;, floor &lt;dbl&gt;, walls &lt;dbl&gt;, roof &lt;dbl&gt;, asset_wardrobe &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   asset_table &lt;dbl&gt;, asset_chair &lt;dbl&gt;, asset_khat &lt;dbl&gt;, asset_chouki &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   asset_tv &lt;dbl&gt;, asset_refrig &lt;dbl&gt;, asset_bike &lt;dbl&gt;, asset_moto &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   asset_sewmach &lt;dbl&gt;, asset_mobile &lt;dbl&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="intro.html#cb3-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="intro.html#cb3-2"></a></span>
+<span id="cb3-3"><a href="intro.html#cb3-3"></a><span class="co"># read in data</span></span>
+<span id="cb3-4"><a href="intro.html#cb3-4"></a>dat &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv"</span>)</span>
+<span id="cb3-5"><a href="intro.html#cb3-5"></a>dat</span>
+<span id="cb3-6"><a href="intro.html#cb3-6"></a><span class="co"># A tibble: 4,695 × 28</span></span>
+<span id="cb3-7"><a href="intro.html#cb3-7"></a>    whz tr      fracode month  aged sex    momage momedu momheight hfiacat Nlt18</span>
+<span id="cb3-8"><a href="intro.html#cb3-8"></a>  <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb3-9"><a href="intro.html#cb3-9"></a><span class="dv">1</span>  <span class="dv">0</span>    Control N05265      <span class="dv">9</span>   <span class="dv">268</span> male       <span class="dv">30</span> Prima…      <span class="fl">146.</span> Food S…     <span class="dv">3</span></span>
+<span id="cb3-10"><a href="intro.html#cb3-10"></a><span class="dv">2</span> <span class="fl">-1.16</span> Control N05265      <span class="dv">9</span>   <span class="dv">286</span> male       <span class="dv">25</span> Prima…      <span class="fl">149.</span> Modera…     <span class="dv">2</span></span>
+<span id="cb3-11"><a href="intro.html#cb3-11"></a><span class="dv">3</span> <span class="fl">-1.05</span> Control N08002      <span class="dv">9</span>   <span class="dv">264</span> male       <span class="dv">25</span> Prima…      <span class="fl">152.</span> Food S…     <span class="dv">1</span></span>
+<span id="cb3-12"><a href="intro.html#cb3-12"></a><span class="dv">4</span> <span class="fl">-1.26</span> Control N08002      <span class="dv">9</span>   <span class="dv">252</span> female     <span class="dv">28</span> Prima…      <span class="fl">140.</span> Food S…     <span class="dv">3</span></span>
+<span id="cb3-13"><a href="intro.html#cb3-13"></a><span class="dv">5</span> <span class="fl">-0.59</span> Control N06531      <span class="dv">9</span>   <span class="dv">336</span> female     <span class="dv">19</span> Secon…      <span class="fl">151.</span> Food S…     <span class="dv">2</span></span>
+<span id="cb3-14"><a href="intro.html#cb3-14"></a><span class="co"># … with 4,690 more rows, and 17 more variables: Ncomp &lt;dbl&gt;, watmin &lt;dbl&gt;,</span></span>
+<span id="cb3-15"><a href="intro.html#cb3-15"></a><span class="co">#   elec &lt;dbl&gt;, floor &lt;dbl&gt;, walls &lt;dbl&gt;, roof &lt;dbl&gt;, asset_wardrobe &lt;dbl&gt;,</span></span>
+<span id="cb3-16"><a href="intro.html#cb3-16"></a><span class="co">#   asset_table &lt;dbl&gt;, asset_chair &lt;dbl&gt;, asset_khat &lt;dbl&gt;, asset_chouki &lt;dbl&gt;,</span></span>
+<span id="cb3-17"><a href="intro.html#cb3-17"></a><span class="co">#   asset_tv &lt;dbl&gt;, asset_refrig &lt;dbl&gt;, asset_bike &lt;dbl&gt;, asset_moto &lt;dbl&gt;,</span></span>
+<span id="cb3-18"><a href="intro.html#cb3-18"></a><span class="co">#   asset_sewmach &lt;dbl&gt;, asset_mobile &lt;dbl&gt;</span></span></code></pre></div>
 <p>For the purposes of this workshop, we we start by treating the data as independent
 and identically distributed (i.i.d.) random draws from a very large target
 population. We could, with available options, account for the clustering of the
@@ -464,9 +463,6 @@ the treatment of interest, <span class="math inline">\(A\)</span>, is the random
 results in our observed data structure being <span class="math inline">\(n\)</span> i.i.d. copies of <span class="math inline">\(O_i = (W_i, A_i, Y_i)\)</span>, for <span class="math inline">\(i = 1, \ldots, n\)</span>.</p>
 <p>Using the <a href="https://CRAN.R-project.org/package=skimr"><code>skimr</code> package</a>, we can
 quickly summarize the variables measured in the WASH Benefits data set:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/">skimr</a></span><span class="op">)</span>
-<span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>(#tab:skim_washb_data)Data summary</caption>
 <tbody>
@@ -892,7 +888,7 @@ quickly summarize the variables measured in the WASH Benefits data set:</p>
 </table></div>
 <p>A convenient summary of the relevant variables is given just above, complete
 with a small visualization describing the marginal characteristics of each
-covariate. Note that the <em>asset</em> variables reflect socio-economic status of the
+covariate. Note that the <em>asset</em> variables reflect socioeconomic status of the
 study participants. Notice also the uniform distribution of the treatment groups
 (with twice as many controls); this is, of course, by design.</p>
 
@@ -941,7 +937,7 @@ study participants. Notice also the uniform distribution of the treatment groups
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: August 16, 2021.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: October 12, 2021.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

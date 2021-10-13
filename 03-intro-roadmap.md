@@ -214,10 +214,7 @@ variables. Ignoring exogenous $U$ terms (explained below), we assume the
 following ordering of the variables in the observed data $O$.
 
 
-```{=html}
-<div id="htmlwidget-f24f61b14a52b30b1486" style="width:200px;height:300px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f24f61b14a52b30b1486">{"x":{"nodes":{"id":["W","A","Y"],"label":["W","A","Y"]},"edges":{"from":["W","W","A"],"to":["A","Y","Y"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"arrows":{"to":true}},"layout":{"randomSeed":25}},"groups":null,"width":"200px","height":"300px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
-```
+\begin{center}\includegraphics[width=0.8\linewidth]{03-intro-roadmap_files/figure-latex/unnamed-chunk-1-1} 
 
 While directed acyclic graphs (DAGs) like above provide a convenient means by 
 which to visualize causal relations between variables, the same causal 
@@ -359,19 +356,19 @@ library(tidyverse)
 # read in data
 dat <- read_csv("https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv")
 dat
-#> # A tibble: 4,695 × 28
-#>     whz tr      fracode month  aged sex    momage momedu momheight hfiacat Nlt18
-#>   <dbl> <chr>   <chr>   <dbl> <dbl> <chr>   <dbl> <chr>      <dbl> <chr>   <dbl>
-#> 1  0    Control N05265      9   268 male       30 Prima…      146. Food S…     3
-#> 2 -1.16 Control N05265      9   286 male       25 Prima…      149. Modera…     2
-#> 3 -1.05 Control N08002      9   264 male       25 Prima…      152. Food S…     1
-#> 4 -1.26 Control N08002      9   252 female     28 Prima…      140. Food S…     3
-#> 5 -0.59 Control N06531      9   336 female     19 Secon…      151. Food S…     2
-#> # … with 4,690 more rows, and 17 more variables: Ncomp <dbl>, watmin <dbl>,
-#> #   elec <dbl>, floor <dbl>, walls <dbl>, roof <dbl>, asset_wardrobe <dbl>,
-#> #   asset_table <dbl>, asset_chair <dbl>, asset_khat <dbl>, asset_chouki <dbl>,
-#> #   asset_tv <dbl>, asset_refrig <dbl>, asset_bike <dbl>, asset_moto <dbl>,
-#> #   asset_sewmach <dbl>, asset_mobile <dbl>
+# A tibble: 4,695 x 28
+    whz tr      fracode month  aged sex    momage momedu momheight hfiacat Nlt18
+  <dbl> <chr>   <chr>   <dbl> <dbl> <chr>   <dbl> <chr>      <dbl> <chr>   <dbl>
+1  0    Control N05265      9   268 male       30 Prima~      146. Food S~     3
+2 -1.16 Control N05265      9   286 male       25 Prima~      149. Modera~     2
+3 -1.05 Control N08002      9   264 male       25 Prima~      152. Food S~     1
+4 -1.26 Control N08002      9   252 female     28 Prima~      140. Food S~     3
+5 -0.59 Control N06531      9   336 female     19 Secon~      151. Food S~     2
+# ... with 4,690 more rows, and 17 more variables: Ncomp <dbl>, watmin <dbl>,
+#   elec <dbl>, floor <dbl>, walls <dbl>, roof <dbl>, asset_wardrobe <dbl>,
+#   asset_table <dbl>, asset_chair <dbl>, asset_khat <dbl>, asset_chouki <dbl>,
+#   asset_tv <dbl>, asset_refrig <dbl>, asset_bike <dbl>, asset_moto <dbl>,
+#   asset_sewmach <dbl>, asset_mobile <dbl>
 ```
 
 For the purposes of this workshop, we we start by treating the data as independent
@@ -392,68 +389,70 @@ Using the [`skimr` package](https://CRAN.R-project.org/package=skimr), we can
 quickly summarize the variables measured in the WASH Benefits data set:
 
 
-```r
-library(skimr)
-skim(dat)
-```
-
-
-Table: (\#tab:skim_washb_data)Data summary
-
-|                         |     |
-|:------------------------|:----|
-|Name                     |dat  |
-|Number of rows           |4695 |
-|Number of columns        |28   |
-|_______________________  |     |
-|Column type frequency:   |     |
-|character                |5    |
-|numeric                  |23   |
-|________________________ |     |
-|Group variables          |None |
-
-
-**Variable type: character**
-
-|skim_variable | n_missing| complete_rate| min| max| empty| n_unique| whitespace|
-|:-------------|---------:|-------------:|---:|---:|-----:|--------:|----------:|
-|tr            |         0|             1|   3|  15|     0|        7|          0|
-|fracode       |         0|             1|   2|   6|     0|       20|          0|
-|sex           |         0|             1|   4|   6|     0|        2|          0|
-|momedu        |         0|             1|  12|  15|     0|        3|          0|
-|hfiacat       |         0|             1|  11|  24|     0|        4|          0|
-
-
-**Variable type: numeric**
-
-|skim_variable  | n_missing| complete_rate|   mean|    sd|     p0|    p25|   p50|    p75|   p100|hist  |
-|:--------------|---------:|-------------:|------:|-----:|------:|------:|-----:|------:|------:|:-----|
-|whz            |         0|          1.00|  -0.59|  1.03|  -4.67|  -1.28|  -0.6|   0.08|   4.97|▁▆▇▁▁ |
-|month          |         0|          1.00|   6.45|  3.33|   1.00|   4.00|   6.0|   9.00|  12.00|▇▇▅▇▇ |
-|aged           |         0|          1.00| 266.32| 52.17|  42.00| 230.00| 266.0| 303.00| 460.00|▁▂▇▅▁ |
-|momage         |        18|          1.00|  23.91|  5.24|  14.00|  20.00|  23.0|  27.00|  60.00|▇▇▁▁▁ |
-|momheight      |        31|          0.99| 150.50|  5.23| 120.65| 147.05| 150.6| 154.06| 168.00|▁▁▆▇▁ |
-|Nlt18          |         0|          1.00|   1.60|  1.25|   0.00|   1.00|   1.0|   2.00|  10.00|▇▂▁▁▁ |
-|Ncomp          |         0|          1.00|  11.04|  6.35|   2.00|   6.00|  10.0|  14.00|  52.00|▇▃▁▁▁ |
-|watmin         |         0|          1.00|   0.95|  9.48|   0.00|   0.00|   0.0|   1.00| 600.00|▇▁▁▁▁ |
-|elec           |         0|          1.00|   0.60|  0.49|   0.00|   0.00|   1.0|   1.00|   1.00|▆▁▁▁▇ |
-|floor          |         0|          1.00|   0.11|  0.31|   0.00|   0.00|   0.0|   0.00|   1.00|▇▁▁▁▁ |
-|walls          |         0|          1.00|   0.72|  0.45|   0.00|   0.00|   1.0|   1.00|   1.00|▃▁▁▁▇ |
-|roof           |         0|          1.00|   0.99|  0.12|   0.00|   1.00|   1.0|   1.00|   1.00|▁▁▁▁▇ |
-|asset_wardrobe |         0|          1.00|   0.17|  0.37|   0.00|   0.00|   0.0|   0.00|   1.00|▇▁▁▁▂ |
-|asset_table    |         0|          1.00|   0.73|  0.44|   0.00|   0.00|   1.0|   1.00|   1.00|▃▁▁▁▇ |
-|asset_chair    |         0|          1.00|   0.73|  0.44|   0.00|   0.00|   1.0|   1.00|   1.00|▃▁▁▁▇ |
-|asset_khat     |         0|          1.00|   0.61|  0.49|   0.00|   0.00|   1.0|   1.00|   1.00|▅▁▁▁▇ |
-|asset_chouki   |         0|          1.00|   0.78|  0.41|   0.00|   1.00|   1.0|   1.00|   1.00|▂▁▁▁▇ |
-|asset_tv       |         0|          1.00|   0.30|  0.46|   0.00|   0.00|   0.0|   1.00|   1.00|▇▁▁▁▃ |
-|asset_refrig   |         0|          1.00|   0.08|  0.27|   0.00|   0.00|   0.0|   0.00|   1.00|▇▁▁▁▁ |
-|asset_bike     |         0|          1.00|   0.32|  0.47|   0.00|   0.00|   0.0|   1.00|   1.00|▇▁▁▁▃ |
-|asset_moto     |         0|          1.00|   0.07|  0.25|   0.00|   0.00|   0.0|   0.00|   1.00|▇▁▁▁▁ |
-|asset_sewmach  |         0|          1.00|   0.06|  0.25|   0.00|   0.00|   0.0|   0.00|   1.00|▇▁▁▁▁ |
-|asset_mobile   |         0|          1.00|   0.86|  0.35|   0.00|   1.00|   1.0|   1.00|   1.00|▁▁▁▁▇ |
+\begin{tabular}{l|l|r|r|r|r|r|r|r|r|r|r|r|r|r|r}
+\hline
+skim\_type & skim\_variable & n\_missing & complete\_rate & character.min & character.max & character.empty & character.n\_unique & character.whitespace & numeric.mean & numeric.sd & numeric.p0 & numeric.p25 & numeric.p50 & numeric.p75 & numeric.p100\\
+\hline
+character & tr & 0 & 1.00000 & 3 & 15 & 0 & 7 & 0 & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+character & fracode & 0 & 1.00000 & 2 & 6 & 0 & 20 & 0 & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+character & sex & 0 & 1.00000 & 4 & 6 & 0 & 2 & 0 & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+character & momedu & 0 & 1.00000 & 12 & 15 & 0 & 3 & 0 & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+character & hfiacat & 0 & 1.00000 & 11 & 24 & 0 & 4 & 0 & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+numeric & whz & 0 & 1.00000 & NA & NA & NA & NA & NA & -0.58608 & 1.03212 & -4.67 & -1.28 & -0.6 & 0.08 & 4.97\\
+\hline
+numeric & month & 0 & 1.00000 & NA & NA & NA & NA & NA & 6.45474 & 3.33214 & 1.00 & 4.00 & 6.0 & 9.00 & 12.00\\
+\hline
+numeric & aged & 0 & 1.00000 & NA & NA & NA & NA & NA & 266.31502 & 52.17465 & 42.00 & 230.00 & 266.0 & 303.00 & 460.00\\
+\hline
+numeric & momage & 18 & 0.99617 & NA & NA & NA & NA & NA & 23.90592 & 5.24055 & 14.00 & 20.00 & 23.0 & 27.00 & 60.00\\
+\hline
+numeric & momheight & 31 & 0.99340 & NA & NA & NA & NA & NA & 150.50407 & 5.22667 & 120.65 & 147.05 & 150.6 & 154.06 & 168.00\\
+\hline
+numeric & Nlt18 & 0 & 1.00000 & NA & NA & NA & NA & NA & 1.60469 & 1.24726 & 0.00 & 1.00 & 1.0 & 2.00 & 10.00\\
+\hline
+numeric & Ncomp & 0 & 1.00000 & NA & NA & NA & NA & NA & 11.04324 & 6.35044 & 2.00 & 6.00 & 10.0 & 14.00 & 52.00\\
+\hline
+numeric & watmin & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.94867 & 9.48125 & 0.00 & 0.00 & 0.0 & 1.00 & 600.00\\
+\hline
+numeric & elec & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.59510 & 0.49092 & 0.00 & 0.00 & 1.0 & 1.00 & 1.00\\
+\hline
+numeric & floor & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.10671 & 0.30878 & 0.00 & 0.00 & 0.0 & 0.00 & 1.00\\
+\hline
+numeric & walls & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.71502 & 0.45145 & 0.00 & 0.00 & 1.0 & 1.00 & 1.00\\
+\hline
+numeric & roof & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.98530 & 0.12035 & 0.00 & 1.00 & 1.0 & 1.00 & 1.00\\
+\hline
+numeric & asset\_wardrobe & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.16720 & 0.37319 & 0.00 & 0.00 & 0.0 & 0.00 & 1.00\\
+\hline
+numeric & asset\_table & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.73440 & 0.44170 & 0.00 & 0.00 & 1.0 & 1.00 & 1.00\\
+\hline
+numeric & asset\_chair & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.73440 & 0.44170 & 0.00 & 0.00 & 1.0 & 1.00 & 1.00\\
+\hline
+numeric & asset\_khat & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.61321 & 0.48707 & 0.00 & 0.00 & 1.0 & 1.00 & 1.00\\
+\hline
+numeric & asset\_chouki & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.78126 & 0.41344 & 0.00 & 1.00 & 1.0 & 1.00 & 1.00\\
+\hline
+numeric & asset\_tv & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.30394 & 0.46001 & 0.00 & 0.00 & 0.0 & 1.00 & 1.00\\
+\hline
+numeric & asset\_refrig & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.07945 & 0.27046 & 0.00 & 0.00 & 0.0 & 0.00 & 1.00\\
+\hline
+numeric & asset\_bike & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.31906 & 0.46616 & 0.00 & 0.00 & 0.0 & 1.00 & 1.00\\
+\hline
+numeric & asset\_moto & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.06603 & 0.24836 & 0.00 & 0.00 & 0.0 & 0.00 & 1.00\\
+\hline
+numeric & asset\_sewmach & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.06475 & 0.24611 & 0.00 & 0.00 & 0.0 & 0.00 & 1.00\\
+\hline
+numeric & asset\_mobile & 0 & 1.00000 & NA & NA & NA & NA & NA & 0.85857 & 0.34850 & 0.00 & 1.00 & 1.0 & 1.00 & 1.00\\
+\hline
+\end{tabular}
 
 A convenient summary of the relevant variables is given just above, complete
 with a small visualization describing the marginal characteristics of each
-covariate. Note that the *asset* variables reflect socio-economic status of the
+covariate. Note that the *asset* variables reflect socioeconomic status of the
 study participants. Notice also the uniform distribution of the treatment groups
 (with twice as many controls); this is, of course, by design.

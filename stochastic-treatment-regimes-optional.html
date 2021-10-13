@@ -6,20 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 6 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
-<meta name="description" content="Nima Hejazi Based on the tmle3shift R package by Nima Hejazi, Jeremy Coyle, and Mark van der Laan. Updated: 2021-08-16  6.1 Learning Objectives Differentiate stochastic treatment regimes from...">
-<meta name="generator" content="bookdown 0.23.1 with bs4_book()">
+<meta name="description" content="Nima Hejazi Based on the tmle3shift R package by Nima Hejazi, Jeremy Coyle, and Mark van der Laan. Updated: 2021-10-12  6.1 Learning Objectives Differentiate stochastic treatment regimes from...">
+<meta name="generator" content="bookdown 0.24.1 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://tlverse.org/tlverse-workshops/stochastic-treatment-regimes-optional.html">
-<meta property="og:description" content="Nima Hejazi Based on the tmle3shift R package by Nima Hejazi, Jeremy Coyle, and Mark van der Laan. Updated: 2021-08-16  6.1 Learning Objectives Differentiate stochastic treatment regimes from...">
+<meta property="og:description" content="Nima Hejazi Based on the tmle3shift R package by Nima Hejazi, Jeremy Coyle, and Mark van der Laan. Updated: 2021-10-12  6.1 Learning Objectives Differentiate stochastic treatment regimes from...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 6 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse">
-<meta name="twitter:description" content="Nima Hejazi Based on the tmle3shift R package by Nima Hejazi, Jeremy Coyle, and Mark van der Laan. Updated: 2021-08-16  6.1 Learning Objectives Differentiate stochastic treatment regimes from...">
+<meta name="twitter:description" content="Nima Hejazi Based on the tmle3shift R package by Nima Hejazi, Jeremy Coyle, and Mark van der Laan. Updated: 2021-10-12  6.1 Learning Objectives Differentiate stochastic treatment regimes from...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><link href="libs/vis-4.20.1/vis.css" rel="stylesheet">
-<script src="libs/vis-4.20.1/vis.min.js"></script><script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.0/visNetwork.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body>
 <span class="math inline">
@@ -78,7 +78,7 @@
 <p><em>Nima Hejazi</em></p>
 <p>Based on the <a href="https://github.com/tlverse/tmle3shift"><code>tmle3shift</code> <code>R</code> package</a>
 by <em>Nima Hejazi, Jeremy Coyle, and Mark van der Laan</em>.</p>
-<p>Updated: 2021-08-16</p>
+<p>Updated: 2021-10-12</p>
 <div id="learning-objectives-4" class="section level2">
 <h2>
 <span class="header-section-number">6.1</span> Learning Objectives<a class="anchor" aria-label="anchor" href="#learning-objectives-4"><i class="fas fa-link"></i></a>
@@ -222,7 +222,7 @@ on <span class="math inline">\(W\)</span>, i.e., for <span class="math inline">\
 </h3>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-1"></span>
-<img src="img/gif/shift_animation.gif" alt="Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention" width="60%"><p class="caption">
+<img src="img/gif/shift_animation.gif" alt="Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention" width="80%"><p class="caption">
 FIGURE 5.1: Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention
 </p>
 </div>
@@ -255,7 +255,7 @@ or an alternative regression model incorporating weights.</li>
 </li>
 </ol>
 <p>To start, let’s load the packages we’ll use and set a seed for simulation:</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tlverse.org/sl3">sl3</a></span><span class="op">)</span>
@@ -270,7 +270,7 @@ TML estimator.</p>
 <li>The outcome regression, <span class="math inline">\(\hat{Q}_n\)</span>, which is a simple regression of the
 form <span class="math inline">\(\mathbb{E}[Y \mid A,W]\)</span>.</li>
 </ol>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># learners used for conditional expectation regression</span>
 <span class="va">mean_learner</span> <span class="op">&lt;-</span> <span class="va"><a href="https://tlverse.org/sl3/reference/Lrnr_mean.html">Lrnr_mean</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span>
 <span class="va">fglm_learner</span> <span class="op">&lt;-</span> <span class="va"><a href="https://tlverse.org/sl3/reference/Lrnr_glm_fast.html">Lrnr_glm_fast</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span>
@@ -288,11 +288,10 @@ treatment mechanism, we must make use of learning algorithms specifically
 suited to conditional density estimation; a list of such learners may be
 extracted from <code>sl3</code> by using <code><a href="https://tlverse.org/sl3/reference/list_learners.html">sl3_list_learners()</a></code>:</li>
 </ol>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://tlverse.org/sl3/reference/list_learners.html">sl3_list_learners</a></span><span class="op">(</span><span class="st">"density"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Lrnr_density_discretize"     "Lrnr_density_hse"           </span>
-<span class="co">#&gt; [3] "Lrnr_density_semiparametric" "Lrnr_haldensify"            </span>
-<span class="co">#&gt; [5] "Lrnr_solnp_density"</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="stochastic-treatment-regimes-optional.html#cb85-1"></a><span class="kw">sl3_list_learners</span>(<span class="st">"density"</span>)</span>
+<span id="cb85-2"><a href="stochastic-treatment-regimes-optional.html#cb85-2"></a>[<span class="dv">1</span>] <span class="st">"Lrnr_density_discretize"</span>     <span class="st">"Lrnr_density_hse"</span>           </span>
+<span id="cb85-3"><a href="stochastic-treatment-regimes-optional.html#cb85-3"></a>[<span class="dv">3</span>] <span class="st">"Lrnr_density_semiparametric"</span> <span class="st">"Lrnr_haldensify"</span>            </span>
+<span id="cb85-4"><a href="stochastic-treatment-regimes-optional.html#cb85-4"></a>[<span class="dv">5</span>] <span class="st">"Lrnr_solnp_density"</span>         </span></code></pre></div>
 <p>To proceed, we’ll select two of the above learners, <code>Lrnr_haldensify</code> for using
 the highly adaptive lasso for conditional density estimation, based on an
 algorithm given by <span class="citation">Dı́az and van der Laan (<a href="references.html#ref-diaz2011super" role="doc-biblioref">2011</a>)</span> and implemented in <span class="citation">Hejazi, Benkeser, and van der Laan (<a href="references.html#ref-hejazi2020haldensify" role="doc-biblioref">2020</a>)</span>, and
@@ -300,7 +299,7 @@ semiparametric location-scale conditional density estimators implemented in the
 <a href="https://github.com/tlverse/sl3"><code>sl3</code> package</a>. A Super Learner may be
 constructed by pooling estimates from each of these modified conditional
 density estimation techniques.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># learners used for conditional densities (i.e., generalized propensity score)</span>
 <span class="va">haldensify_learner</span> <span class="op">&lt;-</span> <span class="va"><a href="https://tlverse.org/sl3/reference/Lrnr_haldensify.html">Lrnr_haldensify</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
   n_bins <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>,
@@ -323,7 +322,7 @@ density estimation techniques.</p>
 <span class="op">)</span></code></pre></div>
 <p>Finally, we construct a <code>learner_list</code> object for use in constructing a TML
 estimator of our target parameter of interest:</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Q_learner</span> <span class="op">&lt;-</span> <span class="va">sl_regression_learner</span>
 <span class="va">g_learner</span> <span class="op">&lt;-</span> <span class="va">sl_density_learner</span>
 <span class="va">learner_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">Q_learner</span>, A <span class="op">=</span> <span class="va">g_learner</span><span class="op">)</span></code></pre></div>
@@ -331,32 +330,31 @@ estimator of our target parameter of interest:</p>
 <h3>
 <span class="header-section-number">6.4.1</span> Simulate Data<a class="anchor" aria-label="anchor" href="#simulate-data-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># simulate simple data for tmle-shift sketch</span>
-<span class="va">n_obs</span> <span class="op">&lt;-</span> <span class="fl">1000</span> <span class="co"># number of observations</span>
-<span class="va">tx_mult</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># multiplier for the effect of W = 1 on the treatment</span>
-
-<span class="co">## baseline covariates -- simple, binary</span>
-<span class="va">W</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">n_obs</span>, <span class="fl">1</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co">## create treatment based on baseline W</span>
-<span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_obs</span>, mean <span class="op">=</span> <span class="va">tx_mult</span> <span class="op">*</span> <span class="va">W</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="co">## create outcome as a linear function of A, W + white noise</span>
-<span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">n_obs</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Logistic.html">plogis</a></span><span class="op">(</span><span class="va">A</span> <span class="op">+</span> <span class="va">W</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># organize data and nodes for tmle3</span>
-<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span><span class="va">W</span>, <span class="va">A</span>, <span class="va">Y</span><span class="op">)</span>
-<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"W1"</span>, <span class="st">"W2"</span>, <span class="st">"A"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">node_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>W <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"W1"</span>, <span class="st">"W2"</span><span class="op">)</span>, A <span class="op">=</span> <span class="st">"A"</span>, Y <span class="op">=</span> <span class="st">"Y"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
-<span class="co">#&gt;    W1 W2        A Y</span>
-<span class="co">#&gt; 1:  1  1  3.58065 1</span>
-<span class="co">#&gt; 2:  1  0  3.20718 1</span>
-<span class="co">#&gt; 3:  1  1  1.03584 1</span>
-<span class="co">#&gt; 4:  0  0 -0.65785 1</span>
-<span class="co">#&gt; 5:  1  1  3.01990 1</span>
-<span class="co">#&gt; 6:  1  1  2.78031 1</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="stochastic-treatment-regimes-optional.html#cb88-1"></a><span class="co"># simulate simple data for tmle-shift sketch</span></span>
+<span id="cb88-2"><a href="stochastic-treatment-regimes-optional.html#cb88-2"></a>n_obs &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># number of observations</span></span>
+<span id="cb88-3"><a href="stochastic-treatment-regimes-optional.html#cb88-3"></a>tx_mult &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># multiplier for the effect of W = 1 on the treatment</span></span>
+<span id="cb88-4"><a href="stochastic-treatment-regimes-optional.html#cb88-4"></a></span>
+<span id="cb88-5"><a href="stochastic-treatment-regimes-optional.html#cb88-5"></a><span class="co">## baseline covariates -- simple, binary</span></span>
+<span id="cb88-6"><a href="stochastic-treatment-regimes-optional.html#cb88-6"></a>W &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">2</span>, <span class="kw">rbinom</span>(n_obs, <span class="dv">1</span>, <span class="fl">0.5</span>))</span>
+<span id="cb88-7"><a href="stochastic-treatment-regimes-optional.html#cb88-7"></a></span>
+<span id="cb88-8"><a href="stochastic-treatment-regimes-optional.html#cb88-8"></a><span class="co">## create treatment based on baseline W</span></span>
+<span id="cb88-9"><a href="stochastic-treatment-regimes-optional.html#cb88-9"></a>A &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n_obs, <span class="dt">mean =</span> tx_mult <span class="op">*</span><span class="st"> </span>W, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb88-10"><a href="stochastic-treatment-regimes-optional.html#cb88-10"></a></span>
+<span id="cb88-11"><a href="stochastic-treatment-regimes-optional.html#cb88-11"></a><span class="co">## create outcome as a linear function of A, W + white noise</span></span>
+<span id="cb88-12"><a href="stochastic-treatment-regimes-optional.html#cb88-12"></a>Y &lt;-<span class="st"> </span><span class="kw">rbinom</span>(n_obs, <span class="dv">1</span>, <span class="dt">prob =</span> <span class="kw">plogis</span>(A <span class="op">+</span><span class="st"> </span>W))</span>
+<span id="cb88-13"><a href="stochastic-treatment-regimes-optional.html#cb88-13"></a></span>
+<span id="cb88-14"><a href="stochastic-treatment-regimes-optional.html#cb88-14"></a><span class="co"># organize data and nodes for tmle3</span></span>
+<span id="cb88-15"><a href="stochastic-treatment-regimes-optional.html#cb88-15"></a>data &lt;-<span class="st"> </span><span class="kw">data.table</span>(W, A, Y)</span>
+<span id="cb88-16"><a href="stochastic-treatment-regimes-optional.html#cb88-16"></a><span class="kw">setnames</span>(data, <span class="kw">c</span>(<span class="st">"W1"</span>, <span class="st">"W2"</span>, <span class="st">"A"</span>, <span class="st">"Y"</span>))</span>
+<span id="cb88-17"><a href="stochastic-treatment-regimes-optional.html#cb88-17"></a>node_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">W =</span> <span class="kw">c</span>(<span class="st">"W1"</span>, <span class="st">"W2"</span>), <span class="dt">A =</span> <span class="st">"A"</span>, <span class="dt">Y =</span> <span class="st">"Y"</span>)</span>
+<span id="cb88-18"><a href="stochastic-treatment-regimes-optional.html#cb88-18"></a><span class="kw">head</span>(data)</span>
+<span id="cb88-19"><a href="stochastic-treatment-regimes-optional.html#cb88-19"></a>   W1 W2        A Y</span>
+<span id="cb88-20"><a href="stochastic-treatment-regimes-optional.html#cb88-20"></a><span class="dv">1</span><span class="op">:</span><span class="st">  </span><span class="dv">1</span>  <span class="dv">1</span>  <span class="fl">3.58065</span> <span class="dv">1</span></span>
+<span id="cb88-21"><a href="stochastic-treatment-regimes-optional.html#cb88-21"></a><span class="dv">2</span><span class="op">:</span><span class="st">  </span><span class="dv">1</span>  <span class="dv">0</span>  <span class="fl">3.20718</span> <span class="dv">1</span></span>
+<span id="cb88-22"><a href="stochastic-treatment-regimes-optional.html#cb88-22"></a><span class="dv">3</span><span class="op">:</span><span class="st">  </span><span class="dv">1</span>  <span class="dv">1</span>  <span class="fl">1.03584</span> <span class="dv">1</span></span>
+<span id="cb88-23"><a href="stochastic-treatment-regimes-optional.html#cb88-23"></a><span class="dv">4</span><span class="op">:</span><span class="st">  </span><span class="dv">0</span>  <span class="dv">0</span> <span class="fl">-0.65785</span> <span class="dv">1</span></span>
+<span id="cb88-24"><a href="stochastic-treatment-regimes-optional.html#cb88-24"></a><span class="dv">5</span><span class="op">:</span><span class="st">  </span><span class="dv">1</span>  <span class="dv">1</span>  <span class="fl">3.01990</span> <span class="dv">1</span></span>
+<span id="cb88-25"><a href="stochastic-treatment-regimes-optional.html#cb88-25"></a><span class="dv">6</span><span class="op">:</span><span class="st">  </span><span class="dv">1</span>  <span class="dv">1</span>  <span class="fl">2.78031</span> <span class="dv">1</span></span></code></pre></div>
 <p>We now have an observed data structure (<code>data</code>) and a specification of the role
 that each variable in the data set plays as the nodes in a <em>directed acyclic
 graph</em> (DAG) via <em>nonparametric structural equation models</em> (NPSEMs).</p>
@@ -365,7 +363,7 @@ interest (a <code>tmle3_Spec</code> in the <code>tlverse</code> nomenclature) si
 <code>tmle_shift</code>. We specify the argument <code>shift_val = 0.5</code> when initializing the
 <code>tmle3_Spec</code> object to communicate that we’re interested in a shift of <span class="math inline">\(0.5\)</span> on
 the scale of the treatment <span class="math inline">\(A\)</span> – that is, we specify <span class="math inline">\(\delta = 0.5\)</span>.</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># initialize a tmle specification</span>
 <span class="va">tmle_spec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tlverse.org/tmle3shift/reference/tmle_shift.html">tmle_shift</a></span><span class="op">(</span>
   shift_val <span class="op">=</span> <span class="fl">0.5</span>,
@@ -394,18 +392,17 @@ sequel.
 <h3>
 <span class="header-section-number">6.4.2</span> Targeted Estimation of Stochastic Interventions Effects<a class="anchor" aria-label="anchor" href="#targeted-estimation-of-stochastic-interventions-effects"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tmle_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://tlverse.org/tmle3/reference/tmle3.html">tmle3</a></span><span class="op">(</span><span class="va">tmle_spec</span>, <span class="va">data</span>, <span class="va">node_list</span>, <span class="va">learner_list</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Iter: 1 fn: 1384.5336     Pars:  0.22969279 0.00001885 0.77028836</span>
-<span class="co">#&gt; Iter: 2 fn: 1384.5336     Pars:  0.229692876 0.000007582 0.770299542</span>
-<span class="co">#&gt; solnp--&gt; Completed in 2 iterations</span>
-<span class="va">tmle_fit</span>
-<span class="co">#&gt; A tmle3_Fit that took 1 step(s)</span>
-<span class="co">#&gt;    type         param init_est tmle_est      se   lower   upper psi_transformed</span>
-<span class="co">#&gt; 1:  TSM E[Y_{A=NULL}]   0.8008  0.79855 0.01284 0.77339 0.82372         0.79855</span>
-<span class="co">#&gt;    lower_transformed upper_transformed</span>
-<span class="co">#&gt; 1:           0.77339           0.82372</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="stochastic-treatment-regimes-optional.html#cb90-1"></a>tmle_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(tmle_spec, data, node_list, learner_list)</span>
+<span id="cb90-2"><a href="stochastic-treatment-regimes-optional.html#cb90-2"></a></span>
+<span id="cb90-3"><a href="stochastic-treatment-regimes-optional.html#cb90-3"></a>Iter<span class="op">:</span><span class="st"> </span><span class="dv">1</span> fn<span class="op">:</span><span class="st"> </span><span class="fl">1342.0479</span>    Pars<span class="op">:</span><span class="st">  </span><span class="fl">0.56750948</span> <span class="fl">0.00000282</span> <span class="fl">0.43248770</span></span>
+<span id="cb90-4"><a href="stochastic-treatment-regimes-optional.html#cb90-4"></a>Iter<span class="op">:</span><span class="st"> </span><span class="dv">2</span> fn<span class="op">:</span><span class="st"> </span><span class="fl">1342.0479</span>    Pars<span class="op">:</span><span class="st">  </span><span class="fl">0.5675095127</span> <span class="fl">0.0000005883</span> <span class="fl">0.4324898990</span></span>
+<span id="cb90-5"><a href="stochastic-treatment-regimes-optional.html#cb90-5"></a>solnp<span class="op">-</span>-&gt;<span class="st"> </span>Completed <span class="cf">in</span> <span class="dv">2</span> iterations</span>
+<span id="cb90-6"><a href="stochastic-treatment-regimes-optional.html#cb90-6"></a>tmle_fit</span>
+<span id="cb90-7"><a href="stochastic-treatment-regimes-optional.html#cb90-7"></a>A tmle3_Fit that took <span class="dv">1</span> <span class="kw">step</span>(s)</span>
+<span id="cb90-8"><a href="stochastic-treatment-regimes-optional.html#cb90-8"></a>   type         param init_est tmle_est       se   lower   upper</span>
+<span id="cb90-9"><a href="stochastic-treatment-regimes-optional.html#cb90-9"></a><span class="dv">1</span><span class="op">:</span><span class="st">  </span>TSM E[Y_{A=<span class="ot">NULL</span>}]   <span class="fl">0.8008</span>  <span class="fl">0.79801</span> <span class="fl">0.012924</span> <span class="fl">0.77268</span> <span class="fl">0.82334</span></span>
+<span id="cb90-10"><a href="stochastic-treatment-regimes-optional.html#cb90-10"></a>   psi_transformed lower_transformed upper_transformed</span>
+<span id="cb90-11"><a href="stochastic-treatment-regimes-optional.html#cb90-11"></a><span class="dv">1</span><span class="op">:</span><span class="st">         </span><span class="fl">0.79801</span>           <span class="fl">0.77268</span>           <span class="fl">0.82334</span></span></code></pre></div>
 <p>The <code>print</code> method of the resultant <code>tmle_fit</code> object conveniently displays the
 results from computing our TML estimator.</p>
 </div>
@@ -456,7 +453,7 @@ interest (called a <code>tmle3_Spec</code> in the <code>tlverse</code> nomenclat
 <code>tmle_shift</code>. We specify the argument <code>shift_grid = seq(-1, 1, by = 1)</code>
 when initializing the <code>tmle3_Spec</code> object to communicate that we’re interested
 in assessing the mean counterfactual outcome over a grid of shifts -1, 0, 1 on the scale of the treatment <span class="math inline">\(A\)</span>.</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># what's the grid of shifts we wish to consider?</span>
 <span class="va">delta_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, to <span class="op">=</span> <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
@@ -476,26 +473,25 @@ machinery exposed by the <a href="https://tlverse.org/tmle3"><code>tmle3</code> 
 simply invoke the <code>tmle3</code> wrapper function to fit the series of TML estimators
 (one for each parameter defined by the grid delta) in a single function call.
 For convenience, we choose the latter:</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tmle_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://tlverse.org/tmle3/reference/tmle3.html">tmle3</a></span><span class="op">(</span><span class="va">tmle_spec</span>, <span class="va">data</span>, <span class="va">node_list</span>, <span class="va">learner_list</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Iter: 1 fn: 1385.8594     Pars:  0.25208827 0.00004768 0.74786405</span>
-<span class="co">#&gt; Iter: 2 fn: 1385.8594     Pars:  0.25208843 0.00002901 0.74788255</span>
-<span class="co">#&gt; solnp--&gt; Completed in 2 iterations</span>
-<span class="va">tmle_fit</span>
-<span class="co">#&gt; A tmle3_Fit that took 1 step(s)</span>
-<span class="co">#&gt;          type          param init_est tmle_est        se   lower   upper</span>
-<span class="co">#&gt; 1:        TSM  E[Y_{A=NULL}]  0.61655  0.61546 0.0140007 0.58802 0.64290</span>
-<span class="co">#&gt; 2:        TSM  E[Y_{A=NULL}]  0.74115  0.73899 0.0138954 0.71176 0.76623</span>
-<span class="co">#&gt; 3:        TSM  E[Y_{A=NULL}]  0.84917  0.84374 0.0107174 0.82274 0.86475</span>
-<span class="co">#&gt; 4: MSM_linear MSM(intercept)  0.73563  0.73273 0.0120788 0.70906 0.75641</span>
-<span class="co">#&gt; 5: MSM_linear     MSM(slope)  0.11631  0.11414 0.0053805 0.10360 0.12469</span>
-<span class="co">#&gt;    psi_transformed lower_transformed upper_transformed</span>
-<span class="co">#&gt; 1:         0.61546           0.58802           0.64290</span>
-<span class="co">#&gt; 2:         0.73899           0.71176           0.76623</span>
-<span class="co">#&gt; 3:         0.84374           0.82274           0.86475</span>
-<span class="co">#&gt; 4:         0.73273           0.70906           0.75641</span>
-<span class="co">#&gt; 5:         0.11414           0.10360           0.12469</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="stochastic-treatment-regimes-optional.html#cb92-1"></a>tmle_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(tmle_spec, data, node_list, learner_list)</span>
+<span id="cb92-2"><a href="stochastic-treatment-regimes-optional.html#cb92-2"></a></span>
+<span id="cb92-3"><a href="stochastic-treatment-regimes-optional.html#cb92-3"></a>Iter<span class="op">:</span><span class="st"> </span><span class="dv">1</span> fn<span class="op">:</span><span class="st"> </span><span class="fl">1340.1739</span>    Pars<span class="op">:</span><span class="st">  </span><span class="fl">0.59196</span> <span class="fl">0.12955</span> <span class="fl">0.27849</span></span>
+<span id="cb92-4"><a href="stochastic-treatment-regimes-optional.html#cb92-4"></a>Iter<span class="op">:</span><span class="st"> </span><span class="dv">2</span> fn<span class="op">:</span><span class="st"> </span><span class="fl">1340.1739</span>    Pars<span class="op">:</span><span class="st">  </span><span class="fl">0.59196</span> <span class="fl">0.12956</span> <span class="fl">0.27848</span></span>
+<span id="cb92-5"><a href="stochastic-treatment-regimes-optional.html#cb92-5"></a>solnp<span class="op">-</span>-&gt;<span class="st"> </span>Completed <span class="cf">in</span> <span class="dv">2</span> iterations</span>
+<span id="cb92-6"><a href="stochastic-treatment-regimes-optional.html#cb92-6"></a>tmle_fit</span>
+<span id="cb92-7"><a href="stochastic-treatment-regimes-optional.html#cb92-7"></a>A tmle3_Fit that took <span class="dv">1</span> <span class="kw">step</span>(s)</span>
+<span id="cb92-8"><a href="stochastic-treatment-regimes-optional.html#cb92-8"></a>         type          param init_est tmle_est        se   lower   upper</span>
+<span id="cb92-9"><a href="stochastic-treatment-regimes-optional.html#cb92-9"></a><span class="dv">1</span><span class="op">:</span><span class="st">        </span>TSM  E[Y_{A=<span class="ot">NULL</span>}]  <span class="fl">0.61243</span>  <span class="fl">0.61414</span> <span class="fl">0.0140803</span> <span class="fl">0.58655</span> <span class="fl">0.64174</span></span>
+<span id="cb92-10"><a href="stochastic-treatment-regimes-optional.html#cb92-10"></a><span class="dv">2</span><span class="op">:</span><span class="st">        </span>TSM  E[Y_{A=<span class="ot">NULL</span>}]  <span class="fl">0.74078</span>  <span class="fl">0.73900</span> <span class="fl">0.0138950</span> <span class="fl">0.71177</span> <span class="fl">0.76623</span></span>
+<span id="cb92-11"><a href="stochastic-treatment-regimes-optional.html#cb92-11"></a><span class="dv">3</span><span class="op">:</span><span class="st">        </span>TSM  E[Y_{A=<span class="ot">NULL</span>}]  <span class="fl">0.85109</span>  <span class="fl">0.84900</span> <span class="fl">0.0112007</span> <span class="fl">0.82705</span> <span class="fl">0.87096</span></span>
+<span id="cb92-12"><a href="stochastic-treatment-regimes-optional.html#cb92-12"></a><span class="dv">4</span><span class="op">:</span><span class="st"> </span>MSM_linear <span class="kw">MSM</span>(intercept)  <span class="fl">0.73477</span>  <span class="fl">0.73405</span> <span class="fl">0.0125574</span> <span class="fl">0.70944</span> <span class="fl">0.75866</span></span>
+<span id="cb92-13"><a href="stochastic-treatment-regimes-optional.html#cb92-13"></a><span class="dv">5</span><span class="op">:</span><span class="st"> </span>MSM_linear     <span class="kw">MSM</span>(slope)  <span class="fl">0.11933</span>  <span class="fl">0.11743</span> <span class="fl">0.0043886</span> <span class="fl">0.10883</span> <span class="fl">0.12603</span></span>
+<span id="cb92-14"><a href="stochastic-treatment-regimes-optional.html#cb92-14"></a>   psi_transformed lower_transformed upper_transformed</span>
+<span id="cb92-15"><a href="stochastic-treatment-regimes-optional.html#cb92-15"></a><span class="dv">1</span><span class="op">:</span><span class="st">         </span><span class="fl">0.61414</span>           <span class="fl">0.58655</span>           <span class="fl">0.64174</span></span>
+<span id="cb92-16"><a href="stochastic-treatment-regimes-optional.html#cb92-16"></a><span class="dv">2</span><span class="op">:</span><span class="st">         </span><span class="fl">0.73900</span>           <span class="fl">0.71177</span>           <span class="fl">0.76623</span></span>
+<span id="cb92-17"><a href="stochastic-treatment-regimes-optional.html#cb92-17"></a><span class="dv">3</span><span class="op">:</span><span class="st">         </span><span class="fl">0.84900</span>           <span class="fl">0.82705</span>           <span class="fl">0.87096</span></span>
+<span id="cb92-18"><a href="stochastic-treatment-regimes-optional.html#cb92-18"></a><span class="dv">4</span><span class="op">:</span><span class="st">         </span><span class="fl">0.73405</span>           <span class="fl">0.70944</span>           <span class="fl">0.75866</span></span>
+<span id="cb92-19"><a href="stochastic-treatment-regimes-optional.html#cb92-19"></a><span class="dv">5</span><span class="op">:</span><span class="st">         </span><span class="fl">0.11743</span>           <span class="fl">0.10883</span>           <span class="fl">0.12603</span></span></code></pre></div>
 <p><em>Remark</em>: The <code>print</code> method of the resultant <code>tmle_fit</code> object conveniently
 displays the results from computing our TML estimator.</p>
 </div>
@@ -521,14 +517,13 @@ from a working MSM is rather straightforward. To wit, the limiting distribution
 for <span class="math inline">\(m_{\beta}(\delta)\)</span> may be expressed <span class="math display">\[\sqrt{n}(\beta_n - \beta_0) \to N(0,
 \Sigma),\]</span> where <span class="math inline">\(\Sigma\)</span> is the empirical covariance matrix of
 <span class="math inline">\(\text{EIF}_{\beta}(O)\)</span>.</p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tmle_fit</span><span class="op">$</span><span class="va">summary</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>
-<span class="co">#&gt;          type          param init_est tmle_est        se   lower   upper</span>
-<span class="co">#&gt; 1: MSM_linear MSM(intercept)  0.73563  0.73273 0.0120788 0.70906 0.75641</span>
-<span class="co">#&gt; 2: MSM_linear     MSM(slope)  0.11631  0.11414 0.0053805 0.10360 0.12469</span>
-<span class="co">#&gt;    psi_transformed lower_transformed upper_transformed</span>
-<span class="co">#&gt; 1:         0.73273           0.70906           0.75641</span>
-<span class="co">#&gt; 2:         0.11414           0.10360           0.12469</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="stochastic-treatment-regimes-optional.html#cb93-1"></a>tmle_fit<span class="op">$</span>summary[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, ]</span>
+<span id="cb93-2"><a href="stochastic-treatment-regimes-optional.html#cb93-2"></a>         type          param init_est tmle_est        se   lower   upper</span>
+<span id="cb93-3"><a href="stochastic-treatment-regimes-optional.html#cb93-3"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span>MSM_linear <span class="kw">MSM</span>(intercept)  <span class="fl">0.73477</span>  <span class="fl">0.73405</span> <span class="fl">0.0125574</span> <span class="fl">0.70944</span> <span class="fl">0.75866</span></span>
+<span id="cb93-4"><a href="stochastic-treatment-regimes-optional.html#cb93-4"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span>MSM_linear     <span class="kw">MSM</span>(slope)  <span class="fl">0.11933</span>  <span class="fl">0.11743</span> <span class="fl">0.0043886</span> <span class="fl">0.10883</span> <span class="fl">0.12603</span></span>
+<span id="cb93-5"><a href="stochastic-treatment-regimes-optional.html#cb93-5"></a>   psi_transformed lower_transformed upper_transformed</span>
+<span id="cb93-6"><a href="stochastic-treatment-regimes-optional.html#cb93-6"></a><span class="dv">1</span><span class="op">:</span><span class="st">         </span><span class="fl">0.73405</span>           <span class="fl">0.70944</span>           <span class="fl">0.75866</span></span>
+<span id="cb93-7"><a href="stochastic-treatment-regimes-optional.html#cb93-7"></a><span class="dv">2</span><span class="op">:</span><span class="st">         </span><span class="fl">0.11743</span>           <span class="fl">0.10883</span>           <span class="fl">0.12603</span></span></code></pre></div>
 </div>
 <div id="directly-targeting-the-msm-parameter-beta" class="section level3">
 <h3>
@@ -552,27 +547,26 @@ H_2(g),\]</span> for all <span class="math inline">\(\delta\)</span>, where <spa
 parameters of the working marginal structural model, we may use the
 <code>tmle_vimshift_msm</code> Spec (instead of the <code>tmle_vimshift_delta</code> Spec that
 appears above):</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># initialize a tmle specification</span>
-<span class="va">tmle_msm_spec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tlverse.org/tmle3shift/reference/tmle_vimshift_msm.html">tmle_vimshift_msm</a></span><span class="op">(</span>
-  shift_grid <span class="op">=</span> <span class="va">delta_grid</span>,
-  max_shifted_ratio <span class="op">=</span> <span class="fl">2</span>
-<span class="op">)</span>
-
-<span class="co"># fit the TML estimator and examine the results</span>
-<span class="va">tmle_msm_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://tlverse.org/tmle3/reference/tmle3.html">tmle3</a></span><span class="op">(</span><span class="va">tmle_msm_spec</span>, <span class="va">data</span>, <span class="va">node_list</span>, <span class="va">learner_list</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Iter: 1 fn: 1383.8221     Pars:  0.25259038 0.00001286 0.74739676</span>
-<span class="co">#&gt; Iter: 2 fn: 1383.8221     Pars:  0.25259037 0.00000784 0.74740179</span>
-<span class="co">#&gt; solnp--&gt; Completed in 2 iterations</span>
-<span class="va">tmle_msm_fit</span>
-<span class="co">#&gt; A tmle3_Fit that took 100 step(s)</span>
-<span class="co">#&gt;          type          param init_est tmle_est        se   lower   upper</span>
-<span class="co">#&gt; 1: MSM_linear MSM(intercept)  0.73688  0.73682 0.0120245 0.71326 0.76039</span>
-<span class="co">#&gt; 2: MSM_linear     MSM(slope)  0.11604  0.11615 0.0053919 0.10558 0.12672</span>
-<span class="co">#&gt;    psi_transformed lower_transformed upper_transformed</span>
-<span class="co">#&gt; 1:         0.73682           0.71326           0.76039</span>
-<span class="co">#&gt; 2:         0.11615           0.10558           0.12672</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="stochastic-treatment-regimes-optional.html#cb94-1"></a><span class="co"># initialize a tmle specification</span></span>
+<span id="cb94-2"><a href="stochastic-treatment-regimes-optional.html#cb94-2"></a>tmle_msm_spec &lt;-<span class="st"> </span><span class="kw">tmle_vimshift_msm</span>(</span>
+<span id="cb94-3"><a href="stochastic-treatment-regimes-optional.html#cb94-3"></a>  <span class="dt">shift_grid =</span> delta_grid,</span>
+<span id="cb94-4"><a href="stochastic-treatment-regimes-optional.html#cb94-4"></a>  <span class="dt">max_shifted_ratio =</span> <span class="dv">2</span></span>
+<span id="cb94-5"><a href="stochastic-treatment-regimes-optional.html#cb94-5"></a>)</span>
+<span id="cb94-6"><a href="stochastic-treatment-regimes-optional.html#cb94-6"></a></span>
+<span id="cb94-7"><a href="stochastic-treatment-regimes-optional.html#cb94-7"></a><span class="co"># fit the TML estimator and examine the results</span></span>
+<span id="cb94-8"><a href="stochastic-treatment-regimes-optional.html#cb94-8"></a>tmle_msm_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(tmle_msm_spec, data, node_list, learner_list)</span>
+<span id="cb94-9"><a href="stochastic-treatment-regimes-optional.html#cb94-9"></a></span>
+<span id="cb94-10"><a href="stochastic-treatment-regimes-optional.html#cb94-10"></a>Iter<span class="op">:</span><span class="st"> </span><span class="dv">1</span> fn<span class="op">:</span><span class="st"> </span><span class="fl">1338.2186</span>    Pars<span class="op">:</span><span class="st">  </span><span class="fl">0.621115419</span> <span class="fl">0.000009161</span> <span class="fl">0.378875424</span></span>
+<span id="cb94-11"><a href="stochastic-treatment-regimes-optional.html#cb94-11"></a>Iter<span class="op">:</span><span class="st"> </span><span class="dv">2</span> fn<span class="op">:</span><span class="st"> </span><span class="fl">1338.2186</span>    Pars<span class="op">:</span><span class="st">  </span><span class="fl">0.6211155417</span> <span class="fl">0.0000003725</span> <span class="fl">0.3788840858</span></span>
+<span id="cb94-12"><a href="stochastic-treatment-regimes-optional.html#cb94-12"></a>solnp<span class="op">-</span>-&gt;<span class="st"> </span>Completed <span class="cf">in</span> <span class="dv">2</span> iterations</span>
+<span id="cb94-13"><a href="stochastic-treatment-regimes-optional.html#cb94-13"></a>tmle_msm_fit</span>
+<span id="cb94-14"><a href="stochastic-treatment-regimes-optional.html#cb94-14"></a>A tmle3_Fit that took <span class="dv">100</span> <span class="kw">step</span>(s)</span>
+<span id="cb94-15"><a href="stochastic-treatment-regimes-optional.html#cb94-15"></a>         type          param init_est tmle_est        se   lower   upper</span>
+<span id="cb94-16"><a href="stochastic-treatment-regimes-optional.html#cb94-16"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span>MSM_linear <span class="kw">MSM</span>(intercept)  <span class="fl">0.73511</span>  <span class="fl">0.73540</span> <span class="fl">0.0125979</span> <span class="fl">0.71071</span> <span class="fl">0.76009</span></span>
+<span id="cb94-17"><a href="stochastic-treatment-regimes-optional.html#cb94-17"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span>MSM_linear     <span class="kw">MSM</span>(slope)  <span class="fl">0.11894</span>  <span class="fl">0.11876</span> <span class="fl">0.0042977</span> <span class="fl">0.11033</span> <span class="fl">0.12718</span></span>
+<span id="cb94-18"><a href="stochastic-treatment-regimes-optional.html#cb94-18"></a>   psi_transformed lower_transformed upper_transformed</span>
+<span id="cb94-19"><a href="stochastic-treatment-regimes-optional.html#cb94-19"></a><span class="dv">1</span><span class="op">:</span><span class="st">         </span><span class="fl">0.73540</span>           <span class="fl">0.71071</span>           <span class="fl">0.76009</span></span>
+<span id="cb94-20"><a href="stochastic-treatment-regimes-optional.html#cb94-20"></a><span class="dv">2</span><span class="op">:</span><span class="st">         </span><span class="fl">0.11876</span>           <span class="fl">0.11033</span>           <span class="fl">0.12718</span></span></code></pre></div>
 </div>
 <div id="example-with-the-wash-benefits-data" class="section level3">
 <h3>
@@ -581,31 +575,30 @@ appears above):</p>
 <p>To complete our walk through, let’s turn to using stochastic interventions to
 investigate the data from the WASH Benefits trial. To start, let’s load the
 data, convert all columns to be of class <code>numeric</code>, and take a quick look at it</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">washb_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data_subset.csv"</span>, stringsAsFactors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">washb_data</span> <span class="op">&lt;-</span> <span class="va">washb_data</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">momage</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">momheight</span><span class="op">)</span>, <span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">washb_data</span>, <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt;      whz          tr fracode month aged    sex momage         momedu momheight</span>
-<span class="co">#&gt; 1: -0.94 Handwashing  N06505     7  237   male     21 Primary (1-5y)    146.00</span>
-<span class="co">#&gt; 2: -1.13     Control  N06505     8  310 female     26   No education    148.90</span>
-<span class="co">#&gt; 3: -1.61     Control  N06524     3  162   male     25 Primary (1-5y)    153.75</span>
-<span class="co">#&gt;        hfiacat Nlt18 Ncomp watmin elec floor walls roof asset_wardrobe</span>
-<span class="co">#&gt; 1: Food Secure     1    25      2    1     0     1    1              0</span>
-<span class="co">#&gt; 2: Food Secure     1     7      4    1     0     0    1              0</span>
-<span class="co">#&gt; 3: Food Secure     0    15      2    0     0     1    1              0</span>
-<span class="co">#&gt;    asset_table asset_chair asset_khat asset_chouki asset_tv asset_refrig</span>
-<span class="co">#&gt; 1:           1           0          0            1        0            0</span>
-<span class="co">#&gt; 2:           1           1          0            1        0            0</span>
-<span class="co">#&gt; 3:           1           0          1            1        0            0</span>
-<span class="co">#&gt;    asset_bike asset_moto asset_sewmach asset_mobile</span>
-<span class="co">#&gt; 1:          0          0             0            0</span>
-<span class="co">#&gt; 2:          0          0             0            1</span>
-<span class="co">#&gt; 3:          0          0             0            0</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="stochastic-treatment-regimes-optional.html#cb95-1"></a>washb_data &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">"https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data_subset.csv"</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb95-2"><a href="stochastic-treatment-regimes-optional.html#cb95-2"></a>washb_data &lt;-<span class="st"> </span>washb_data[<span class="op">!</span><span class="kw">is.na</span>(momage) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(momheight), ]</span>
+<span id="cb95-3"><a href="stochastic-treatment-regimes-optional.html#cb95-3"></a><span class="kw">head</span>(washb_data, <span class="dv">3</span>)</span>
+<span id="cb95-4"><a href="stochastic-treatment-regimes-optional.html#cb95-4"></a>     whz          tr fracode month aged    sex momage         momedu momheight</span>
+<span id="cb95-5"><a href="stochastic-treatment-regimes-optional.html#cb95-5"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.94</span> Handwashing  N06505     <span class="dv">7</span>  <span class="dv">237</span>   male     <span class="dv">21</span> <span class="kw">Primary</span> (<span class="dv">1</span><span class="op">-</span>5y)    <span class="fl">146.00</span></span>
+<span id="cb95-6"><a href="stochastic-treatment-regimes-optional.html#cb95-6"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span><span class="fl">-1.13</span>     Control  N06505     <span class="dv">8</span>  <span class="dv">310</span> female     <span class="dv">26</span>   No education    <span class="fl">148.90</span></span>
+<span id="cb95-7"><a href="stochastic-treatment-regimes-optional.html#cb95-7"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span><span class="fl">-1.61</span>     Control  N06524     <span class="dv">3</span>  <span class="dv">162</span>   male     <span class="dv">25</span> <span class="kw">Primary</span> (<span class="dv">1</span><span class="op">-</span>5y)    <span class="fl">153.75</span></span>
+<span id="cb95-8"><a href="stochastic-treatment-regimes-optional.html#cb95-8"></a>       hfiacat Nlt18 Ncomp watmin elec floor walls roof asset_wardrobe</span>
+<span id="cb95-9"><a href="stochastic-treatment-regimes-optional.html#cb95-9"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Food Secure     <span class="dv">1</span>    <span class="dv">25</span>      <span class="dv">2</span>    <span class="dv">1</span>     <span class="dv">0</span>     <span class="dv">1</span>    <span class="dv">1</span>              <span class="dv">0</span></span>
+<span id="cb95-10"><a href="stochastic-treatment-regimes-optional.html#cb95-10"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span>Food Secure     <span class="dv">1</span>     <span class="dv">7</span>      <span class="dv">4</span>    <span class="dv">1</span>     <span class="dv">0</span>     <span class="dv">0</span>    <span class="dv">1</span>              <span class="dv">0</span></span>
+<span id="cb95-11"><a href="stochastic-treatment-regimes-optional.html#cb95-11"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span>Food Secure     <span class="dv">0</span>    <span class="dv">15</span>      <span class="dv">2</span>    <span class="dv">0</span>     <span class="dv">0</span>     <span class="dv">1</span>    <span class="dv">1</span>              <span class="dv">0</span></span>
+<span id="cb95-12"><a href="stochastic-treatment-regimes-optional.html#cb95-12"></a>   asset_table asset_chair asset_khat asset_chouki asset_tv asset_refrig</span>
+<span id="cb95-13"><a href="stochastic-treatment-regimes-optional.html#cb95-13"></a><span class="dv">1</span><span class="op">:</span><span class="st">           </span><span class="dv">1</span>           <span class="dv">0</span>          <span class="dv">0</span>            <span class="dv">1</span>        <span class="dv">0</span>            <span class="dv">0</span></span>
+<span id="cb95-14"><a href="stochastic-treatment-regimes-optional.html#cb95-14"></a><span class="dv">2</span><span class="op">:</span><span class="st">           </span><span class="dv">1</span>           <span class="dv">1</span>          <span class="dv">0</span>            <span class="dv">1</span>        <span class="dv">0</span>            <span class="dv">0</span></span>
+<span id="cb95-15"><a href="stochastic-treatment-regimes-optional.html#cb95-15"></a><span class="dv">3</span><span class="op">:</span><span class="st">           </span><span class="dv">1</span>           <span class="dv">0</span>          <span class="dv">1</span>            <span class="dv">1</span>        <span class="dv">0</span>            <span class="dv">0</span></span>
+<span id="cb95-16"><a href="stochastic-treatment-regimes-optional.html#cb95-16"></a>   asset_bike asset_moto asset_sewmach asset_mobile</span>
+<span id="cb95-17"><a href="stochastic-treatment-regimes-optional.html#cb95-17"></a><span class="dv">1</span><span class="op">:</span><span class="st">          </span><span class="dv">0</span>          <span class="dv">0</span>             <span class="dv">0</span>            <span class="dv">0</span></span>
+<span id="cb95-18"><a href="stochastic-treatment-regimes-optional.html#cb95-18"></a><span class="dv">2</span><span class="op">:</span><span class="st">          </span><span class="dv">0</span>          <span class="dv">0</span>             <span class="dv">0</span>            <span class="dv">1</span></span>
+<span id="cb95-19"><a href="stochastic-treatment-regimes-optional.html#cb95-19"></a><span class="dv">3</span><span class="op">:</span><span class="st">          </span><span class="dv">0</span>          <span class="dv">0</span>             <span class="dv">0</span>            <span class="dv">0</span></span></code></pre></div>
 <p>Next, we specify our NPSEM via the <code>node_list</code> object. For our example analysis,
 we’ll consider the outcome to be the weight-for-height Z-score (as in previous
 sections), the intervention of interest to be the mother’s age at time of
 child’s birth, and take all other covariates to be potential confounders.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">node_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
   W <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">washb_data</span><span class="op">)</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">washb_data</span><span class="op">)</span> <span class="op">%in%</span>
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"whz"</span>, <span class="st">"momage"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>,
@@ -620,7 +613,7 @@ intervention would correspond to a policy advocating that potential mothers
 defer or accelerate plans of having a child for two calendar years, possibly
 implemented through the deployment of an encouragement design.</p>
 <p>First, let’s try a simple upward shift of just two years:</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># initialize a tmle specification for just a single delta shift</span>
 <span class="va">washb_shift_spec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tlverse.org/tmle3shift/reference/tmle_shift.html">tmle_shift</a></span><span class="op">(</span>
   shift_val <span class="op">=</span> <span class="fl">2</span>,
@@ -631,7 +624,7 @@ implemented through the deployment of an encouragement design.</p>
 we’ll estimate the effect of this shift <span class="math inline">\(\delta = 2\)</span> while stratifying on the
 mother’s education level (<code>momedu</code>, a categorical variable with three levels).
 For this, we augment our initialized <code>tmle3_Spec</code> object like so</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># initialize effect modification specification around previous specification</span>
 <span class="va">washb_shift_strat_spec</span> <span class="op">&lt;-</span>  <span class="fu"><a href="http://tlverse.org/tmle3/reference/tmle_stratified.html">tmle_stratified</a></span><span class="op">(</span><span class="va">washb_shift_spec</span><span class="op">)</span></code></pre></div>
 <p>Prior to running our analysis, we’ll modify the <code>learner_list</code> object we had
@@ -640,7 +633,7 @@ density estimators, as fitting of these estimators is much faster than the more
 computationally intensive approach implemented in the
 <a href="ihttps://CRAN.R-project.org/package=haldensify"><code>haldensify</code> package</a>
 <span class="citation">(Hejazi, Benkeser, and van der Laan <a href="references.html#ref-hejazi2020haldensify" role="doc-biblioref">2020</a>)</span>.</p>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># learners used for conditional density regression (i.e., propensity score),</span>
 <span class="co"># but we need to turn on cross-validation for this conditional density learner</span>
 <span class="va">hose_learner_xgb_cv</span> <span class="op">&lt;-</span> <span class="va"><a href="https://tlverse.org/sl3/reference/Lrnr_cv.html">Lrnr_cv</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
@@ -652,32 +645,31 @@ computationally intensive approach implemented in the
 <span class="va">learner_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">Q_learner</span>, A <span class="op">=</span> <span class="va">hose_learner_xgb_cv</span><span class="op">)</span></code></pre></div>
 <p>Now we’re ready to construct a TML estimate of the shift parameter at
 <span class="math inline">\(\delta = 2\)</span>, stratified across levels of our variable of interest:</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># fit stratified TMLE</span>
-<span class="va">strat_node_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">node_list</span><span class="op">)</span>
-<span class="va">strat_node_list</span><span class="op">$</span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="va">strat_node_list</span><span class="op">$</span><span class="va">W</span>,<span class="st">"momedu"</span><span class="op">)</span>
-<span class="va">strat_node_list</span><span class="op">$</span><span class="va">V</span> <span class="op">&lt;-</span> <span class="st">"momedu"</span>
-<span class="va">washb_shift_strat_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://tlverse.org/tmle3/reference/tmle3.html">tmle3</a></span><span class="op">(</span><span class="va">washb_shift_strat_spec</span>, <span class="va">washb_data</span>, <span class="va">strat_node_list</span>,
-                               <span class="va">learner_list</span><span class="op">)</span>
-<span class="va">washb_shift_strat_fit</span>
-<span class="co">#&gt; A tmle3_Fit that took 1 step(s)</span>
-<span class="co">#&gt;              type                             param init_est tmle_est       se</span>
-<span class="co">#&gt; 1:            TSM                     E[Y_{A=NULL}] -0.57206 -0.56936 0.048211</span>
-<span class="co">#&gt; 2: stratified TSM  E[Y_{A=NULL}] | V=Primary (1-5y) -0.62295 -0.69200 0.076813</span>
-<span class="co">#&gt; 3: stratified TSM    E[Y_{A=NULL}] | V=No education -0.68673 -0.86672 0.128939</span>
-<span class="co">#&gt; 4: stratified TSM E[Y_{A=NULL}] | V=Secondary (&gt;5y) -0.50717 -0.40686 0.067633</span>
-<span class="co">#&gt;       lower    upper psi_transformed lower_transformed upper_transformed</span>
-<span class="co">#&gt; 1: -0.66385 -0.47487        -0.56936          -0.66385          -0.47487</span>
-<span class="co">#&gt; 2: -0.84255 -0.54145        -0.69200          -0.84255          -0.54145</span>
-<span class="co">#&gt; 3: -1.11944 -0.61401        -0.86672          -1.11944          -0.61401</span>
-<span class="co">#&gt; 4: -0.53942 -0.27431        -0.40686          -0.53942          -0.27431</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="stochastic-treatment-regimes-optional.html#cb100-1"></a><span class="co"># fit stratified TMLE</span></span>
+<span id="cb100-2"><a href="stochastic-treatment-regimes-optional.html#cb100-2"></a>strat_node_list &lt;-<span class="st"> </span><span class="kw">copy</span>(node_list)</span>
+<span id="cb100-3"><a href="stochastic-treatment-regimes-optional.html#cb100-3"></a>strat_node_list<span class="op">$</span>W &lt;-<span class="st"> </span><span class="kw">setdiff</span>(strat_node_list<span class="op">$</span>W,<span class="st">"momedu"</span>)</span>
+<span id="cb100-4"><a href="stochastic-treatment-regimes-optional.html#cb100-4"></a>strat_node_list<span class="op">$</span>V &lt;-<span class="st"> "momedu"</span></span>
+<span id="cb100-5"><a href="stochastic-treatment-regimes-optional.html#cb100-5"></a>washb_shift_strat_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(washb_shift_strat_spec, washb_data, strat_node_list,</span>
+<span id="cb100-6"><a href="stochastic-treatment-regimes-optional.html#cb100-6"></a>                               learner_list)</span>
+<span id="cb100-7"><a href="stochastic-treatment-regimes-optional.html#cb100-7"></a>washb_shift_strat_fit</span>
+<span id="cb100-8"><a href="stochastic-treatment-regimes-optional.html#cb100-8"></a>A tmle3_Fit that took <span class="dv">1</span> <span class="kw">step</span>(s)</span>
+<span id="cb100-9"><a href="stochastic-treatment-regimes-optional.html#cb100-9"></a>             type                             param init_est tmle_est       se</span>
+<span id="cb100-10"><a href="stochastic-treatment-regimes-optional.html#cb100-10"></a><span class="dv">1</span><span class="op">:</span><span class="st">            </span>TSM                     E[Y_{A=<span class="ot">NULL</span>}] <span class="fl">-0.57056</span> <span class="fl">-0.59444</span> <span class="fl">0.058920</span></span>
+<span id="cb100-11"><a href="stochastic-treatment-regimes-optional.html#cb100-11"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span>stratified TSM  E[Y_{A=<span class="ot">NULL</span>}] <span class="op">|</span><span class="st"> </span>V=<span class="kw">Primary</span> (<span class="dv">1</span><span class="op">-</span>5y) <span class="fl">-0.60763</span> <span class="fl">-0.70816</span> <span class="fl">0.075504</span></span>
+<span id="cb100-12"><a href="stochastic-treatment-regimes-optional.html#cb100-12"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span>stratified TSM    E[Y_{A=<span class="ot">NULL</span>}] <span class="op">|</span><span class="st"> </span>V=No education <span class="fl">-0.65272</span> <span class="fl">-0.85506</span> <span class="fl">0.125655</span></span>
+<span id="cb100-13"><a href="stochastic-treatment-regimes-optional.html#cb100-13"></a><span class="dv">4</span><span class="op">:</span><span class="st"> </span>stratified TSM E[Y_{A=<span class="ot">NULL</span>}] <span class="op">|</span><span class="st"> </span>V=<span class="kw">Secondary</span> (<span class="op">&gt;</span>5y) <span class="fl">-0.52368</span> <span class="fl">-0.44815</span> <span class="fl">0.094647</span></span>
+<span id="cb100-14"><a href="stochastic-treatment-regimes-optional.html#cb100-14"></a>      lower    upper psi_transformed lower_transformed upper_transformed</span>
+<span id="cb100-15"><a href="stochastic-treatment-regimes-optional.html#cb100-15"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.70992</span> <span class="fl">-0.47896</span>        <span class="fl">-0.59444</span>          <span class="fl">-0.70992</span>          <span class="fl">-0.47896</span></span>
+<span id="cb100-16"><a href="stochastic-treatment-regimes-optional.html#cb100-16"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.85614</span> <span class="fl">-0.56017</span>        <span class="fl">-0.70816</span>          <span class="fl">-0.85614</span>          <span class="fl">-0.56017</span></span>
+<span id="cb100-17"><a href="stochastic-treatment-regimes-optional.html#cb100-17"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span><span class="fl">-1.10134</span> <span class="fl">-0.60878</span>        <span class="fl">-0.85506</span>          <span class="fl">-1.10134</span>          <span class="fl">-0.60878</span></span>
+<span id="cb100-18"><a href="stochastic-treatment-regimes-optional.html#cb100-18"></a><span class="dv">4</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.63365</span> <span class="fl">-0.26264</span>        <span class="fl">-0.44815</span>          <span class="fl">-0.63365</span>          <span class="fl">-0.26264</span></span></code></pre></div>
 <p>For the next example, we’ll use the variable importance strategy of considering
 a grid of stochastic interventions to evaluate the weight-for-height Z-score
 under a shift in the mother’s age down by two years (<span class="math inline">\(\delta = -2\)</span>) through up
 by two years (<span class="math inline">\(\delta = 2\)</span>), incrementing by a single year between the two. To
 do this, we simply initialize a <code>Spec</code> <code>tmle_vimshift_delta</code> similar to how we
 did in a previous example:</p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># initialize a tmle specification for the variable importance parameter</span>
 <span class="va">washb_vim_spec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tlverse.org/tmle3shift/reference/tmle_vimshift_delta.html">tmle_vimshift_delta</a></span><span class="op">(</span>
   shift_grid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>, to <span class="op">=</span> <span class="fl">2</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
@@ -687,26 +679,25 @@ did in a previous example:</p>
 counterfactual mean of the weight-for-height Z-score under a small grid of
 shifts in the mother’s age at child’s birth. Just as before, we do this through
 a simple call to our <code>tmle3</code> wrapper function:</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">washb_tmle_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://tlverse.org/tmle3/reference/tmle3.html">tmle3</a></span><span class="op">(</span><span class="va">washb_vim_spec</span>, <span class="va">washb_data</span>, <span class="va">node_list</span>, <span class="va">learner_list</span><span class="op">)</span>
-<span class="va">washb_tmle_fit</span>
-<span class="co">#&gt; A tmle3_Fit that took 1 step(s)</span>
-<span class="co">#&gt;          type          param   init_est   tmle_est        se      lower</span>
-<span class="co">#&gt; 1:        TSM  E[Y_{A=NULL}] -0.5608084 -0.5552156 0.0469064 -0.6471504</span>
-<span class="co">#&gt; 2:        TSM  E[Y_{A=NULL}] -0.5638623 -0.5644702 0.0466125 -0.6558290</span>
-<span class="co">#&gt; 3:        TSM  E[Y_{A=NULL}] -0.5663920 -0.5652941 0.0466314 -0.6566901</span>
-<span class="co">#&gt; 4:        TSM  E[Y_{A=NULL}] -0.5687408 -0.5681002 0.0463126 -0.6588712</span>
-<span class="co">#&gt; 5:        TSM  E[Y_{A=NULL}] -0.5708337 -0.5716047 0.0468992 -0.6635256</span>
-<span class="co">#&gt; 6: MSM_linear MSM(intercept) -0.5661274 -0.5649370 0.0465180 -0.6561105</span>
-<span class="co">#&gt; 7: MSM_linear     MSM(slope) -0.0024929 -0.0036408 0.0012834 -0.0061563</span>
-<span class="co">#&gt;         upper psi_transformed lower_transformed upper_transformed</span>
-<span class="co">#&gt; 1: -0.4632807      -0.5552156        -0.6471504        -0.4632807</span>
-<span class="co">#&gt; 2: -0.4731114      -0.5644702        -0.6558290        -0.4731114</span>
-<span class="co">#&gt; 3: -0.4738982      -0.5652941        -0.6566901        -0.4738982</span>
-<span class="co">#&gt; 4: -0.4773292      -0.5681002        -0.6588712        -0.4773292</span>
-<span class="co">#&gt; 5: -0.4796839      -0.5716047        -0.6635256        -0.4796839</span>
-<span class="co">#&gt; 6: -0.4737634      -0.5649370        -0.6561105        -0.4737634</span>
-<span class="co">#&gt; 7: -0.0011254      -0.0036408        -0.0061563        -0.0011254</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="stochastic-treatment-regimes-optional.html#cb102-1"></a>washb_tmle_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(washb_vim_spec, washb_data, node_list, learner_list)</span>
+<span id="cb102-2"><a href="stochastic-treatment-regimes-optional.html#cb102-2"></a>washb_tmle_fit</span>
+<span id="cb102-3"><a href="stochastic-treatment-regimes-optional.html#cb102-3"></a>A tmle3_Fit that took <span class="dv">1</span> <span class="kw">step</span>(s)</span>
+<span id="cb102-4"><a href="stochastic-treatment-regimes-optional.html#cb102-4"></a>         type          param init_est   tmle_est        se      lower</span>
+<span id="cb102-5"><a href="stochastic-treatment-regimes-optional.html#cb102-5"></a><span class="dv">1</span><span class="op">:</span><span class="st">        </span>TSM  E[Y_{A=<span class="ot">NULL</span>}] <span class="fl">-0.56197</span> <span class="fl">-0.5606288</span> <span class="fl">0.0459486</span> <span class="fl">-0.6506865</span></span>
+<span id="cb102-6"><a href="stochastic-treatment-regimes-optional.html#cb102-6"></a><span class="dv">2</span><span class="op">:</span><span class="st">        </span>TSM  E[Y_{A=<span class="ot">NULL</span>}] <span class="fl">-0.56388</span> <span class="fl">-0.5604088</span> <span class="fl">0.0464538</span> <span class="fl">-0.6514565</span></span>
+<span id="cb102-7"><a href="stochastic-treatment-regimes-optional.html#cb102-7"></a><span class="dv">3</span><span class="op">:</span><span class="st">        </span>TSM  E[Y_{A=<span class="ot">NULL</span>}] <span class="fl">-0.56579</span> <span class="fl">-0.5652941</span> <span class="fl">0.0466314</span> <span class="fl">-0.6566901</span></span>
+<span id="cb102-8"><a href="stochastic-treatment-regimes-optional.html#cb102-8"></a><span class="dv">4</span><span class="op">:</span><span class="st">        </span>TSM  E[Y_{A=<span class="ot">NULL</span>}] <span class="fl">-0.56770</span> <span class="fl">-0.5688357</span> <span class="fl">0.0468849</span> <span class="fl">-0.6607283</span></span>
+<span id="cb102-9"><a href="stochastic-treatment-regimes-optional.html#cb102-9"></a><span class="dv">5</span><span class="op">:</span><span class="st">        </span>TSM  E[Y_{A=<span class="ot">NULL</span>}] <span class="fl">-0.56961</span> <span class="fl">-0.5653488</span> <span class="fl">0.0479085</span> <span class="fl">-0.6592478</span></span>
+<span id="cb102-10"><a href="stochastic-treatment-regimes-optional.html#cb102-10"></a><span class="dv">6</span><span class="op">:</span><span class="st"> </span>MSM_linear <span class="kw">MSM</span>(intercept) <span class="fl">-0.56579</span> <span class="fl">-0.5641032</span> <span class="fl">0.0466524</span> <span class="fl">-0.6555403</span></span>
+<span id="cb102-11"><a href="stochastic-treatment-regimes-optional.html#cb102-11"></a><span class="dv">7</span><span class="op">:</span><span class="st"> </span>MSM_linear     <span class="kw">MSM</span>(slope) <span class="fl">-0.00191</span> <span class="fl">-0.0017867</span> <span class="fl">0.0015524</span> <span class="fl">-0.0048293</span></span>
+<span id="cb102-12"><a href="stochastic-treatment-regimes-optional.html#cb102-12"></a>        upper psi_transformed lower_transformed upper_transformed</span>
+<span id="cb102-13"><a href="stochastic-treatment-regimes-optional.html#cb102-13"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.4705711</span>      <span class="fl">-0.5606288</span>        <span class="fl">-0.6506865</span>        <span class="fl">-0.4705711</span></span>
+<span id="cb102-14"><a href="stochastic-treatment-regimes-optional.html#cb102-14"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.4693611</span>      <span class="fl">-0.5604088</span>        <span class="fl">-0.6514565</span>        <span class="fl">-0.4693611</span></span>
+<span id="cb102-15"><a href="stochastic-treatment-regimes-optional.html#cb102-15"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.4738982</span>      <span class="fl">-0.5652941</span>        <span class="fl">-0.6566901</span>        <span class="fl">-0.4738982</span></span>
+<span id="cb102-16"><a href="stochastic-treatment-regimes-optional.html#cb102-16"></a><span class="dv">4</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.4769430</span>      <span class="fl">-0.5688357</span>        <span class="fl">-0.6607283</span>        <span class="fl">-0.4769430</span></span>
+<span id="cb102-17"><a href="stochastic-treatment-regimes-optional.html#cb102-17"></a><span class="dv">5</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.4714498</span>      <span class="fl">-0.5653488</span>        <span class="fl">-0.6592478</span>        <span class="fl">-0.4714498</span></span>
+<span id="cb102-18"><a href="stochastic-treatment-regimes-optional.html#cb102-18"></a><span class="dv">6</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.4726662</span>      <span class="fl">-0.5641032</span>        <span class="fl">-0.6555403</span>        <span class="fl">-0.4726662</span></span>
+<span id="cb102-19"><a href="stochastic-treatment-regimes-optional.html#cb102-19"></a><span class="dv">7</span><span class="op">:</span><span class="st">  </span><span class="fl">0.0012559</span>      <span class="fl">-0.0017867</span>        <span class="fl">-0.0048293</span>         <span class="fl">0.0012559</span></span></code></pre></div>
 <hr>
 </div>
 </div>
@@ -784,7 +775,7 @@ interpret our findings?</p></li>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: August 16, 2021.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: October 12, 2021.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
