@@ -23,10 +23,11 @@ Imports:
   skimr,
   delayed,
   origami (>= 1.0.3),
-  sl3 (>= 1.4.3),
+  sl3 (>= 1.4.4),
   tmle3 (>= 0.2.0),
-  tmle3mopttx,
-  tmle3shift (>= 0.2.0)
+  tmle3mopttx (>= 1.0.0),
+  tmle3shift (>= 0.2.0),
+  tmle3mediate (>= 0.0.3)
 Suggests:
   nnls,
   Rsolnp,
@@ -39,15 +40,16 @@ Suggests:
   polspline,
   randomForest,
   SuperLearner,
-  hal9001,
-  haldensify
+  hal9001 (>= 0.4.3),
+  haldensify (>= 0.2.3)
 Remotes:
   rstudio/bslib,
   rstudio/bookdown,
   tlverse/sl3@devel,
   tlverse/tmle3@master,
   tlverse/tmle3mopttx@master,
-  tlverse/tmle3shift@master
+  tlverse/tmle3shift@master,
+  tlverse/tmle3mediate@master
 URL:
   https://github.com/tlverse/tlverse-workshops,
   https://tlverse.org/tlverse-workshops

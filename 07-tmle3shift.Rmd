@@ -2,8 +2,7 @@
 
 _Nima Hejazi_
 
-Based on the [`tmle3shift` `R` package](https://github.com/tlverse/tmle3shift)
-by _Nima Hejazi, Jeremy Coyle, and Mark van der Laan_.
+Based on the [`tmle3shift` `R` package](https://github.com/tlverse/tmle3shift).
 
 Updated: `r Sys.Date()`
 
@@ -56,12 +55,13 @@ individual level, and define novel shift intervention functions.
 * We may consider stochastic interventions in two ways:
 
   1. The equation $f_A$, which produces $A$, is replaced by a probabilistic
-     mechanism $g_{\delta}(A \mid W)$ that differs from the original $g(A \mid
-     W)$. The _stochastically modified_ value of the treatment $A_{\delta}$ is
-     drawn from a user-specified distribution $g_\delta(A \mid W)$, which may
-     depend on the original distribution $g(A \mid W)$ and is indexed by a
+     mechanism $g_{A,\delta}(A \mid W)$ that differs from the original $g_A(A
+     \mid W)$. The _stochastically modified_ value of the treatment $A_{\delta}$
+     is drawn from a user-specified distribution $g_{A,\delta}(A \mid W)$, which
+     may depend on the original distribution $g_A(A \mid W)$ and is indexed by a
      user-specified parameter $\delta$. In this case, the stochastically
-     modified value of the treatment $A_{\delta} \sim g_{\delta}(\cdot \mid W)$.
+     modified value of the treatment $A_{\delta} \sim g_{A,\delta}(\cdot \mid
+     W)$.
 
   2. The observed value $A$ is replaced by a new value $A_{d(A,W)}$ based on
      applying a user-defined function $d(A,W)$ to $A$. In this case, the
@@ -76,56 +76,56 @@ individual level, and define novel shift intervention functions.
 ### Identifying the Causal Effect of a Stochastic Intervention
 
 * The stochastic intervention generates a counterfactual random variable
-  $Y_{d(A,W)} := f_Y(d(A,W), W, U_Y) \equiv Y_{g_{\delta}} := f_Y(A_{\delta},
-  W, U_Y)$, where $Y_{d(A,W)} \sim \mathcal{P}_0^{\delta}$.
+  $Y_{d(A,W)} := f_Y(d(A,W), W, U_Y) \equiv Y_{g_{A,\delta}} := f_Y(A_{\delta},
+  W, U_Y)$, where $Y_{d(A,W)} \sim P_0^{\delta}$, for $P_0^{\delta}$ being the
+  counterfactual distribution implied by the intervention on $A$.
 
 * The target causal estimand of our analysis is $\psi_{0, \delta} :=
   \mathbb{E}_{P_0^{\delta}}\{Y_{d(A,W)}\}$, the mean of the counterfactual
   outcome variable $Y_{d(A, W)}$. The statistical target parameter may also be
-  denoted $\Psi(P_0) = \mathbb{E}_{P_0}{\overline{Q}(d(A, W), W)}$, where
-  $\overline{Q}(d(A, W), W)$ is the counterfactual outcome value of a given
-  individual under the stochastic intervention distribution
+  denoted $\Psi(P_0) = \mathbb{E}_{P_0}{\overline{Q}_{Y,0}(d(A, W), W)}$, where
+  $\overline{Q}_{Y,0}(d(A, W), W)$ is the counterfactual outcome value of a
+  given individual under the stochastic intervention distribution
   [@diaz2018stochastic].
 
 * In prior work, @diaz2012population showed that the causal quantity of interest
-  $\mathbb{E}_0 \{Y_{d(A, W)}\}$ is identified by a functional of the
-  distribution of $O$:
+  $\mathbb{E}_{P_0} \{Y_{d(A, W)}\}$ is identified by a functional of the
+  distribution of the observed data $O$:
   \begin{align*}\label{eqn:identification2012}
-    \psi_{0,d} = \int_{\mathcal{W}} \int_{\mathcal{A}} & \mathbb{E}_{P_0}
-     \{Y \mid A = d(a, w), W = w\} \cdot \\ &q_{0, A}^O(a \mid W = w) \cdot
-     q_{0, W}^O(w) d\mu(a)d\nu(w).
+    \psi_{0,\delta} = \int_{\mathcal{W}} \int_{\mathcal{A}} & \mathbb{E}_{P_0}
+     \{Y \mid A = d(a, w), W = w\} \\ &g_{A,0}(a \mid W = w) q_{W,0}(w)
+     d\mu(a)d\nu(w).
   \end{align*}
 
-* The four standard assumptions presented in \ref{intro} are necessary in order
-  to establish identifiability of the causal parameter from the observed data
-  via the statistical functional. These were
+* Two standard assumptions are necessary in order to establish identifiability
+  of the causal parameter from the observed data via the statistical functional
+  above. These were
 
-  1. _Consistency_: $Y^{d(a_i, w_i)}_i = Y_i$ in the event $A_i = d(a_i, w_i)$,
-     for $i = 1, \ldots, n$
-  2. _Stable unit value treatment assumption (SUTVA)_: $Y^{d(a_i, w_i)}_i$ does
-     not depend on $d(a_j, w_j)$ for $i = 1, \ldots, n$ and $j \neq i$, or lack
-     of interference [@rubin1978bayesian; @rubin1980randomization].
-  3. _Strong ignorability_: $A_i \perp \!\!\! \perp Y^{d(a_i, w_i)}_i \mid W_i$,
-     for $i = 1, \ldots, n$.
-  4. _Positivity (or overlap)_: $a_i \in \mathcal{A} \implies d(a_i, w_i) \in
-     \mathcal{A}$ for all $w \in \mathcal{W}$, where $\mathcal{A}$ denotes the
-     support of $A \mid W = w_i \quad \forall i = 1, \ldots n$.
+  ::: {.definition name="Strong Ignorability"}
+  $A_i \perp \!\!\! \perp Y^{d(a_i, w_i)}_i \mid W_i$, for $i = 1, \ldots, n$.
+  :::
 
-* With the identification assumptions satisfied, @diaz2012population and
-  @diaz2018stochastic provide an efficient influence function with respect to
-  the nonparametric model $\mathcal{M}$ as
+  ::: {.definition name="Treatment Positivity (or Overlap)"}
+  $a_i \in \mathcal{A} \implies d(a_i, w_i) \in \mathcal{A}$ for all
+  $w \in \mathcal{W}$, where $\mathcal{A}$ denotes the support of
+  $A \mid W = w_i \quad \forall i = 1, \ldots n$.
+  :::
+
+* With the identification assumptions satisfied, @diaz2018stochastic provide an
+  efficient influence function with respect to the nonparametric model
+  $\mathcal{M}$ as
   \begin{equation*}\label{eqn:eif}
-    D(P_0)(x) = H(a, w)({y - \overline{Q}(a, w)}) +
-    \overline{Q}(d(a, w), w) - \Psi(P_0),
+    D(P_0)(o) = H(a, w)({y - \overline{Q}_{Y,0}(a, w)}) +
+    \overline{Q}_{Y,0}(d(a, w), w) - \Psi(P_0),
   \end{equation*}
   where the auxiliary covariate $H(a,w)$ may be expressed
   \begin{equation*}\label{eqn:aux_covar_full}
-    H(a,w) = \mathbb{I}(a + \delta < u(w)) \frac{g_0(a - \delta \mid w)} {g_0(a \mid w)}
-      + \mathbb{I}(a + \delta \geq u(w)),
+    H(a,w) = \mathbb{I}(a + \delta < u(w)) \frac{g_{A,0}(a - \delta \mid w)}
+      {g_{A,0}(a \mid w)} + \mathbb{I}(a + \delta \geq u(w)),
   \end{equation*}
   which may be reduced to
   \begin{equation*}\label{eqn:aux_covar_simple}
-    H(a,w) = \frac{g_0(a - \delta \mid w)}{g_0(a \mid w)} + 1
+    H(a,w) = \frac{g_{A,0}(a - \delta \mid w)}{g_{A,0}(a \mid w)} + 1
   \end{equation*}
   in the case that the treatment is in the limits that arise from conditioning
   on $W$, i.e., for $A_i \in (u(w) - \delta, u(w))$.
@@ -147,20 +147,21 @@ of a causal effect of a stochastic treatment regime that shifts the natural
 value of the treatment based on a shifting function $d(A,W)$. We will follow
 the recipe provided by @diaz2018stochastic, tailored to the `tmle3` framework:
 
-1. Construct initial estimators $g_n$ of $g_0(A, W)$ and $Q_n$ of
-   $\overline{Q}_0(A, W)$, perhaps using data-adaptive regression techniques.
+1. Construct initial estimators $g_{A,n}$ of $g_{A,0}(A, W)$ and
+   $\overline{Q}_{Y,n}$ of $\overline{Q}_{Y,0}(A, W)$, perhaps using
+   data-adaptive regression techniques.
 2. For each observation $i$, compute an estimate $H_n(a_i, w_i)$ of the
    auxiliary covariate $H(a_i,w_i)$.
 3. Estimate the parameter $\epsilon$ in the logistic regression model
-   $$ \text{logit}\overline{Q}_{\epsilon, n}(a, w) =
-   \text{logit}\overline{Q}_n(a, w) + \epsilon H_n(a, w),$$
+   $$ \text{logit}\overline{Q}_{Y, n, \epsilon}(a, w) =
+   \text{logit}\overline{Q}_{Y,n}(a, w) + \epsilon H_n(a, w),$$
    or an alternative regression model incorporating weights.
 4. Compute TML estimator $\Psi_n$ of the target parameter, defining update
-   $\overline{Q}_n^{\star}$ of the initial estimate
-   $\overline{Q}_{n, \epsilon_n}$:
+   $\overline{Q}_{Y,n}^{\star}$ of the initial estimate
+   $\overline{Q}_{Y, n, \epsilon_n}$:
    \begin{equation*}\label{eqn:tmle}
-     \Psi_n = \Psi(P_n^{\star}) = \frac{1}{n} \sum_{i = 1}^n
-     \overline{Q}_n^{\star}(d(A_i, W_i), W_i).
+     \psi_n^{\star} = \Psi(P_n^{\star}) = \frac{1}{n} \sum_{i = 1}^n
+     \overline{Q}_{Y,n}^{\star}(d(A_i, W_i), W_i).
    \end{equation*}
 
 To start, let's load the packages we'll use and set a seed for simulation:
@@ -174,14 +175,14 @@ library(tmle3shift)
 set.seed(429153)
 ```
 
-**1. Construct initial estimators $g_n$ of $g_0(A, W)$ and $Q_n$ of
-   $\overline{Q}_0(A, W)$.**
+**1. Construct initial estimators $g_{A,n}$ of $g_{A,0}(A, W)$ and
+   $\overline{Q}_{Y,n}$ of $\overline{Q}_{Y,0}(A, W)$.**
 
 We need to estimate two components of the likelihood in order to construct a
 TML estimator.
 
-1. The outcome regression, $\hat{Q}_n$, which is a simple regression of the
-   form $\mathbb{E}[Y \mid A,W]$.
+1. The outcome regression, $\overline{Q}_{Y,n}$, which is a simple regression
+   of the form $\mathbb{E}[Y \mid A,W]$.
 
 ```{r sl3_lrnrs-Qfit-shift}
 # learners used for conditional expectation regression
@@ -193,14 +194,15 @@ sl_regression_learner <- Lrnr_sl$new(
 )
 ```
 
-2. The second of these is an estimate of the treatment mechanism, $\hat{g}_n$,
-   i.e., the _propensity score_. In the case of a continuous intervention node
-   $A$, such a quantity takes the form $p(A \mid W)$, which is a conditional
-   density.  Generally speaking, conditional density estimation is a challenging
-   problem that has received much attention in the literature. To estimate the
-   treatment mechanism, we must make use of learning algorithms specifically
-   suited to conditional density estimation; a list of such learners may be
-   extracted from `sl3` by using `sl3_list_learners()`:
+2. The second of these is an estimate of the treatment mechanism, $g_{A,n}$,
+   i.e., the _generalized propensity score_. In the case of a continuous
+   intervention node $A$, such a quantity takes the form $p(A \mid W)$, which is
+   a conditional density of treatment, given covariates. Generally speaking,
+   conditional density estimation is a challenging problem that has received
+   much attention in the literature. To estimate the treatment mechanism, we
+   must make use of learning algorithms specifically suited to conditional
+   density estimation; a list of such learners may be extracted from `sl3` by
+   using `sl3_list_learners()`:
 
 ```{r sl3_density_lrnrs_search-shift, message=FALSE, warning=FALSE}
 sl3_list_learners("density")
@@ -320,20 +322,22 @@ results from computing our TML estimator.
 ## Stochastic Interventions over a Grid of Counterfactual Shifts
 
 * Consider an arbitrary scalar $\delta$ that defines a counterfactual outcome
-  $\psi_n = Q_n(d(A, W), W)$, where, for simplicity, let $d(A, W) = A + \delta$.
-  A simplified expression of the auxiliary covariate for the TMLE of $\psi$ is
-  $H_n = \frac{g^{\star}(a \mid w)}{g(a \mid w)}$, where $g^{\star}(a \mid w)$
-  defines the treatment mechanism with the stochastic intervention implemented.
-  In this manner, we can specify a _grid_ of shifts $\delta$ to define a set of
+  $\psi_n = \mathbb{E}_P \overline{Q}_{Y,n}(d(A, W), W)$, where, for simplicity,
+  let $d(A, W) = A + \delta$.  A simplified expression of the auxiliary
+  covariate for the TML estimator of $\psi$ is $H_n := \frac{g^{\star}_{A,0}(a
+  \mid w)}{g_{A,0}(a \mid w)}$, where $g^{\star}_{A,0}(a \mid w)$ defines the
+  treatment mechanism with the stochastic intervention implemented.  In this
+  manner, we can specify a _grid_ of shifts $\delta$ to define a set of
   stochastic intervention policies in an _a priori_ manner.
 
 * To ascertain whether a given choice of the shift $\delta$ is acceptable, let
-  there be a bound $C(\delta) = \frac{g^{\star}(a \mid w)}{g(a \mid w)} \leq M$,
-  where $g^{\star}(a \mid w)$ is a function of $\delta$ in part, and $M$ is a
-  user-specified upper bound of $C(\delta)$. Then, $C(\delta)$ is a measure of
-  the influence of a given observation (under a bound of the ratio of the
-  conditional densities), which provides a way to limit the maximum influence of
-  a given observation through a choice of the shift $\delta$.
+  there be a bound $C(\delta) = \frac{g^{\star}_{A,0}(a \mid w)}{g_{A,0}(a \mid
+  w)} \leq M$, where $g^{\star}_{A,0}(a \mid w)$ is a function of $\delta$ in
+  part, and $M$ is a user-specified upper bound of $C(\delta)$. Then,
+  $C(\delta)$ is a measure of the influence of a given observation (under a
+  bound of the ratio of the conditional densities), which provides a way to
+  limit the maximum influence of a given observation through a choice of the
+  shift $\delta$.
 
 * For the purpose of using such a shift in practice, the present software
   provides the functions `shift_additive_bounded` and
@@ -347,11 +351,11 @@ results from computing our TML estimator.
   \end{equation}
   which corresponds to an intervention in which the natural value of treatment
   of a given observational unit is shifted by a value $\delta$ in the case that
-  the ratio of the intervened density $g^{\star}(a \mid w)$ to the natural
-  density $g(a \mid w)$ (that is, $C(\delta)$) does not exceed a bound $M$. In
-  the case that the ratio $C(\delta)$ exceeds the bound $M$, the stochastic
-  intervention policy does not apply to the given unit and they remain at their
-  natural value of treatment $a$.
+  the ratio of the intervened density $g^{\star}_{A,0}(a \mid w)$ to the natural
+  density $g_{A,0}(a \mid w)$ (that is, $C(\delta)$) does not exceed a bound
+  $M$. In the case that the ratio $C(\delta)$ exceeds the bound $M$, the
+  stochastic intervention policy does not apply to the given unit and they
+  remain at their natural value of treatment $a$.
 
 ### Initializing `vimshift` through its `tmle3_Spec`
 
@@ -567,26 +571,35 @@ washb_tmle_fit
 
 ## Exercises
 
-1. Set the `sl3` library of algorithms for the Super Learner to a simple,
-   interpretable library and use this new library to estimate the counterfactual
-   mean of mother's age at child's birth (`momage`) under a shift $\delta = 0$.
-   What does this counterfactual mean equate to in terms of the observed data?
+::: {.exercise}
+Set the `sl3` library of algorithms for the Super Learner to a simple,
+interpretable library and use this new library to estimate the counterfactual
+mean of mother's age at child's birth (`momage`) under a shift $\delta = 0$.
+What does this counterfactual mean equate to in terms of the observed data?
+:::
 
-2. Describe two (equivalent) ways in which the causal effects of stochastic
-   interventions may be interpreted.
+::: {.exercise}
+Describe two (equivalent) ways in which the causal effects of stochastic
+interventions may be interpreted.
+:::
 
-3. Using a grid of values of the shift parameter $\delta$ (e.g., $\{-1, 0,
-   +1\}$), repeat the analysis on the variable of interest (`momage`),
-   summarizing the trend for this sequence of shifts using a marginal structural
-   model.
+::: {.exercise}
+Using a grid of values of the shift parameter $\delta$ (e.g., $\{-1, 0, +1\}$),
+repeat the analysis on the variable of interest (`momage`), summarizing the
+trend for this sequence of shifts using a marginal structural model.
+:::
 
-4. For either the grid of shifts in the example preceding the exercises or that
-   estimated in (3) above, plot the resultant estimates against their respective
-   counterfactual shifts. Graphically add to the scatterplot a line with slope
-   and intercept equivalent to the MSM fit through the individual TML estimates.
+::: {.exercise}
+For either the grid of shifts in the example preceding the exercises or that
+estimated in (3) above, plot the resultant estimates against their respective
+counterfactual shifts. Graphically add to the scatterplot a line with slope and
+intercept equivalent to the MSM fit through the individual TML estimates.
+:::
 
-5. How does the marginal structural model we used to summarize the trend along
-   the sequence of shifts previously help to contextualize the estimated effect
-   for a single shift? That is, how does access to estimates across several
-   shifts and the marginal structural model parameters allow us to more richly
-   interpret our findings?
+::: {.exercise}
+How does the marginal structural model we used to summarize the trend along the
+sequence of shifts previously help to contextualize the estimated effect for a
+single shift? That is, how does access to estimates across several shifts and
+the marginal structural model parameters allow us to more richly interpret our
+findings?
+:::
