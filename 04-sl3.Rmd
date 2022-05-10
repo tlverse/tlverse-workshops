@@ -870,7 +870,7 @@ washb_task_new <- make_sl3_Task(
 )
 
 CVsl <- CV_lrnr_sl(
-  lrnr_sl = sl_fit, task = washb_task_new, loss_fun = loss_squared_error
+  lrnr_sl = sl_fit, task = washb_task_new, eval_fun = loss_squared_error
 )
 
 if (is_latex_output()) {
