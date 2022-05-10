@@ -1,4 +1,4 @@
-## ---- fig.cap="Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention", echo=FALSE, eval=TRUE, out.width='60%'----
+## ---- fig.cap="Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention", results = "asis", echo=FALSE----
 knitr::include_graphics(path = "img/gif/shift_animation.gif")
 
 

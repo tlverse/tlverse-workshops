@@ -17,7 +17,14 @@ dat <- read_csv("https://raw.githubusercontent.com/tlverse/tlverse-data/master/w
 dat
 
 
-## ----skim_washb_data, message=FALSE, warning=FALSE----------------------------
+## ----skim_washb_data, results="asis", echo=FALSE------------------------------
+library(knitr)
 library(skimr)
-skim(dat)
+
+# optionally disable sparkline graphs for PDF output
+if (is_latex_output()) {
+  kable(skim_no_sparks(dat), format = "latex")
+} else if (is_html_output()) {
+  skim(dat)
+}
 

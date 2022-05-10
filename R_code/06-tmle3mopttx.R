@@ -1,5 +1,5 @@
 ## ---- fig.cap="Illustration of a Dynamic Treatment Regime in a Clinical Setting", echo=FALSE, eval=TRUE, out.width='60%'----
-knitr::include_graphics(path = "img/image/DynamicA_Illustration.png")
+knitr::include_graphics(path = "img/png/DynamicA_Illustration.png")
 
 
 ## ----setup-mopttx, message=FALSE, warning=FALSE-------------------------------

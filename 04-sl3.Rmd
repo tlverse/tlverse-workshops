@@ -842,7 +842,7 @@ learner on the block, main terms linear regression.
 We can also obtain a summary of the results.
 
 ```{r, sl-summary}
-sl_fit$cv_risk(loss_fun = loss_squared_error)
+sl_fit$cv_risk(eval_fun = loss_squared_error)
 ```
 
 ## Cross-validated Super Learner {-}

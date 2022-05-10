@@ -1,13 +1,13 @@
 ## ----why_sl, fig.show="hold", echo = FALSE------------------------------------
-knitr::include_graphics("img/misc/ericSL.pdf")
+knitr::include_graphics("img/png/ericSL.png")
 
 
 ## ----cv_fig, fig.show="hold", echo = FALSE------------------------------------
-knitr::include_graphics("img/misc/vs.pdf")
+knitr::include_graphics("img/png/vs.png")
 
 
 ## ----cv_sl_alg, fig.show="hold", echo = FALSE---------------------------------
-knitr::include_graphics("img/misc/SLKaiserNew.pdf")
+knitr::include_graphics("img/png/SLKaiserNew.png")
 
 
 ## ----setup--------------------------------------------------------------------
@@ -29,10 +29,15 @@ washb_data <- fread(
   ),
   stringsAsFactors = TRUE
 )
-head(washb_data) %>%
-  kable() %>%
-  kableExtra:::kable_styling(fixed_thead = T) %>%
-  scroll_box(width = "100%", height = "300px")
+if (is_latex_output()) {
+  head(washb_data) %>%
+    kable(format = "latex")
+} else if (is_html_output()) {
+   head(washb_data) %>%
+     kable() %>%
+     kable_styling(fixed_thead = TRUE) %>%
+     scroll_box(width = "100%", height = "300px")
+}
 
 
 ## ----task, warning=TRUE-------------------------------------------------------
@@ -228,9 +233,9 @@ discrete_sl <- Lrnr_sl$new(
 )
 
 
-## ----make-sl-plot-------------------------------------------------------------
-dt_sl <- delayed_learner_train(sl, washb_task)
-plot(dt_sl, color = FALSE, height = "400px", width = "90%")
+## ----make-sl-plot, eval=FALSE-------------------------------------------------
+## dt_sl <- delayed_learner_train(sl, washb_task)
+## plot(dt_sl, color = FALSE, height = "400px", width = "90%")
 
 
 ## ----sl-----------------------------------------------------------------------
@@ -245,7 +250,6 @@ head(sl_preds)
 
 
 ## ---- plot-predvobs-woohoo, eval=FALSE----------------------------------------
-## 
 ## # df_plot <- data.frame(Observed = washb_data[["whz"]], Predicted = sl_preds,
 ## #                        count = seq(1:nrow(washb_data))
 ## 
@@ -256,7 +260,7 @@ head(sl_preds)
 
 
 ## ---- sl-summary--------------------------------------------------------------
-sl_fit_summary <- sl_fit$print()
+sl_fit$cv_risk(eval_fun = loss_squared_error)
 
 
 ## ----CVsl---------------------------------------------------------------------
@@ -266,21 +270,34 @@ washb_task_new <- make_sl3_Task(
   outcome = outcome,
   folds = origami::make_folds(washb_data, fold_fun = folds_vfold, V = 2)
 )
+
 CVsl <- CV_lrnr_sl(
   lrnr_sl = sl_fit, task = washb_task_new, loss_fun = loss_squared_error
 )
-CVsl %>%
-  kable(digits = 4) %>%
-  kableExtra:::kable_styling(fixed_thead = T) %>%
-  scroll_box(width = "100%", height = "300px")
+
+if (is_latex_output()) {
+   CVsl %>%
+     kable(format = "latex")
+} else if (is_html_output()) {
+   CVsl %>%
+     kable() %>%
+     kable_styling(fixed_thead = TRUE) %>%
+     scroll_box(width = "100%", height = "300px")
+}
 
 
 ## ----varimp-------------------------------------------------------------------
 washb_varimp <- importance(sl_fit, loss = loss_squared_error, type = "permute")
-washb_varimp %>%
-  kable(digits = 4) %>%
-  kableExtra:::kable_styling(fixed_thead = TRUE) %>%
-  scroll_box(width = "100%", height = "300px")
+
+if (is_latex_output()) {
+  washb_varimp %>%
+    kable(format = "latex")
+} else if (is_html_output()) {
+  washb_varimp %>%
+    kable() %>%
+    kable_styling(fixed_thead = TRUE) %>%
+    scroll_box(width = "100%", height = "300px")
+}
 
 
 ## ----varimp-plot, out.width = "100%"------------------------------------------
@@ -291,7 +308,7 @@ importance_plot(
 )
 
 
-## ----ex-setup-----------------------------------------------------------------
+## ----ex1-setup----------------------------------------------------------------
 # load the data set
 db_data <- url(
   paste0(
@@ -302,162 +319,82 @@ db_data <- url(
 chspred <- read_csv(file = db_data, col_names = TRUE)
 
 # take a quick peek
-head(chspred) %>%
-  kable(digits = 4) %>%
-  kableExtra:::kable_styling(fixed_thead = TRUE) %>%
-  scroll_box(width = "100%", height = "300px")
+if (is_latex_output()) {
+   head(chspred) %>%
+     kable(format = "latex")
+} else if (is_html_output()) {
+   head(chspred) %>%
+     kable() %>%
+     kable_styling(fixed_thead = TRUE) %>%
+     scroll_box(width = "100%", height = "300px")
+}
 
 
-## ----ex-setup2----------------------------------------------------------------
-ist_data <- paste0(
-  "https://raw.githubusercontent.com/tlverse/",
-  "tlverse-handbook/master/data/ist_sample.csv"
-) %>% fread()
-
-# number 3 help
-ist_task_CVsl <- make_sl3_Task(
-  data = ist_data,
-  outcome = "DRSISC",
-  covariates = colnames(ist_data)[-which(names(ist_data) == "DRSISC")],
-  drop_missing_outcome = TRUE,
-  folds = origami::make_folds(
-    n = sum(!is.na(ist_data$DRSISC)),
-    fold_fun = folds_vfold,
-    V = 5
-  )
-)
-
-
-## ----ex-key, eval=FALSE-------------------------------------------------------
+## ----sl-ex1-setup, eval=FALSE-------------------------------------------------
+## library(data.table)
+## library(readr)
+## library(origami)
+## library(sl3)
+## 
 ## db_data <- url(
 ##   "https://raw.githubusercontent.com/benkeser/sllecture/master/chspred.csv"
 ## )
 ## chspred <- read_csv(file = db_data, col_names = TRUE)
-## 
-## # make task
+
+
+## ----sl-ex1-1, eval=FALSE-----------------------------------------------------
 ## chspred_task <- make_sl3_Task(
-##   data = chspred,
-##   covariates = head(colnames(chspred), -1),
-##   outcome = "mi"
+##   data = chspred, covariates = head(colnames(chspred), -1), outcome = "mi"
 ## )
-## 
-## # make learners
-## glm_learner <- Lrnr_glm$new()
+
+
+## ----sl-ex1-2, eval=FALSE-----------------------------------------------------
 ## lasso_learner <- Lrnr_glmnet$new(alpha = 1)
 ## ridge_learner <- Lrnr_glmnet$new(alpha = 0)
 ## enet_learner <- Lrnr_glmnet$new(alpha = 0.5)
-## # curated_glm_learner uses formula = "mi ~ smoke + beta + waist"
-## curated_glm_learner <- Lrnr_glm_fast$new(covariates = c("smoke, beta, waist"))
-## mean_learner <- Lrnr_mean$new() # That is one mean learner!
 ## glm_fast_learner <- Lrnr_glm_fast$new()
 ## ranger_learner <- Lrnr_ranger$new()
 ## svm_learner <- Lrnr_svm$new()
 ## xgb_learner <- Lrnr_xgboost$new()
-## 
-## # screening
+## # curated_glm_learner uses formula = "mi ~ smoke + beta + waist"
+## curated_glm_learner <- Lrnr_glm_fast$new(covariates = c("smoke, beta, waist"))
+## mean_learner <- Lrnr_mean$new() # That is one mean learner!
+
+
+## ----sl-ex1-3, eval=FALSE-----------------------------------------------------
 ## screen_cor <- make_learner(Lrnr_screener_correlation)
-## glm_pipeline <- make_learner(Pipeline, screen_cor, glm_learner)
-## 
+## glm_pipeline <- make_learner(Pipeline, screen_cor, glm_fast_learner)
+
+
+## ----sl-ex1-4, eval=FALSE-----------------------------------------------------
 ## # stack learners together
 ## stack <- make_learner(
 ##   Stack,
-##   glm_pipeline, glm_learner,
-##   lasso_learner, ridge_learner, enet_learner,
+##   glm_pipeline, lasso_learner, ridge_learner, enet_learner,
 ##   curated_glm_learner, mean_learner, glm_fast_learner,
 ##   ranger_learner, svm_learner, xgb_learner
 ## )
 ## 
-## # make and train SL
-## sl <- Lrnr_sl$new(
-##   learners = stack
-## )
-## sl_fit <- sl$train(chspred_task)
-## sl_fit$print()
+## # make SL with default metalearner
+## sl <- Lrnr_sl$new(stack)
 ## 
+## # train SL
+## sl_fit <- sl$train(chspred_task)
+
+
+## ----sl-ex1-5, eval=FALSE-----------------------------------------------------
+## sl_fit$print()
+
+
+## ----sl-ex1-6, eval=FALSE-----------------------------------------------------
 ## CVsl <- CV_lrnr_sl(sl_fit, chspred_task, loss_loglik_binomial)
 ## CVsl
-## 
+
+
+## ----sl-ex1-7, eval=FALSE-----------------------------------------------------
 ## varimp <- importance(sl_fit, type = "permute")
 ## varimp %>%
 ##   importance_plot(
 ##     main = "sl3 Variable Importance for Myocardial Infarction Prediction"
 ##   )
-
-
-## ----ex2-key, eval=FALSE------------------------------------------------------
-## library(ROCR) # for AUC calculation
-## 
-## ist_data <- paste0(
-##   "https://raw.githubusercontent.com/tlverse/",
-##   "tlverse-handbook/master/data/ist_sample.csv"
-## ) %>% fread()
-## 
-## # stack
-## ist_task <- make_sl3_Task(
-##   data = ist_data,
-##   outcome = "DRSISC",
-##   covariates = colnames(ist_data)[-which(names(ist_data) == "DRSISC")],
-##   drop_missing_outcome = TRUE
-## )
-## 
-## # learner library
-## lrn_glm <- Lrnr_glm$new()
-## lrn_lasso <- Lrnr_glmnet$new(alpha = 1)
-## lrn_ridge <- Lrnr_glmnet$new(alpha = 0)
-## lrn_enet <- Lrnr_glmnet$new(alpha = 0.5)
-## lrn_mean <- Lrnr_mean$new()
-## lrn_ranger <- Lrnr_ranger$new()
-## lrn_svm <- Lrnr_svm$new()
-## # xgboost grid
-## grid_params <- list(
-##   max_depth = c(2, 5, 8),
-##   eta = c(0.01, 0.15, 0.3)
-## )
-## grid <- expand.grid(grid_params, KEEP.OUT.ATTRS = FALSE)
-## params_default <- list(nthread = getOption("sl.cores.learners", 1))
-## xgb_learners <- apply(grid, MARGIN = 1, function(params_tune) {
-##   do.call(Lrnr_xgboost$new, c(params_default, as.list(params_tune)))
-## })
-## learners <- unlist(list(
-##   xgb_learners, lrn_ridge, lrn_mean, lrn_lasso,
-##   lrn_glm, lrn_enet, lrn_ranger, lrn_svm
-## ),
-## recursive = TRUE
-## )
-## 
-## # SL
-## sl <- Lrnr_sl$new(learners)
-## sl_fit <- sl$train(ist_task)
-## 
-## # AUC
-## preds <- sl_fit$predict()
-## obs <- c(na.omit(ist_data$DRSISC))
-## AUC <- performance(prediction(sl_preds, obs), measure = "auc")@y.values[[1]]
-## plot(performance(prediction(sl_preds, obs), "tpr", "fpr"))
-## 
-## # CVsl
-## ist_task_CVsl <- make_sl3_Task(
-##   data = ist_data,
-##   outcome = "DRSISC",
-##   covariates = colnames(ist_data)[-which(names(ist_data) == "DRSISC")],
-##   drop_missing_outcome = TRUE,
-##   folds = origami::make_folds(
-##     n = sum(!is.na(ist_data$DRSISC)),
-##     fold_fun = folds_vfold,
-##     V = 5
-##   )
-## )
-## CVsl <- CV_lrnr_sl(sl_fit, ist_task_CVsl, loss_loglik_binomial)
-## CVsl
-## 
-## # sl3 variable importance plot
-## ist_varimp <- importance(sl_fit, type = "permute")
-## ist_varimp %>%
-##   importance_plot(
-##     main = "Variable Importance for Predicting Recurrent Ischemic Stroke"
-##   )
-
-
-## ----ex3-key, eval=FALSE------------------------------------------------------
-## # TODO
 
