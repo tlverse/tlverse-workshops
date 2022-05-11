@@ -74,7 +74,7 @@ not benefit from an intervention.
 <br>
 
 ```{r, align='center', fig.cap="Illustration of a Dynamic Treatment Regime in a Clinical Setting", echo=FALSE, eval=TRUE, out.width='60%'}
-knitr::include_graphics(path = "img/image/DynamicA_Illustration.png")
+knitr::include_graphics(path = "img/png/DynamicA_Illustration.png")
 ```
 
 
@@ -521,7 +521,7 @@ $$P(A=1|W) = \frac{1}{1+\exp^{(-0.8*W_1)}}$$
 <br>
 
 ```{r load_data_bin, echo=FALSE}
-load(here("Data/tmle3mopttx_bin.RData"))
+load(here("data/tmle3mopttx_bin.RData"))
 ```
 
 ```{r load sim_bin_data, eval=FALSE, echo=FALSE}
@@ -835,7 +835,7 @@ We can just load the data available as part of the package as follows:
 
 ```{r load_results, eval=TRUE, echo=FALSE}
 library(here)
-load(here("Data/tmle3mopttx_cat.RData"))
+load(here("data/tmle3mopttx_cat.RData"))
 ```
 
 ```{r load sim_cat_data, eval=FALSE, echo=FALSE}
