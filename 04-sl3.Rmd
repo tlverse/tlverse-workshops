@@ -931,8 +931,7 @@ if (is_latex_output()) {
 ```{r varimp-plot, out.width = "100%"}
 # plot variable importance
 importance_plot(
-  washb_varimp,
-  main = "sl3 Variable Importance for WASH Benefits Example Data"
+  washb_varimp
 )
 ```
 <!-- Explain summary!!!! -->
@@ -1277,8 +1276,6 @@ CVsl
 ```{r sl-ex1-7, eval=FALSE}
 varimp <- importance(sl_fit, type = "permute")
 varimp %>%
-  importance_plot(
-    main = "sl3 Variable Importance for Myocardial Infarction Prediction"
-  )
+  importance_plot()
 ```
 -->
