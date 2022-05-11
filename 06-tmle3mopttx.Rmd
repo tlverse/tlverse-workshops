@@ -29,11 +29,7 @@ By the end of this lesson you will be able to:
 8. Measure variable importance as defined in terms of the optimal individualized
    treatment interventions.
 
-<br>
-
 ---
-
-<br>
 
 ## Introduction
 
@@ -42,39 +38,32 @@ based on lifestyle, genetic and environmental factors is a common goal in
 precision medicine. One opts to administer the intervention to individuals
 who will benefit from it, instead of assigning treatment on a population level.
 
-<br>
+* This aim motivates a different type of intervention, as opposed to the static
+  exposures we might be used to.
 
-* This aim motivates a different type of intervention, as opposed to the static 
-exposures we might be used to. 
-
-* In this chapter, we learn about dynamic 
-(individualized) interventions that tailor the treatment decision based on the 
-collected covariates. 
-
-<br>
+* In this chapter, we learn about dynamic (individualized) interventions that
+  tailor the treatment decision based on the collected covariates.
 
 ---
 
-<br>
-
 To motivate these types of interventions, we turn to an actual randomized trial.
 
-* The goal is to improve retention in HIV care. 
+* The goal is to improve retention in HIV care.
 
-* Several interventions show efficacy --- 
-appointment reminders through text messages, small cash incentives for on-time clinic 
-visits, and peer health workers. 
+* Several interventions show efficacy -- appointment reminders through text
+  messages, small cash incentives for on-time clinic visits, and peer health
+  workers.
 
-* We want to improve effectiveness by assigning 
-each patient the intervention they are most likely to benefit from.
+* We want to improve effectiveness by assigning each patient the intervention
+  they are most likely to benefit from.
 
-* We also do not want to allocate resources to individuals who would
-not benefit from an intervention.
+* We also do not want to allocate resources to individuals who would not benefit
+  from an intervention.
 
 <br>
 
 ```{r, align='center', fig.cap="Illustration of a Dynamic Treatment Regime in a Clinical Setting", echo=FALSE, eval=TRUE, out.width='60%'}
-knitr::include_graphics(path = "img/image/DynamicA_Illustration.png")
+knitr::include_graphics(path = "img/png/DynamicA_Illustration.png")
 ```
 
 
@@ -85,23 +74,22 @@ knitr::include_graphics(path = "img/image/DynamicA_Illustration.png")
 <br>
 
 <div align="center"> In the statistics community, such a treatment strategy is
-termed **individualized treatment regimes** (ITR). The (counterfactual) population 
+termed **individualized treatment regimes** (ITR). The (counterfactual) population
 mean outcome under an ITR is the **value of the ITR**. </div>
 
 <br>
 
-* Suppose one wishes 
-to maximize the population mean of an outcome, where for each individual we have 
-access to some set of measured covariates. 
+* Suppose one wishes to maximize the population mean of an outcome, where for
+  each individual we have access to some set of measured covariates.
 
-* ITR with the maximal value is referred 
-to as an **optimal ITR** or the **optimal individualized treatment**. 
+* ITR with the maximal value is referred to as an **optimal ITR** or the
+  **optimal individualized treatment**.
 
-* The value of an optimal ITR is termed the **optimal value**, or the 
-**mean under the optimal individualized treatment**.
+* The value of an optimal ITR is termed the **optimal value**, or the **mean
+  under the optimal individualized treatment**.
 
-* One opts to administer the intervention to individuals who will profit from it, instead of 
-assigning treatment on a population level. 
+* One opts to administer the intervention to individuals who will profit from
+  it, instead of assigning treatment on a population level.
 
 <br>
 <div align="center"> **But how do we know which intervention works for which patient?** </div>
@@ -112,14 +100,13 @@ assigning treatment on a population level.
 ---
 
 
-* In this chapter, we examine optimal individualized 
-treatment regimes, and estimate the mean outcome under the ITR.
+* In this chapter, we examine optimal individualized treatment regimes, and
+  estimate the mean outcome under the ITR.
 
-* The candidate rules are restricted to depend only on user-supplied 
-subset of the baseline covariates. 
+* The candidate rules are restricted to depend only on user-supplied subset of
+  the baseline covariates.
 
-* We will use `tmle3mopttx` to estimate 
-optimal ITR and the corresponding value.
+* We will use `tmle3mopttx` to estimate optimal ITR and the corresponding value.
 
 
 <br>
@@ -225,16 +212,15 @@ For a given rule $d$, our modified system then takes the following form:
 
 <br>
 
-* The couterfactual outcome $Y_{d(V)}$ denotes the outcome for a 
-patient had their treatment been assigned using the dynamic rule $d(V)$ 
-(possibly contrary to the fact). 
+* The counterfactual outcome $Y_{d(V)}$ denotes the outcome for a patient had
+  their treatment been assigned using the dynamic rule $d(V)$ (possibly contrary
+  to the fact).
 
-* Distribution of the counterfactual outcomes is $P_{U,X}$, 
-implied by the distribution of exogenous variables $U$ and structural 
-equations $f$. 
+* Distribution of the counterfactual outcomes is $P_{U,X}$, implied by the
+  distribution of exogenous variables $U$ and structural equations $f$.
 
-* The set of all possible counterfactual distributions are encompassed
-by the causal model $\mathcal{M}^F$, where $P_{U,X} \in \mathcal{M}^F$. 
+* The set of all possible counterfactual distributions are encompassed by the
+  causal model $\mathcal{M}^F$, where $P_{U,X} \in \mathcal{M}^F$.
 
 <br>
 
