@@ -287,7 +287,8 @@ if (is_latex_output()) {
 
 
 ## ----varimp-------------------------------------------------------------------
-washb_varimp <- importance(sl_fit, loss = loss_squared_error, type = "permute")
+washb_varimp <- importance(sl_fit, eval_fun = loss_squared_error,
+                           type = "permute")
 
 if (is_latex_output()) {
   washb_varimp %>%
