@@ -1195,7 +1195,7 @@ We will initialize a specification for the TMLE of our parameter of
 interest (called a `tmle3_Spec` in the `tlverse` nomenclature) simply by calling
 `tmle3_mopttx_vim`.
 
-```{r mopttx_spec_init_vim}
+```{r mopttx_spec_init_vim, eval=FALSE}
 # initialize a tmle specification
 tmle_spec_vim <- tmle3_mopttx_vim(
   V=c("W2"),
@@ -1206,13 +1206,14 @@ tmle_spec_vim <- tmle3_mopttx_vim(
   complex = TRUE,
   realistic = FALSE
 )
-```
 
-```{r mopttx_fit_tmle_auto_vim, eval=TRUE}
 # fit the TML estimator
 vim_results <- tmle3_vim(tmle_spec_vim, data, node_list, learner_list,
   adjust_for_other_A = TRUE
 )
+```
+
+```{r mopttx_fit_tmle_auto_vim, eval=TRUE}
 # see results:
 print(vim_results)
 ```
