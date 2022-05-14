@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Super (Machine) Learning | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
-<meta name="description" content="Ivana Malenica and Rachael Phillips Based on the sl3 R package by Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips, and Oleg Sofrygin. Updated: 2021-10-13 Learning Objectives By the end...">
+<meta name="description" content="Ivana Malenica and Rachael Phillips Based on the sl3 R package by Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips, and Oleg Sofrygin. Updated: 2022-05-14 Learning Objectives By the end...">
 <meta name="generator" content="bookdown 0.24.1 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Super (Machine) Learning | [Workshop] Targeted Learning in the tlverse">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://tlverse.org/tlverse-workshops/sl3.html">
-<meta property="og:description" content="Ivana Malenica and Rachael Phillips Based on the sl3 R package by Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips, and Oleg Sofrygin. Updated: 2021-10-13 Learning Objectives By the end...">
+<meta property="og:description" content="Ivana Malenica and Rachael Phillips Based on the sl3 R package by Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips, and Oleg Sofrygin. Updated: 2022-05-14 Learning Objectives By the end...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Super (Machine) Learning | [Workshop] Targeted Learning in the tlverse">
-<meta name="twitter:description" content="Ivana Malenica and Rachael Phillips Based on the sl3 R package by Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips, and Oleg Sofrygin. Updated: 2021-10-13 Learning Objectives By the end...">
+<meta name="twitter:description" content="Ivana Malenica and Rachael Phillips Based on the sl3 R package by Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips, and Oleg Sofrygin. Updated: 2022-05-14 Learning Objectives By the end...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -60,9 +60,10 @@
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> The Roadmap for Targeted Learning</a></li>
 <li><a class="active" href="sl3.html"><span class="header-section-number">3</span> Super (Machine) Learning</a></li>
 <li><a class="" href="tmle3.html"><span class="header-section-number">4</span> The TMLE Framework</a></li>
-<li><a class="" href="optimal-individualized-treatment-regimes-optional.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes (optional)</a></li>
+<li><a class="" href="optimal-individualized-treatment-regimes.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes</a></li>
 <li><a class="" href="stochastic-treatment-regimes-optional.html"><span class="header-section-number">6</span> Stochastic Treatment Regimes (optional)</a></li>
-<li><a class="" href="r6.html"><span class="header-section-number">7</span> A Primer on the R6 Class System</a></li>
+<li><a class="" href="causal-mediation-analysis.html"><span class="header-section-number">7</span> Causal Mediation Analysis</a></li>
+<li><a class="" href="r6.html"><span class="header-section-number">8</span> A Primer on the R6 Class System</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -78,7 +79,7 @@
 <p><em>Ivana Malenica</em> and <em>Rachael Phillips</em></p>
 <p>Based on the <a href="https://github.com/tlverse/sl3"><code>sl3</code> <code>R</code> package</a> by <em>Jeremy
 Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips, and Oleg Sofrygin</em>.</p>
-<p>Updated: 2021-10-13</p>
+<p>Updated: 2022-05-14</p>
 <div id="learning-objectives-2" class="section level2 unnumbered">
 <h2>Learning Objectives<a class="anchor" aria-label="anchor" href="#learning-objectives-2"><i class="fas fa-link"></i></a>
 </h2>
@@ -1150,7 +1151,7 @@ in the task. The default cross-validation scheme is V-fold, with <span class="ma
 of folds.</p>
 <p>Let’s visualize our <code>washb_task</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sl3.html#cb6-1"></a>washb_task</span>
-<span id="cb6-2"><a href="sl3.html#cb6-2"></a>A sl3 Task with <span class="dv">4695</span> obs and these nodes<span class="op">:</span></span>
+<span id="cb6-2"><a href="sl3.html#cb6-2"></a>An sl3 Task with <span class="dv">4695</span> obs and these nodes<span class="op">:</span></span>
 <span id="cb6-3"><a href="sl3.html#cb6-3"></a><span class="er">$</span>covariates</span>
 <span id="cb6-4"><a href="sl3.html#cb6-4"></a> [<span class="dv">1</span>] <span class="st">"tr"</span>              <span class="st">"fracode"</span>         <span class="st">"month"</span>           <span class="st">"aged"</span>           </span>
 <span id="cb6-5"><a href="sl3.html#cb6-5"></a> [<span class="dv">5</span>] <span class="st">"sex"</span>             <span class="st">"momage"</span>          <span class="st">"momedu"</span>          <span class="st">"momheight"</span>      </span>
@@ -1227,23 +1228,24 @@ this outcome type with <code><a href="https://tlverse.org/sl3/reference/list_lea
 <span id="cb9-4"><a href="sl3.html#cb9-4"></a> [<span class="dv">5</span>] <span class="st">"Lrnr_bound"</span>                     <span class="st">"Lrnr_caret"</span>                    </span>
 <span id="cb9-5"><a href="sl3.html#cb9-5"></a> [<span class="dv">7</span>] <span class="st">"Lrnr_cv_selector"</span>               <span class="st">"Lrnr_dbarts"</span>                   </span>
 <span id="cb9-6"><a href="sl3.html#cb9-6"></a> [<span class="dv">9</span>] <span class="st">"Lrnr_earth"</span>                     <span class="st">"Lrnr_expSmooth"</span>                </span>
-<span id="cb9-7"><a href="sl3.html#cb9-7"></a>[<span class="dv">11</span>] <span class="st">"Lrnr_gam"</span>                       <span class="st">"Lrnr_gbm"</span>                      </span>
-<span id="cb9-8"><a href="sl3.html#cb9-8"></a>[<span class="dv">13</span>] <span class="st">"Lrnr_glm"</span>                       <span class="st">"Lrnr_glm_fast"</span>                 </span>
-<span id="cb9-9"><a href="sl3.html#cb9-9"></a>[<span class="dv">15</span>] <span class="st">"Lrnr_glmnet"</span>                    <span class="st">"Lrnr_grf"</span>                      </span>
-<span id="cb9-10"><a href="sl3.html#cb9-10"></a>[<span class="dv">17</span>] <span class="st">"Lrnr_gru_keras"</span>                 <span class="st">"Lrnr_gts"</span>                      </span>
-<span id="cb9-11"><a href="sl3.html#cb9-11"></a>[<span class="dv">19</span>] <span class="st">"Lrnr_h2o_glm"</span>                   <span class="st">"Lrnr_h2o_grid"</span>                 </span>
-<span id="cb9-12"><a href="sl3.html#cb9-12"></a>[<span class="dv">21</span>] <span class="st">"Lrnr_hal9001"</span>                   <span class="st">"Lrnr_HarmonicReg"</span>              </span>
-<span id="cb9-13"><a href="sl3.html#cb9-13"></a>[<span class="dv">23</span>] <span class="st">"Lrnr_hts"</span>                       <span class="st">"Lrnr_lightgbm"</span>                 </span>
-<span id="cb9-14"><a href="sl3.html#cb9-14"></a>[<span class="dv">25</span>] <span class="st">"Lrnr_lstm_keras"</span>                <span class="st">"Lrnr_mean"</span>                     </span>
-<span id="cb9-15"><a href="sl3.html#cb9-15"></a>[<span class="dv">27</span>] <span class="st">"Lrnr_multiple_ts"</span>               <span class="st">"Lrnr_nnet"</span>                     </span>
-<span id="cb9-16"><a href="sl3.html#cb9-16"></a>[<span class="dv">29</span>] <span class="st">"Lrnr_nnls"</span>                      <span class="st">"Lrnr_optim"</span>                    </span>
-<span id="cb9-17"><a href="sl3.html#cb9-17"></a>[<span class="dv">31</span>] <span class="st">"Lrnr_pkg_SuperLearner"</span>          <span class="st">"Lrnr_pkg_SuperLearner_method"</span>  </span>
-<span id="cb9-18"><a href="sl3.html#cb9-18"></a>[<span class="dv">33</span>] <span class="st">"Lrnr_pkg_SuperLearner_screener"</span> <span class="st">"Lrnr_polspline"</span>                </span>
-<span id="cb9-19"><a href="sl3.html#cb9-19"></a>[<span class="dv">35</span>] <span class="st">"Lrnr_randomForest"</span>              <span class="st">"Lrnr_ranger"</span>                   </span>
-<span id="cb9-20"><a href="sl3.html#cb9-20"></a>[<span class="dv">37</span>] <span class="st">"Lrnr_rpart"</span>                     <span class="st">"Lrnr_rugarch"</span>                  </span>
-<span id="cb9-21"><a href="sl3.html#cb9-21"></a>[<span class="dv">39</span>] <span class="st">"Lrnr_screener_correlation"</span>      <span class="st">"Lrnr_solnp"</span>                    </span>
-<span id="cb9-22"><a href="sl3.html#cb9-22"></a>[<span class="dv">41</span>] <span class="st">"Lrnr_stratified"</span>                <span class="st">"Lrnr_svm"</span>                      </span>
-<span id="cb9-23"><a href="sl3.html#cb9-23"></a>[<span class="dv">43</span>] <span class="st">"Lrnr_tsDyn"</span>                     <span class="st">"Lrnr_xgboost"</span>                  </span></code></pre></div>
+<span id="cb9-7"><a href="sl3.html#cb9-7"></a>[<span class="dv">11</span>] <span class="st">"Lrnr_ga"</span>                        <span class="st">"Lrnr_gam"</span>                      </span>
+<span id="cb9-8"><a href="sl3.html#cb9-8"></a>[<span class="dv">13</span>] <span class="st">"Lrnr_gbm"</span>                       <span class="st">"Lrnr_glm"</span>                      </span>
+<span id="cb9-9"><a href="sl3.html#cb9-9"></a>[<span class="dv">15</span>] <span class="st">"Lrnr_glm_fast"</span>                  <span class="st">"Lrnr_glmnet"</span>                   </span>
+<span id="cb9-10"><a href="sl3.html#cb9-10"></a>[<span class="dv">17</span>] <span class="st">"Lrnr_grf"</span>                       <span class="st">"Lrnr_gru_keras"</span>                </span>
+<span id="cb9-11"><a href="sl3.html#cb9-11"></a>[<span class="dv">19</span>] <span class="st">"Lrnr_gts"</span>                       <span class="st">"Lrnr_h2o_glm"</span>                  </span>
+<span id="cb9-12"><a href="sl3.html#cb9-12"></a>[<span class="dv">21</span>] <span class="st">"Lrnr_h2o_grid"</span>                  <span class="st">"Lrnr_hal9001"</span>                  </span>
+<span id="cb9-13"><a href="sl3.html#cb9-13"></a>[<span class="dv">23</span>] <span class="st">"Lrnr_HarmonicReg"</span>               <span class="st">"Lrnr_hts"</span>                      </span>
+<span id="cb9-14"><a href="sl3.html#cb9-14"></a>[<span class="dv">25</span>] <span class="st">"Lrnr_lightgbm"</span>                  <span class="st">"Lrnr_lstm_keras"</span>               </span>
+<span id="cb9-15"><a href="sl3.html#cb9-15"></a>[<span class="dv">27</span>] <span class="st">"Lrnr_mean"</span>                      <span class="st">"Lrnr_multiple_ts"</span>              </span>
+<span id="cb9-16"><a href="sl3.html#cb9-16"></a>[<span class="dv">29</span>] <span class="st">"Lrnr_nnet"</span>                      <span class="st">"Lrnr_nnls"</span>                     </span>
+<span id="cb9-17"><a href="sl3.html#cb9-17"></a>[<span class="dv">31</span>] <span class="st">"Lrnr_optim"</span>                     <span class="st">"Lrnr_pkg_SuperLearner"</span>         </span>
+<span id="cb9-18"><a href="sl3.html#cb9-18"></a>[<span class="dv">33</span>] <span class="st">"Lrnr_pkg_SuperLearner_method"</span>   <span class="st">"Lrnr_pkg_SuperLearner_screener"</span></span>
+<span id="cb9-19"><a href="sl3.html#cb9-19"></a>[<span class="dv">35</span>] <span class="st">"Lrnr_polspline"</span>                 <span class="st">"Lrnr_randomForest"</span>             </span>
+<span id="cb9-20"><a href="sl3.html#cb9-20"></a>[<span class="dv">37</span>] <span class="st">"Lrnr_ranger"</span>                    <span class="st">"Lrnr_rpart"</span>                    </span>
+<span id="cb9-21"><a href="sl3.html#cb9-21"></a>[<span class="dv">39</span>] <span class="st">"Lrnr_rugarch"</span>                   <span class="st">"Lrnr_screener_correlation"</span>     </span>
+<span id="cb9-22"><a href="sl3.html#cb9-22"></a>[<span class="dv">41</span>] <span class="st">"Lrnr_solnp"</span>                     <span class="st">"Lrnr_stratified"</span>               </span>
+<span id="cb9-23"><a href="sl3.html#cb9-23"></a>[<span class="dv">43</span>] <span class="st">"Lrnr_svm"</span>                       <span class="st">"Lrnr_tsDyn"</span>                    </span>
+<span id="cb9-24"><a href="sl3.html#cb9-24"></a>[<span class="dv">45</span>] <span class="st">"Lrnr_xgboost"</span>                  </span></code></pre></div>
 <p>Now that we have an idea of some learners, we can construct them using the
 <code>make_learner</code> function or the <code>new</code> method.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -1561,7 +1563,7 @@ for each subject.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="sl3.html#cb29-1"></a><span class="co"># we did it! now we have SL predictions</span></span>
 <span id="cb29-2"><a href="sl3.html#cb29-2"></a>sl_preds &lt;-<span class="st"> </span>sl_fit<span class="op">$</span><span class="kw">predict</span>()</span>
 <span id="cb29-3"><a href="sl3.html#cb29-3"></a><span class="kw">head</span>(sl_preds)</span>
-<span id="cb29-4"><a href="sl3.html#cb29-4"></a>[<span class="dv">1</span>] <span class="fl">-0.61014</span> <span class="fl">-0.76503</span> <span class="fl">-0.69304</span> <span class="fl">-0.65588</span> <span class="fl">-0.65689</span> <span class="fl">-0.64811</span></span></code></pre></div>
+<span id="cb29-4"><a href="sl3.html#cb29-4"></a>[<span class="dv">1</span>] <span class="fl">-0.60375</span> <span class="fl">-0.76000</span> <span class="fl">-0.69324</span> <span class="fl">-0.67469</span> <span class="fl">-0.64265</span> <span class="fl">-0.71172</span></span></code></pre></div>
 <!--
 Below we visualize the observed versus predicted values.
 
@@ -1581,47 +1583,47 @@ learner on the block, main terms linear regression.
 ```
 -->
 <p>We can also obtain a summary of the results.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sl3.html#cb30-1"></a>sl_fit<span class="op">$</span><span class="kw">cv_risk</span>(<span class="dt">loss_fun =</span> loss_squared_error)</span>
-<span id="cb30-2"><a href="sl3.html#cb30-2"></a>                          learner coefficients   risk       se  fold_sd</span>
-<span id="cb30-3"><a href="sl3.html#cb30-3"></a> <span class="dv">1</span><span class="op">:</span><span class="st">                           </span>glm     <span class="fl">0.055568</span> <span class="fl">1.0202</span> <span class="fl">0.023955</span> <span class="fl">0.067500</span></span>
-<span id="cb30-4"><a href="sl3.html#cb30-4"></a> <span class="dv">2</span><span class="op">:</span><span class="st">                     </span>polspline     <span class="fl">0.055554</span> <span class="fl">1.0208</span> <span class="fl">0.023577</span> <span class="fl">0.067921</span></span>
-<span id="cb30-5"><a href="sl3.html#cb30-5"></a> <span class="dv">3</span><span class="op">:</span><span class="st">                        </span>enet<span class="fl">.5</span>     <span class="fl">0.055561</span> <span class="fl">1.0133</span> <span class="fl">0.023618</span> <span class="fl">0.065940</span></span>
-<span id="cb30-6"><a href="sl3.html#cb30-6"></a> <span class="dv">4</span><span class="op">:</span><span class="st">                         </span>ridge     <span class="fl">0.055566</span> <span class="fl">1.0154</span> <span class="fl">0.023736</span> <span class="fl">0.065991</span></span>
-<span id="cb30-7"><a href="sl3.html#cb30-7"></a> <span class="dv">5</span><span class="op">:</span><span class="st">                         </span>lasso     <span class="fl">0.055561</span> <span class="fl">1.0130</span> <span class="fl">0.023605</span> <span class="fl">0.065828</span></span>
-<span id="cb30-8"><a href="sl3.html#cb30-8"></a> <span class="dv">6</span><span class="op">:</span><span class="st">                     </span>xgboost50     <span class="fl">0.055589</span> <span class="fl">1.1136</span> <span class="fl">0.025262</span> <span class="fl">0.077580</span></span>
-<span id="cb30-9"><a href="sl3.html#cb30-9"></a> <span class="dv">7</span><span class="op">:</span><span class="st">       </span>randomforest_screen_glm     <span class="fl">0.055549</span> <span class="fl">1.0229</span> <span class="fl">0.023733</span> <span class="fl">0.067706</span></span>
-<span id="cb30-10"><a href="sl3.html#cb30-10"></a> <span class="dv">8</span><span class="op">:</span><span class="st"> </span>randomforest_screen_polspline     <span class="fl">0.055567</span> <span class="fl">1.0178</span> <span class="fl">0.023753</span> <span class="fl">0.067091</span></span>
-<span id="cb30-11"><a href="sl3.html#cb30-11"></a> <span class="dv">9</span><span class="op">:</span><span class="st">    </span>randomforest_screen_enet<span class="fl">.5</span>     <span class="fl">0.055549</span> <span class="fl">1.0229</span> <span class="fl">0.023729</span> <span class="fl">0.067516</span></span>
-<span id="cb30-12"><a href="sl3.html#cb30-12"></a><span class="dv">10</span><span class="op">:</span><span class="st">     </span>randomforest_screen_ridge     <span class="fl">0.055548</span> <span class="fl">1.0232</span> <span class="fl">0.023746</span> <span class="fl">0.067528</span></span>
-<span id="cb30-13"><a href="sl3.html#cb30-13"></a><span class="dv">11</span><span class="op">:</span><span class="st">     </span>randomforest_screen_lasso     <span class="fl">0.055549</span> <span class="fl">1.0226</span> <span class="fl">0.023722</span> <span class="fl">0.067520</span></span>
-<span id="cb30-14"><a href="sl3.html#cb30-14"></a><span class="dv">12</span><span class="op">:</span><span class="st"> </span>randomforest_screen_xgboost50     <span class="fl">0.055548</span> <span class="fl">1.1207</span> <span class="fl">0.025542</span> <span class="fl">0.088250</span></span>
-<span id="cb30-15"><a href="sl3.html#cb30-15"></a><span class="dv">13</span><span class="op">:</span><span class="st">              </span>lasso_screen_glm     <span class="fl">0.055556</span> <span class="fl">1.0165</span> <span class="fl">0.023561</span> <span class="fl">0.064937</span></span>
-<span id="cb30-16"><a href="sl3.html#cb30-16"></a><span class="dv">14</span><span class="op">:</span><span class="st">        </span>lasso_screen_polspline     <span class="fl">0.055556</span> <span class="fl">1.0184</span> <span class="fl">0.023537</span> <span class="fl">0.065581</span></span>
-<span id="cb30-17"><a href="sl3.html#cb30-17"></a><span class="dv">15</span><span class="op">:</span><span class="st">           </span>lasso_screen_enet<span class="fl">.5</span>     <span class="fl">0.055556</span> <span class="fl">1.0164</span> <span class="fl">0.023561</span> <span class="fl">0.064912</span></span>
-<span id="cb30-18"><a href="sl3.html#cb30-18"></a><span class="dv">16</span><span class="op">:</span><span class="st">            </span>lasso_screen_ridge     <span class="fl">0.055555</span> <span class="fl">1.0166</span> <span class="fl">0.023567</span> <span class="fl">0.064759</span></span>
-<span id="cb30-19"><a href="sl3.html#cb30-19"></a><span class="dv">17</span><span class="op">:</span><span class="st">            </span>lasso_screen_lasso     <span class="fl">0.055556</span> <span class="fl">1.0164</span> <span class="fl">0.023560</span> <span class="fl">0.064898</span></span>
-<span id="cb30-20"><a href="sl3.html#cb30-20"></a><span class="dv">18</span><span class="op">:</span><span class="st">        </span>lasso_screen_xgboost50     <span class="fl">0.055511</span> <span class="fl">1.1296</span> <span class="fl">0.025767</span> <span class="fl">0.084180</span></span>
-<span id="cb30-21"><a href="sl3.html#cb30-21"></a><span class="dv">19</span><span class="op">:</span><span class="st">                  </span>SuperLearner           <span class="ot">NA</span> <span class="fl">1.0122</span> <span class="fl">0.023500</span> <span class="fl">0.068013</span></span>
-<span id="cb30-22"><a href="sl3.html#cb30-22"></a>    fold_min_risk fold_max_risk</span>
-<span id="cb30-23"><a href="sl3.html#cb30-23"></a> <span class="dv">1</span><span class="op">:</span><span class="st">       </span><span class="fl">0.89442</span>        <span class="fl">1.1200</span></span>
-<span id="cb30-24"><a href="sl3.html#cb30-24"></a> <span class="dv">2</span><span class="op">:</span><span class="st">       </span><span class="fl">0.89892</span>        <span class="fl">1.1255</span></span>
-<span id="cb30-25"><a href="sl3.html#cb30-25"></a> <span class="dv">3</span><span class="op">:</span><span class="st">       </span><span class="fl">0.88927</span>        <span class="fl">1.1082</span></span>
-<span id="cb30-26"><a href="sl3.html#cb30-26"></a> <span class="dv">4</span><span class="op">:</span><span class="st">       </span><span class="fl">0.88570</span>        <span class="fl">1.1104</span></span>
-<span id="cb30-27"><a href="sl3.html#cb30-27"></a> <span class="dv">5</span><span class="op">:</span><span class="st">       </span><span class="fl">0.89037</span>        <span class="fl">1.1090</span></span>
-<span id="cb30-28"><a href="sl3.html#cb30-28"></a> <span class="dv">6</span><span class="op">:</span><span class="st">       </span><span class="fl">0.96019</span>        <span class="fl">1.2337</span></span>
-<span id="cb30-29"><a href="sl3.html#cb30-29"></a> <span class="dv">7</span><span class="op">:</span><span class="st">       </span><span class="fl">0.89923</span>        <span class="fl">1.1081</span></span>
-<span id="cb30-30"><a href="sl3.html#cb30-30"></a> <span class="dv">8</span><span class="op">:</span><span class="st">       </span><span class="fl">0.90342</span>        <span class="fl">1.1098</span></span>
-<span id="cb30-31"><a href="sl3.html#cb30-31"></a> <span class="dv">9</span><span class="op">:</span><span class="st">       </span><span class="fl">0.89912</span>        <span class="fl">1.1080</span></span>
-<span id="cb30-32"><a href="sl3.html#cb30-32"></a><span class="dv">10</span><span class="op">:</span><span class="st">       </span><span class="fl">0.89882</span>        <span class="fl">1.1073</span></span>
-<span id="cb30-33"><a href="sl3.html#cb30-33"></a><span class="dv">11</span><span class="op">:</span><span class="st">       </span><span class="fl">0.89912</span>        <span class="fl">1.1076</span></span>
-<span id="cb30-34"><a href="sl3.html#cb30-34"></a><span class="dv">12</span><span class="op">:</span><span class="st">       </span><span class="fl">0.95622</span>        <span class="fl">1.2330</span></span>
-<span id="cb30-35"><a href="sl3.html#cb30-35"></a><span class="dv">13</span><span class="op">:</span><span class="st">       </span><span class="fl">0.90204</span>        <span class="fl">1.1156</span></span>
-<span id="cb30-36"><a href="sl3.html#cb30-36"></a><span class="dv">14</span><span class="op">:</span><span class="st">       </span><span class="fl">0.89742</span>        <span class="fl">1.1162</span></span>
-<span id="cb30-37"><a href="sl3.html#cb30-37"></a><span class="dv">15</span><span class="op">:</span><span class="st">       </span><span class="fl">0.90184</span>        <span class="fl">1.1154</span></span>
-<span id="cb30-38"><a href="sl3.html#cb30-38"></a><span class="dv">16</span><span class="op">:</span><span class="st">       </span><span class="fl">0.90132</span>        <span class="fl">1.1148</span></span>
-<span id="cb30-39"><a href="sl3.html#cb30-39"></a><span class="dv">17</span><span class="op">:</span><span class="st">       </span><span class="fl">0.90183</span>        <span class="fl">1.1154</span></span>
-<span id="cb30-40"><a href="sl3.html#cb30-40"></a><span class="dv">18</span><span class="op">:</span><span class="st">       </span><span class="fl">0.96251</span>        <span class="fl">1.2327</span></span>
-<span id="cb30-41"><a href="sl3.html#cb30-41"></a><span class="dv">19</span><span class="op">:</span><span class="st">       </span><span class="fl">0.88510</span>        <span class="fl">1.1087</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sl3.html#cb30-1"></a>sl_fit<span class="op">$</span><span class="kw">cv_risk</span>(<span class="dt">eval_fun =</span> loss_squared_error)</span>
+<span id="cb30-2"><a href="sl3.html#cb30-2"></a>                          learner coefficients    MSE       se  fold_sd</span>
+<span id="cb30-3"><a href="sl3.html#cb30-3"></a> <span class="dv">1</span><span class="op">:</span><span class="st">                           </span>glm    <span class="fl">0.1128155</span> <span class="fl">1.0202</span> <span class="fl">0.023955</span> <span class="fl">0.067500</span></span>
+<span id="cb30-4"><a href="sl3.html#cb30-4"></a> <span class="dv">2</span><span class="op">:</span><span class="st">                     </span>polspline    <span class="fl">0.0000000</span> <span class="fl">1.0208</span> <span class="fl">0.023577</span> <span class="fl">0.067921</span></span>
+<span id="cb30-5"><a href="sl3.html#cb30-5"></a> <span class="dv">3</span><span class="op">:</span><span class="st">                        </span>enet<span class="fl">.5</span>    <span class="fl">0.0171843</span> <span class="fl">1.0133</span> <span class="fl">0.023618</span> <span class="fl">0.065940</span></span>
+<span id="cb30-6"><a href="sl3.html#cb30-6"></a> <span class="dv">4</span><span class="op">:</span><span class="st">                         </span>ridge    <span class="fl">0.1944195</span> <span class="fl">1.0154</span> <span class="fl">0.023736</span> <span class="fl">0.065991</span></span>
+<span id="cb30-7"><a href="sl3.html#cb30-7"></a> <span class="dv">5</span><span class="op">:</span><span class="st">                         </span>lasso    <span class="fl">0.0577189</span> <span class="fl">1.0130</span> <span class="fl">0.023605</span> <span class="fl">0.065828</span></span>
+<span id="cb30-8"><a href="sl3.html#cb30-8"></a> <span class="dv">6</span><span class="op">:</span><span class="st">                     </span>xgboost50    <span class="fl">0.1097927</span> <span class="fl">1.1136</span> <span class="fl">0.025262</span> <span class="fl">0.077580</span></span>
+<span id="cb30-9"><a href="sl3.html#cb30-9"></a> <span class="dv">7</span><span class="op">:</span><span class="st">       </span>randomforest_screen_glm    <span class="fl">0.0000000</span> <span class="fl">1.0229</span> <span class="fl">0.023733</span> <span class="fl">0.067706</span></span>
+<span id="cb30-10"><a href="sl3.html#cb30-10"></a> <span class="dv">8</span><span class="op">:</span><span class="st"> </span>randomforest_screen_polspline    <span class="fl">0.3116745</span> <span class="fl">1.0178</span> <span class="fl">0.023753</span> <span class="fl">0.067091</span></span>
+<span id="cb30-11"><a href="sl3.html#cb30-11"></a> <span class="dv">9</span><span class="op">:</span><span class="st">    </span>randomforest_screen_enet<span class="fl">.5</span>    <span class="fl">0.0000000</span> <span class="fl">1.0229</span> <span class="fl">0.023729</span> <span class="fl">0.067516</span></span>
+<span id="cb30-12"><a href="sl3.html#cb30-12"></a><span class="dv">10</span><span class="op">:</span><span class="st">     </span>randomforest_screen_ridge    <span class="fl">0.0000000</span> <span class="fl">1.0232</span> <span class="fl">0.023746</span> <span class="fl">0.067528</span></span>
+<span id="cb30-13"><a href="sl3.html#cb30-13"></a><span class="dv">11</span><span class="op">:</span><span class="st">     </span>randomforest_screen_lasso    <span class="fl">0.0000000</span> <span class="fl">1.0226</span> <span class="fl">0.023722</span> <span class="fl">0.067520</span></span>
+<span id="cb30-14"><a href="sl3.html#cb30-14"></a><span class="dv">12</span><span class="op">:</span><span class="st"> </span>randomforest_screen_xgboost50    <span class="fl">0.0172496</span> <span class="fl">1.1207</span> <span class="fl">0.025542</span> <span class="fl">0.088250</span></span>
+<span id="cb30-15"><a href="sl3.html#cb30-15"></a><span class="dv">13</span><span class="op">:</span><span class="st">              </span>lasso_screen_glm    <span class="fl">0.0614238</span> <span class="fl">1.0165</span> <span class="fl">0.023561</span> <span class="fl">0.064937</span></span>
+<span id="cb30-16"><a href="sl3.html#cb30-16"></a><span class="dv">14</span><span class="op">:</span><span class="st">        </span>lasso_screen_polspline    <span class="fl">0.0056719</span> <span class="fl">1.0184</span> <span class="fl">0.023537</span> <span class="fl">0.065581</span></span>
+<span id="cb30-17"><a href="sl3.html#cb30-17"></a><span class="dv">15</span><span class="op">:</span><span class="st">           </span>lasso_screen_enet<span class="fl">.5</span>    <span class="fl">0.0553858</span> <span class="fl">1.0164</span> <span class="fl">0.023561</span> <span class="fl">0.064912</span></span>
+<span id="cb30-18"><a href="sl3.html#cb30-18"></a><span class="dv">16</span><span class="op">:</span><span class="st">            </span>lasso_screen_ridge    <span class="fl">0.0000000</span> <span class="fl">1.0166</span> <span class="fl">0.023567</span> <span class="fl">0.064759</span></span>
+<span id="cb30-19"><a href="sl3.html#cb30-19"></a><span class="dv">17</span><span class="op">:</span><span class="st">            </span>lasso_screen_lasso    <span class="fl">0.0566635</span> <span class="fl">1.0164</span> <span class="fl">0.023560</span> <span class="fl">0.064898</span></span>
+<span id="cb30-20"><a href="sl3.html#cb30-20"></a><span class="dv">18</span><span class="op">:</span><span class="st">        </span>lasso_screen_xgboost50    <span class="fl">0.0000000</span> <span class="fl">1.1296</span> <span class="fl">0.025767</span> <span class="fl">0.084180</span></span>
+<span id="cb30-21"><a href="sl3.html#cb30-21"></a><span class="dv">19</span><span class="op">:</span><span class="st">                  </span>SuperLearner           <span class="ot">NA</span> <span class="fl">1.0078</span> <span class="fl">0.023461</span> <span class="fl">0.067144</span></span>
+<span id="cb30-22"><a href="sl3.html#cb30-22"></a>    fold_min_MSE fold_max_MSE</span>
+<span id="cb30-23"><a href="sl3.html#cb30-23"></a> <span class="dv">1</span><span class="op">:</span><span class="st">      </span><span class="fl">0.89442</span>       <span class="fl">1.1200</span></span>
+<span id="cb30-24"><a href="sl3.html#cb30-24"></a> <span class="dv">2</span><span class="op">:</span><span class="st">      </span><span class="fl">0.89892</span>       <span class="fl">1.1255</span></span>
+<span id="cb30-25"><a href="sl3.html#cb30-25"></a> <span class="dv">3</span><span class="op">:</span><span class="st">      </span><span class="fl">0.88927</span>       <span class="fl">1.1082</span></span>
+<span id="cb30-26"><a href="sl3.html#cb30-26"></a> <span class="dv">4</span><span class="op">:</span><span class="st">      </span><span class="fl">0.88570</span>       <span class="fl">1.1104</span></span>
+<span id="cb30-27"><a href="sl3.html#cb30-27"></a> <span class="dv">5</span><span class="op">:</span><span class="st">      </span><span class="fl">0.89037</span>       <span class="fl">1.1090</span></span>
+<span id="cb30-28"><a href="sl3.html#cb30-28"></a> <span class="dv">6</span><span class="op">:</span><span class="st">      </span><span class="fl">0.96019</span>       <span class="fl">1.2337</span></span>
+<span id="cb30-29"><a href="sl3.html#cb30-29"></a> <span class="dv">7</span><span class="op">:</span><span class="st">      </span><span class="fl">0.89923</span>       <span class="fl">1.1081</span></span>
+<span id="cb30-30"><a href="sl3.html#cb30-30"></a> <span class="dv">8</span><span class="op">:</span><span class="st">      </span><span class="fl">0.90342</span>       <span class="fl">1.1098</span></span>
+<span id="cb30-31"><a href="sl3.html#cb30-31"></a> <span class="dv">9</span><span class="op">:</span><span class="st">      </span><span class="fl">0.89912</span>       <span class="fl">1.1080</span></span>
+<span id="cb30-32"><a href="sl3.html#cb30-32"></a><span class="dv">10</span><span class="op">:</span><span class="st">      </span><span class="fl">0.89882</span>       <span class="fl">1.1073</span></span>
+<span id="cb30-33"><a href="sl3.html#cb30-33"></a><span class="dv">11</span><span class="op">:</span><span class="st">      </span><span class="fl">0.89912</span>       <span class="fl">1.1076</span></span>
+<span id="cb30-34"><a href="sl3.html#cb30-34"></a><span class="dv">12</span><span class="op">:</span><span class="st">      </span><span class="fl">0.95622</span>       <span class="fl">1.2330</span></span>
+<span id="cb30-35"><a href="sl3.html#cb30-35"></a><span class="dv">13</span><span class="op">:</span><span class="st">      </span><span class="fl">0.90204</span>       <span class="fl">1.1156</span></span>
+<span id="cb30-36"><a href="sl3.html#cb30-36"></a><span class="dv">14</span><span class="op">:</span><span class="st">      </span><span class="fl">0.89742</span>       <span class="fl">1.1162</span></span>
+<span id="cb30-37"><a href="sl3.html#cb30-37"></a><span class="dv">15</span><span class="op">:</span><span class="st">      </span><span class="fl">0.90184</span>       <span class="fl">1.1154</span></span>
+<span id="cb30-38"><a href="sl3.html#cb30-38"></a><span class="dv">16</span><span class="op">:</span><span class="st">      </span><span class="fl">0.90132</span>       <span class="fl">1.1148</span></span>
+<span id="cb30-39"><a href="sl3.html#cb30-39"></a><span class="dv">17</span><span class="op">:</span><span class="st">      </span><span class="fl">0.90183</span>       <span class="fl">1.1154</span></span>
+<span id="cb30-40"><a href="sl3.html#cb30-40"></a><span class="dv">18</span><span class="op">:</span><span class="st">      </span><span class="fl">0.96251</span>       <span class="fl">1.2327</span></span>
+<span id="cb30-41"><a href="sl3.html#cb30-41"></a><span class="dv">19</span><span class="op">:</span><span class="st">      </span><span class="fl">0.88301</span>       <span class="fl">1.0996</span></span></code></pre></div>
 </div>
 </div>
 <div id="cross-validated-super-learner" class="section level2 unnumbered">
@@ -1647,7 +1649,7 @@ Reference</a>.</p>
 <span class="op">)</span>
 
 <span class="va">CVsl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tlverse.org/sl3/reference/CV_lrnr_sl.html">CV_lrnr_sl</a></span><span class="op">(</span>
-  lrnr_sl <span class="op">=</span> <span class="va">sl_fit</span>, task <span class="op">=</span> <span class="va">washb_task_new</span>, loss_fun <span class="op">=</span> <span class="va">loss_squared_error</span>
+  lrnr_sl <span class="op">=</span> <span class="va">sl_fit</span>, task <span class="op">=</span> <span class="va">washb_task_new</span>, eval_fun <span class="op">=</span> <span class="va">loss_squared_error</span>
 <span class="op">)</span>
 
 <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/output_type.html">is_latex_output</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
@@ -1669,7 +1671,7 @@ learner
 coefficients
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
-risk
+MSE
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
 se
@@ -1678,10 +1680,10 @@ se
 fold_sd
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
-fold_min_risk
+fold_min_MSE
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
-fold_max_risk
+fold_max_MSE
 </th>
 </tr></thead>
 <tbody>
@@ -1690,7 +1692,7 @@ fold_max_risk
 glm
 </td>
 <td style="text-align:right;">
-0.05556
+0.00000
 </td>
 <td style="text-align:right;">
 1.0448
@@ -1713,7 +1715,7 @@ glm
 polspline
 </td>
 <td style="text-align:right;">
-0.05556
+0.19712
 </td>
 <td style="text-align:right;">
 1.0206
@@ -1736,7 +1738,7 @@ polspline
 enet.5
 </td>
 <td style="text-align:right;">
-0.05557
+0.03436
 </td>
 <td style="text-align:right;">
 1.0191
@@ -1759,7 +1761,7 @@ enet.5
 ridge
 </td>
 <td style="text-align:right;">
-0.05557
+0.17672
 </td>
 <td style="text-align:right;">
 1.0264
@@ -1782,7 +1784,7 @@ ridge
 lasso
 </td>
 <td style="text-align:right;">
-0.05556
+0.00000
 </td>
 <td style="text-align:right;">
 1.0201
@@ -1805,7 +1807,7 @@ lasso
 xgboost50
 </td>
 <td style="text-align:right;">
-0.05555
+0.05474
 </td>
 <td style="text-align:right;">
 1.1871
@@ -1828,7 +1830,7 @@ xgboost50
 randomforest_screen_glm
 </td>
 <td style="text-align:right;">
-0.05557
+0.39880
 </td>
 <td style="text-align:right;">
 1.0171
@@ -1851,7 +1853,7 @@ randomforest_screen_glm
 randomforest_screen_polspline
 </td>
 <td style="text-align:right;">
-0.05556
+0.00000
 </td>
 <td style="text-align:right;">
 1.0231
@@ -1874,7 +1876,7 @@ randomforest_screen_polspline
 randomforest_screen_enet.5
 </td>
 <td style="text-align:right;">
-0.05557
+0.05333
 </td>
 <td style="text-align:right;">
 1.0171
@@ -1897,7 +1899,7 @@ randomforest_screen_enet.5
 randomforest_screen_ridge
 </td>
 <td style="text-align:right;">
-0.05557
+0.00000
 </td>
 <td style="text-align:right;">
 1.0171
@@ -1920,7 +1922,7 @@ randomforest_screen_ridge
 randomforest_screen_lasso
 </td>
 <td style="text-align:right;">
-0.05557
+0.04274
 </td>
 <td style="text-align:right;">
 1.0172
@@ -1943,7 +1945,7 @@ randomforest_screen_lasso
 randomforest_screen_xgboost50
 </td>
 <td style="text-align:right;">
-0.05549
+0.00000
 </td>
 <td style="text-align:right;">
 1.1967
@@ -1966,7 +1968,7 @@ randomforest_screen_xgboost50
 lasso_screen_glm
 </td>
 <td style="text-align:right;">
-0.05556
+0.04220
 </td>
 <td style="text-align:right;">
 1.0197
@@ -1989,7 +1991,7 @@ lasso_screen_glm
 lasso_screen_polspline
 </td>
 <td style="text-align:right;">
-0.05556
+0.00000
 </td>
 <td style="text-align:right;">
 1.0229
@@ -2012,7 +2014,7 @@ lasso_screen_polspline
 lasso_screen_enet.5
 </td>
 <td style="text-align:right;">
-0.05556
+0.00000
 </td>
 <td style="text-align:right;">
 1.0195
@@ -2035,7 +2037,7 @@ lasso_screen_enet.5
 lasso_screen_ridge
 </td>
 <td style="text-align:right;">
-0.05556
+0.00000
 </td>
 <td style="text-align:right;">
 1.0198
@@ -2058,7 +2060,7 @@ lasso_screen_ridge
 lasso_screen_lasso
 </td>
 <td style="text-align:right;">
-0.05556
+0.00000
 </td>
 <td style="text-align:right;">
 1.0195
@@ -2081,7 +2083,7 @@ lasso_screen_lasso
 lasso_screen_xgboost50
 </td>
 <td style="text-align:right;">
-0.05549
+0.00000
 </td>
 <td style="text-align:right;">
 1.1884
@@ -2107,19 +2109,19 @@ SuperLearner
 NA
 </td>
 <td style="text-align:right;">
-1.0179
+1.0171
 </td>
 <td style="text-align:right;">
-0.02379
+0.02380
 </td>
 <td style="text-align:right;">
-0.04688
+0.04548
 </td>
 <td style="text-align:right;">
-0.98479
+0.98490
 </td>
 <td style="text-align:right;">
-1.0511
+1.0492
 </td>
 </tr>
 </tbody>
@@ -2153,7 +2155,8 @@ measures. However, the permutation approach is risky, so the importance function
 default is to remove and refit.</p>
 <p>Let’s explore the <code>sl3</code> variable importance measurements for the <code>washb</code> data.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">washb_varimp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tlverse.org/sl3/reference/importance.html">importance</a></span><span class="op">(</span><span class="va">sl_fit</span>, loss <span class="op">=</span> <span class="va">loss_squared_error</span>, type <span class="op">=</span> <span class="st">"permute"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">washb_varimp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tlverse.org/sl3/reference/importance.html">importance</a></span><span class="op">(</span><span class="va">sl_fit</span>, eval_fun <span class="op">=</span> <span class="va">loss_squared_error</span>,
+                           type <span class="op">=</span> <span class="st">"permute"</span><span class="op">)</span>
 
 <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/output_type.html">is_latex_output</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">washb_varimp</span> <span class="op">%&gt;%</span>
@@ -2168,10 +2171,10 @@ default is to remove and refit.</p>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
-X
+covariate
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
-risk_ratio
+MSE_difference
 </th>
 </tr></thead>
 <tbody>
@@ -2180,7 +2183,7 @@ risk_ratio
 aged
 </td>
 <td style="text-align:right;">
-1.03318
+0.03382
 </td>
 </tr>
 <tr>
@@ -2188,23 +2191,7 @@ aged
 momedu
 </td>
 <td style="text-align:right;">
-1.01312
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-asset_refrig
-</td>
-<td style="text-align:right;">
-1.00649
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-asset_chair
-</td>
-<td style="text-align:right;">
-1.00400
+0.00943
 </td>
 </tr>
 <tr>
@@ -2212,7 +2199,23 @@ asset_chair
 month
 </td>
 <td style="text-align:right;">
-1.00312
+0.00742
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_refrig
+</td>
+<td style="text-align:right;">
+0.00545
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_chair
+</td>
+<td style="text-align:right;">
+0.00291
 </td>
 </tr>
 <tr>
@@ -2220,7 +2223,7 @@ month
 tr
 </td>
 <td style="text-align:right;">
-1.00143
+0.00169
 </td>
 </tr>
 <tr>
@@ -2228,23 +2231,7 @@ tr
 Nlt18
 </td>
 <td style="text-align:right;">
-1.00104
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-elec
-</td>
-<td style="text-align:right;">
-1.00079
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-momheight
-</td>
-<td style="text-align:right;">
-1.00054
+0.00160
 </td>
 </tr>
 <tr>
@@ -2252,39 +2239,23 @@ momheight
 asset_chouki
 </td>
 <td style="text-align:right;">
-1.00053
+0.00112
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-walls
+momheight
 </td>
 <td style="text-align:right;">
-1.00048
+0.00104
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-asset_tv
+elec
 </td>
 <td style="text-align:right;">
-1.00047
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-watmin
-</td>
-<td style="text-align:right;">
-1.00046
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-asset_mobile
-</td>
-<td style="text-align:right;">
-1.00038
+0.00101
 </td>
 </tr>
 <tr>
@@ -2292,7 +2263,23 @@ asset_mobile
 hfiacat
 </td>
 <td style="text-align:right;">
-1.00037
+0.00091
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+walls
+</td>
+<td style="text-align:right;">
+0.00084
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_tv
+</td>
+<td style="text-align:right;">
+0.00083
 </td>
 </tr>
 <tr>
@@ -2300,15 +2287,23 @@ hfiacat
 asset_sewmach
 </td>
 <td style="text-align:right;">
-1.00033
+0.00072
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-sex
+watmin
 </td>
 <td style="text-align:right;">
-1.00015
+0.00066
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_mobile
+</td>
+<td style="text-align:right;">
+0.00065
 </td>
 </tr>
 <tr>
@@ -2316,15 +2311,7 @@ sex
 asset_moto
 </td>
 <td style="text-align:right;">
-1.00015
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-asset_table
-</td>
-<td style="text-align:right;">
-1.00015
+0.00038
 </td>
 </tr>
 <tr>
@@ -2332,7 +2319,7 @@ asset_table
 floor
 </td>
 <td style="text-align:right;">
-1.00015
+0.00038
 </td>
 </tr>
 <tr>
@@ -2340,7 +2327,23 @@ floor
 momage
 </td>
 <td style="text-align:right;">
-1.00013
+0.00029
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sex
+</td>
+<td style="text-align:right;">
+0.00026
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_table
+</td>
+<td style="text-align:right;">
+0.00025
 </td>
 </tr>
 <tr>
@@ -2348,31 +2351,7 @@ momage
 delta_momheight
 </td>
 <td style="text-align:right;">
-1.00003
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-asset_bike
-</td>
-<td style="text-align:right;">
-0.99998
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-roof
-</td>
-<td style="text-align:right;">
-0.99994
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-delta_momage
-</td>
-<td style="text-align:right;">
-0.99992
+0.00008
 </td>
 </tr>
 <tr>
@@ -2380,7 +2359,31 @@ delta_momage
 Ncomp
 </td>
 <td style="text-align:right;">
-0.99977
+0.00007
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_bike
+</td>
+<td style="text-align:right;">
+-0.00002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roof
+</td>
+<td style="text-align:right;">
+-0.00016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+delta_momage
+</td>
+<td style="text-align:right;">
+-0.00018
 </td>
 </tr>
 <tr>
@@ -2388,15 +2391,7 @@ Ncomp
 asset_khat
 </td>
 <td style="text-align:right;">
-0.99976
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-fracode
-</td>
-<td style="text-align:right;">
-0.99929
+-0.00026
 </td>
 </tr>
 <tr>
@@ -2404,7 +2399,15 @@ fracode
 asset_wardrobe
 </td>
 <td style="text-align:right;">
-0.99916
+-0.00027
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fracode
+</td>
+<td style="text-align:right;">
+-0.00122
 </td>
 </tr>
 </tbody>
@@ -2413,8 +2416,7 @@ asset_wardrobe
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot variable importance</span>
 <span class="fu"><a href="https://tlverse.org/sl3/reference/importance_plot.html">importance_plot</a></span><span class="op">(</span>
-  <span class="va">washb_varimp</span>,
-  main <span class="op">=</span> <span class="st">"sl3 Variable Importance for WASH Benefits Example Data"</span>
+  <span class="va">washb_varimp</span>
 <span class="op">)</span></code></pre></div>
 <div class="inline-figure">
 <img src="04-sl3_files/figure-html/varimp-plot-1.png" width="100%" style="display: block; margin: auto;"><!-- Explain summary!!!! -->
@@ -3388,9 +3390,7 @@ CVsl
 ```r
 varimp <- importance(sl_fit, type = "permute")
 varimp %>%
-  importance_plot(
-    main = "sl3 Variable Importance for Myocardial Infarction Prediction"
-  )
+  importance_plot()
 ```
 -->
 </div>
@@ -3443,7 +3443,7 @@ varimp %>%
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: October 13, 2021.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: May 14, 2022.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

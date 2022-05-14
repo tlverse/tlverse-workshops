@@ -60,9 +60,10 @@
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> The Roadmap for Targeted Learning</a></li>
 <li><a class="" href="sl3.html"><span class="header-section-number">3</span> Super (Machine) Learning</a></li>
 <li><a class="active" href="tmle3.html"><span class="header-section-number">4</span> The TMLE Framework</a></li>
-<li><a class="" href="optimal-individualized-treatment-regimes-optional.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes (optional)</a></li>
+<li><a class="" href="optimal-individualized-treatment-regimes.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes</a></li>
 <li><a class="" href="stochastic-treatment-regimes-optional.html"><span class="header-section-number">6</span> Stochastic Treatment Regimes (optional)</a></li>
-<li><a class="" href="r6.html"><span class="header-section-number">7</span> A Primer on the R6 Class System</a></li>
+<li><a class="" href="causal-mediation-analysis.html"><span class="header-section-number">7</span> Causal Mediation Analysis</a></li>
+<li><a class="" href="r6.html"><span class="header-section-number">8</span> A Primer on the R6 Class System</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -330,10 +331,10 @@ we plan to include reasonable defaults learners.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="tmle3.html#cb40-1"></a>tmle_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(ate_spec, washb_data, node_list, learner_list)</span>
 <span id="cb40-2"><a href="tmle3.html#cb40-2"></a><span class="kw">print</span>(tmle_fit)</span>
 <span id="cb40-3"><a href="tmle3.html#cb40-3"></a>A tmle3_Fit that took <span class="dv">1</span> <span class="kw">step</span>(s)</span>
-<span id="cb40-4"><a href="tmle3.html#cb40-4"></a>   type                                    param   init_est tmle_est       se</span>
-<span id="cb40-5"><a href="tmle3.html#cb40-5"></a><span class="dv">1</span><span class="op">:</span><span class="st">  </span>ATE ATE[Y_{A=Nutrition <span class="op">+</span><span class="st"> </span>WSH}<span class="op">-</span>Y_{A=Control}] <span class="fl">-0.0031611</span> <span class="fl">0.010044</span> <span class="fl">0.050853</span></span>
+<span id="cb40-4"><a href="tmle3.html#cb40-4"></a>   type                                    param   init_est  tmle_est      se</span>
+<span id="cb40-5"><a href="tmle3.html#cb40-5"></a><span class="dv">1</span><span class="op">:</span><span class="st">  </span>ATE ATE[Y_{A=Nutrition <span class="op">+</span><span class="st"> </span>WSH}<span class="op">-</span>Y_{A=Control}] <span class="fl">-0.0031611</span> <span class="fl">0.0076977</span> <span class="fl">0.05035</span></span>
 <span id="cb40-6"><a href="tmle3.html#cb40-6"></a>       lower   upper psi_transformed lower_transformed upper_transformed</span>
-<span id="cb40-7"><a href="tmle3.html#cb40-7"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.089626</span> <span class="fl">0.10971</span>        <span class="fl">0.010044</span>         <span class="fl">-0.089626</span>           <span class="fl">0.10971</span></span></code></pre></div>
+<span id="cb40-7"><a href="tmle3.html#cb40-7"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.090986</span> <span class="fl">0.10638</span>       <span class="fl">0.0076977</span>         <span class="fl">-0.090986</span>           <span class="fl">0.10638</span></span></code></pre></div>
 </div>
 <div id="evaluate-the-estimates" class="section level3">
 <h3>
@@ -343,7 +344,7 @@ we plan to include reasonable defaults learners.</p>
 can extra results from the summary by indexing into it:</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="tmle3.html#cb41-1"></a>estimates &lt;-<span class="st"> </span>tmle_fit<span class="op">$</span>summary<span class="op">$</span>psi_transformed</span>
 <span id="cb41-2"><a href="tmle3.html#cb41-2"></a><span class="kw">print</span>(estimates)</span>
-<span id="cb41-3"><a href="tmle3.html#cb41-3"></a>[<span class="dv">1</span>] <span class="fl">0.010044</span></span></code></pre></div>
+<span id="cb41-3"><a href="tmle3.html#cb41-3"></a>[<span class="dv">1</span>] <span class="fl">0.0076977</span></span></code></pre></div>
 </div>
 </div>
 <div id="tmle3-components" class="section level2">
@@ -401,17 +402,17 @@ the <code>learner_list</code>) above.</p>
 estimates for each observation:</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="tmle3.html#cb45-1"></a>initial_likelihood<span class="op">$</span><span class="kw">get_likelihoods</span>(tmle_task)</span>
 <span id="cb45-2"><a href="tmle3.html#cb45-2"></a>               W       A        Y</span>
-<span id="cb45-3"><a href="tmle3.html#cb45-3"></a>   <span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.34702</span> <span class="fl">-0.32696</span></span>
-<span id="cb45-4"><a href="tmle3.html#cb45-4"></a>   <span class="dv">2</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.37305</span> <span class="fl">-0.88218</span></span>
-<span id="cb45-5"><a href="tmle3.html#cb45-5"></a>   <span class="dv">3</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.34685</span> <span class="fl">-0.79300</span></span>
-<span id="cb45-6"><a href="tmle3.html#cb45-6"></a>   <span class="dv">4</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.33625</span> <span class="fl">-0.89157</span></span>
-<span id="cb45-7"><a href="tmle3.html#cb45-7"></a>   <span class="dv">5</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.34098</span> <span class="fl">-0.63477</span></span>
+<span id="cb45-3"><a href="tmle3.html#cb45-3"></a>   <span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.32505</span> <span class="fl">-0.32696</span></span>
+<span id="cb45-4"><a href="tmle3.html#cb45-4"></a>   <span class="dv">2</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.34513</span> <span class="fl">-0.88218</span></span>
+<span id="cb45-5"><a href="tmle3.html#cb45-5"></a>   <span class="dv">3</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.32492</span> <span class="fl">-0.79300</span></span>
+<span id="cb45-6"><a href="tmle3.html#cb45-6"></a>   <span class="dv">4</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.31674</span> <span class="fl">-0.89157</span></span>
+<span id="cb45-7"><a href="tmle3.html#cb45-7"></a>   <span class="dv">5</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.32039</span> <span class="fl">-0.63477</span></span>
 <span id="cb45-8"><a href="tmle3.html#cb45-8"></a>  <span class="op">---</span><span class="st">                            </span></span>
-<span id="cb45-9"><a href="tmle3.html#cb45-9"></a><span class="dv">4691</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.24334</span> <span class="fl">-0.61095</span></span>
-<span id="cb45-10"><a href="tmle3.html#cb45-10"></a><span class="dv">4692</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.24620</span> <span class="fl">-0.21534</span></span>
-<span id="cb45-11"><a href="tmle3.html#cb45-11"></a><span class="dv">4693</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.22401</span> <span class="fl">-0.79223</span></span>
-<span id="cb45-12"><a href="tmle3.html#cb45-12"></a><span class="dv">4694</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.27641</span> <span class="fl">-0.94319</span></span>
-<span id="cb45-13"><a href="tmle3.html#cb45-13"></a><span class="dv">4695</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.20158</span> <span class="fl">-1.08201</span></span></code></pre></div>
+<span id="cb45-9"><a href="tmle3.html#cb45-9"></a><span class="dv">4691</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.21683</span> <span class="fl">-0.61095</span></span>
+<span id="cb45-10"><a href="tmle3.html#cb45-10"></a><span class="dv">4692</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.21904</span> <span class="fl">-0.21534</span></span>
+<span id="cb45-11"><a href="tmle3.html#cb45-11"></a><span class="dv">4693</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.20192</span> <span class="fl">-0.79223</span></span>
+<span id="cb45-12"><a href="tmle3.html#cb45-12"></a><span class="dv">4694</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.24234</span> <span class="fl">-0.94319</span></span>
+<span id="cb45-13"><a href="tmle3.html#cb45-13"></a><span class="dv">4695</span><span class="op">:</span><span class="st"> </span><span class="fl">0.00021299</span> <span class="fl">0.18462</span> <span class="fl">-1.08201</span></span></code></pre></div>
 <!-- TODO: make helper to get learners out of fit objects -->
 </div>
 <div id="targeted-likelihood-updater" class="section level3">
@@ -458,10 +459,10 @@ manually fit a <code>tmle3</code>:</p>
 <span id="cb49-4"><a href="tmle3.html#cb49-4"></a>)</span>
 <span id="cb49-5"><a href="tmle3.html#cb49-5"></a><span class="kw">print</span>(tmle_fit_manual)</span>
 <span id="cb49-6"><a href="tmle3.html#cb49-6"></a>A tmle3_Fit that took <span class="dv">1</span> <span class="kw">step</span>(s)</span>
-<span id="cb49-7"><a href="tmle3.html#cb49-7"></a>   type                                    param   init_est tmle_est       se</span>
-<span id="cb49-8"><a href="tmle3.html#cb49-8"></a><span class="dv">1</span><span class="op">:</span><span class="st">  </span>ATE ATE[Y_{A=Nutrition <span class="op">+</span><span class="st"> </span>WSH}<span class="op">-</span>Y_{A=Control}] <span class="fl">-0.0062324</span> <span class="fl">0.017515</span> <span class="fl">0.050591</span></span>
+<span id="cb49-7"><a href="tmle3.html#cb49-7"></a>   type                                    param   init_est tmle_est      se</span>
+<span id="cb49-8"><a href="tmle3.html#cb49-8"></a><span class="dv">1</span><span class="op">:</span><span class="st">  </span>ATE ATE[Y_{A=Nutrition <span class="op">+</span><span class="st"> </span>WSH}<span class="op">-</span>Y_{A=Control}] <span class="fl">-0.0062324</span> <span class="fl">0.015143</span> <span class="fl">0.05025</span></span>
 <span id="cb49-9"><a href="tmle3.html#cb49-9"></a>       lower   upper psi_transformed lower_transformed upper_transformed</span>
-<span id="cb49-10"><a href="tmle3.html#cb49-10"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.081641</span> <span class="fl">0.11667</span>        <span class="fl">0.017515</span>         <span class="fl">-0.081641</span>           <span class="fl">0.11667</span></span></code></pre></div>
+<span id="cb49-10"><a href="tmle3.html#cb49-10"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">-0.083345</span> <span class="fl">0.11363</span>        <span class="fl">0.015143</span>         <span class="fl">-0.083345</span>           <span class="fl">0.11363</span></span></code></pre></div>
 <p>The result is equivalent to fitting using the <code>tmle3</code> function as above.</p>
 </div>
 </div>
@@ -533,32 +534,32 @@ above defined ATE parameter</p>
 <span id="cb52-8"><a href="tmle3.html#cb52-8"></a><span class="kw">print</span>(tmle_fit_multiparam)</span>
 <span id="cb52-9"><a href="tmle3.html#cb52-9"></a>A tmle3_Fit that took <span class="dv">1</span> <span class="kw">step</span>(s)</span>
 <span id="cb52-10"><a href="tmle3.html#cb52-10"></a>   type                                       param   init_est tmle_est</span>
-<span id="cb52-11"><a href="tmle3.html#cb52-11"></a><span class="dv">1</span><span class="op">:</span><span class="st">  </span>TSM                            E[Y_{A=Control}] <span class="fl">-0.5953314</span> <span class="fl">-0.61981</span></span>
-<span id="cb52-12"><a href="tmle3.html#cb52-12"></a><span class="dv">2</span><span class="op">:</span><span class="st">  </span>TSM                        E[Y_{A=Handwashing}] <span class="fl">-0.6179897</span> <span class="fl">-0.66114</span></span>
-<span id="cb52-13"><a href="tmle3.html#cb52-13"></a><span class="dv">3</span><span class="op">:</span><span class="st">  </span>TSM                          E[Y_{A=Nutrition}] <span class="fl">-0.6119870</span> <span class="fl">-0.60338</span></span>
-<span id="cb52-14"><a href="tmle3.html#cb52-14"></a><span class="dv">4</span><span class="op">:</span><span class="st">  </span>TSM                    E[Y_{A=Nutrition <span class="op">+</span><span class="st"> </span>WSH}] <span class="fl">-0.6015639</span> <span class="fl">-0.60250</span></span>
-<span id="cb52-15"><a href="tmle3.html#cb52-15"></a><span class="dv">5</span><span class="op">:</span><span class="st">  </span>TSM                         E[Y_{A=Sanitation}] <span class="fl">-0.5866311</span> <span class="fl">-0.58147</span></span>
-<span id="cb52-16"><a href="tmle3.html#cb52-16"></a><span class="dv">6</span><span class="op">:</span><span class="st">  </span>TSM                                E[Y_{A=WSH}] <span class="fl">-0.5213051</span> <span class="fl">-0.45027</span></span>
-<span id="cb52-17"><a href="tmle3.html#cb52-17"></a><span class="dv">7</span><span class="op">:</span><span class="st">  </span>TSM                              E[Y_{A=Water}] <span class="fl">-0.5653576</span> <span class="fl">-0.53554</span></span>
-<span id="cb52-18"><a href="tmle3.html#cb52-18"></a><span class="dv">8</span><span class="op">:</span><span class="st">  </span>ATE E[Y_{A=Nutrition <span class="op">+</span><span class="st"> </span>WSH}] <span class="op">-</span><span class="st"> </span>E[Y_{A=Control}] <span class="fl">-0.0062324</span>  <span class="fl">0.01731</span></span>
+<span id="cb52-11"><a href="tmle3.html#cb52-11"></a><span class="dv">1</span><span class="op">:</span><span class="st">  </span>TSM                            E[Y_{A=Control}] <span class="fl">-0.5953314</span> <span class="fl">-0.62028</span></span>
+<span id="cb52-12"><a href="tmle3.html#cb52-12"></a><span class="dv">2</span><span class="op">:</span><span class="st">  </span>TSM                        E[Y_{A=Handwashing}] <span class="fl">-0.6179897</span> <span class="fl">-0.65822</span></span>
+<span id="cb52-13"><a href="tmle3.html#cb52-13"></a><span class="dv">3</span><span class="op">:</span><span class="st">  </span>TSM                          E[Y_{A=Nutrition}] <span class="fl">-0.6119870</span> <span class="fl">-0.60538</span></span>
+<span id="cb52-14"><a href="tmle3.html#cb52-14"></a><span class="dv">4</span><span class="op">:</span><span class="st">  </span>TSM                    E[Y_{A=Nutrition <span class="op">+</span><span class="st"> </span>WSH}] <span class="fl">-0.6015639</span> <span class="fl">-0.60536</span></span>
+<span id="cb52-15"><a href="tmle3.html#cb52-15"></a><span class="dv">5</span><span class="op">:</span><span class="st">  </span>TSM                         E[Y_{A=Sanitation}] <span class="fl">-0.5866311</span> <span class="fl">-0.58130</span></span>
+<span id="cb52-16"><a href="tmle3.html#cb52-16"></a><span class="dv">6</span><span class="op">:</span><span class="st">  </span>TSM                                E[Y_{A=WSH}] <span class="fl">-0.5213051</span> <span class="fl">-0.44984</span></span>
+<span id="cb52-17"><a href="tmle3.html#cb52-17"></a><span class="dv">7</span><span class="op">:</span><span class="st">  </span>TSM                              E[Y_{A=Water}] <span class="fl">-0.5653576</span> <span class="fl">-0.53541</span></span>
+<span id="cb52-18"><a href="tmle3.html#cb52-18"></a><span class="dv">8</span><span class="op">:</span><span class="st">  </span>ATE E[Y_{A=Nutrition <span class="op">+</span><span class="st"> </span>WSH}] <span class="op">-</span><span class="st"> </span>E[Y_{A=Control}] <span class="fl">-0.0062324</span>  <span class="fl">0.01492</span></span>
 <span id="cb52-19"><a href="tmle3.html#cb52-19"></a>         se     lower    upper psi_transformed lower_transformed</span>
-<span id="cb52-20"><a href="tmle3.html#cb52-20"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">0.030069</span> <span class="fl">-0.678746</span> <span class="fl">-0.56088</span>        <span class="fl">-0.61981</span>         <span class="fl">-0.678746</span></span>
-<span id="cb52-21"><a href="tmle3.html#cb52-21"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span><span class="fl">0.041821</span> <span class="fl">-0.743111</span> <span class="fl">-0.57917</span>        <span class="fl">-0.66114</span>         <span class="fl">-0.743111</span></span>
-<span id="cb52-22"><a href="tmle3.html#cb52-22"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span><span class="fl">0.041553</span> <span class="fl">-0.684825</span> <span class="fl">-0.52194</span>        <span class="fl">-0.60338</span>         <span class="fl">-0.684825</span></span>
-<span id="cb52-23"><a href="tmle3.html#cb52-23"></a><span class="dv">4</span><span class="op">:</span><span class="st"> </span><span class="fl">0.040925</span> <span class="fl">-0.682712</span> <span class="fl">-0.52229</span>        <span class="fl">-0.60250</span>         <span class="fl">-0.682712</span></span>
-<span id="cb52-24"><a href="tmle3.html#cb52-24"></a><span class="dv">5</span><span class="op">:</span><span class="st"> </span><span class="fl">0.042313</span> <span class="fl">-0.664402</span> <span class="fl">-0.49854</span>        <span class="fl">-0.58147</span>         <span class="fl">-0.664402</span></span>
-<span id="cb52-25"><a href="tmle3.html#cb52-25"></a><span class="dv">6</span><span class="op">:</span><span class="st"> </span><span class="fl">0.045216</span> <span class="fl">-0.538891</span> <span class="fl">-0.36165</span>        <span class="fl">-0.45027</span>         <span class="fl">-0.538891</span></span>
-<span id="cb52-26"><a href="tmle3.html#cb52-26"></a><span class="dv">7</span><span class="op">:</span><span class="st"> </span><span class="fl">0.039290</span> <span class="fl">-0.612551</span> <span class="fl">-0.45854</span>        <span class="fl">-0.53554</span>         <span class="fl">-0.612551</span></span>
-<span id="cb52-27"><a href="tmle3.html#cb52-27"></a><span class="dv">8</span><span class="op">:</span><span class="st"> </span><span class="fl">0.050596</span> <span class="fl">-0.081857</span>  <span class="fl">0.11648</span>         <span class="fl">0.01731</span>         <span class="fl">-0.081857</span></span>
+<span id="cb52-20"><a href="tmle3.html#cb52-20"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="fl">0.029908</span> <span class="fl">-0.678900</span> <span class="fl">-0.56166</span>        <span class="fl">-0.62028</span>         <span class="fl">-0.678900</span></span>
+<span id="cb52-21"><a href="tmle3.html#cb52-21"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span><span class="fl">0.041636</span> <span class="fl">-0.739822</span> <span class="fl">-0.57661</span>        <span class="fl">-0.65822</span>         <span class="fl">-0.739822</span></span>
+<span id="cb52-22"><a href="tmle3.html#cb52-22"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span><span class="fl">0.041414</span> <span class="fl">-0.686550</span> <span class="fl">-0.52421</span>        <span class="fl">-0.60538</span>         <span class="fl">-0.686550</span></span>
+<span id="cb52-23"><a href="tmle3.html#cb52-23"></a><span class="dv">4</span><span class="op">:</span><span class="st"> </span><span class="fl">0.040619</span> <span class="fl">-0.684973</span> <span class="fl">-0.52575</span>        <span class="fl">-0.60536</span>         <span class="fl">-0.684973</span></span>
+<span id="cb52-24"><a href="tmle3.html#cb52-24"></a><span class="dv">5</span><span class="op">:</span><span class="st"> </span><span class="fl">0.042091</span> <span class="fl">-0.663802</span> <span class="fl">-0.49881</span>        <span class="fl">-0.58130</span>         <span class="fl">-0.663802</span></span>
+<span id="cb52-25"><a href="tmle3.html#cb52-25"></a><span class="dv">6</span><span class="op">:</span><span class="st"> </span><span class="fl">0.044845</span> <span class="fl">-0.537731</span> <span class="fl">-0.36194</span>        <span class="fl">-0.44984</span>         <span class="fl">-0.537731</span></span>
+<span id="cb52-26"><a href="tmle3.html#cb52-26"></a><span class="dv">7</span><span class="op">:</span><span class="st"> </span><span class="fl">0.039068</span> <span class="fl">-0.611980</span> <span class="fl">-0.45884</span>        <span class="fl">-0.53541</span>         <span class="fl">-0.611980</span></span>
+<span id="cb52-27"><a href="tmle3.html#cb52-27"></a><span class="dv">8</span><span class="op">:</span><span class="st"> </span><span class="fl">0.050252</span> <span class="fl">-0.083572</span>  <span class="fl">0.11341</span>         <span class="fl">0.01492</span>         <span class="fl">-0.083572</span></span>
 <span id="cb52-28"><a href="tmle3.html#cb52-28"></a>   upper_transformed</span>
-<span id="cb52-29"><a href="tmle3.html#cb52-29"></a><span class="dv">1</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.56088</span></span>
-<span id="cb52-30"><a href="tmle3.html#cb52-30"></a><span class="dv">2</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.57917</span></span>
-<span id="cb52-31"><a href="tmle3.html#cb52-31"></a><span class="dv">3</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.52194</span></span>
-<span id="cb52-32"><a href="tmle3.html#cb52-32"></a><span class="dv">4</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.52229</span></span>
-<span id="cb52-33"><a href="tmle3.html#cb52-33"></a><span class="dv">5</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.49854</span></span>
-<span id="cb52-34"><a href="tmle3.html#cb52-34"></a><span class="dv">6</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.36165</span></span>
-<span id="cb52-35"><a href="tmle3.html#cb52-35"></a><span class="dv">7</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.45854</span></span>
-<span id="cb52-36"><a href="tmle3.html#cb52-36"></a><span class="dv">8</span><span class="op">:</span><span class="st">           </span><span class="fl">0.11648</span></span></code></pre></div>
+<span id="cb52-29"><a href="tmle3.html#cb52-29"></a><span class="dv">1</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.56166</span></span>
+<span id="cb52-30"><a href="tmle3.html#cb52-30"></a><span class="dv">2</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.57661</span></span>
+<span id="cb52-31"><a href="tmle3.html#cb52-31"></a><span class="dv">3</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.52421</span></span>
+<span id="cb52-32"><a href="tmle3.html#cb52-32"></a><span class="dv">4</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.52575</span></span>
+<span id="cb52-33"><a href="tmle3.html#cb52-33"></a><span class="dv">5</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.49881</span></span>
+<span id="cb52-34"><a href="tmle3.html#cb52-34"></a><span class="dv">6</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.36194</span></span>
+<span id="cb52-35"><a href="tmle3.html#cb52-35"></a><span class="dv">7</span><span class="op">:</span><span class="st">          </span><span class="fl">-0.45884</span></span>
+<span id="cb52-36"><a href="tmle3.html#cb52-36"></a><span class="dv">8</span><span class="op">:</span><span class="st">           </span><span class="fl">0.11341</span></span></code></pre></div>
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -706,7 +707,7 @@ optimal treatments and stochastic shift interventions.</p>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="sl3.html"><span class="header-section-number">3</span> Super (Machine) Learning</a></div>
-<div class="next"><a href="optimal-individualized-treatment-regimes-optional.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes (optional)</a></div>
+<div class="next"><a href="optimal-individualized-treatment-regimes.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -770,7 +771,7 @@ optimal treatments and stochastic shift interventions.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: October 13, 2021.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: May 14, 2022.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

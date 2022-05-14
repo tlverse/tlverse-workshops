@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 7 A Primer on the R6 Class System | [Workshop] Targeted Learning in the tlverse</title>
+<title>Chapter 8 A Primer on the R6 Class System | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
 <meta name="description" content="A central goal of the Targeted Learning statistical paradigm is to estimate scientifically relevant parameters in realistic (usually nonparametric) models. The tlverse is designed using basic OOP...">
 <meta name="generator" content="bookdown 0.24.1 with bs4_book()">
-<meta property="og:title" content="Chapter 7 A Primer on the R6 Class System | [Workshop] Targeted Learning in the tlverse">
+<meta property="og:title" content="Chapter 8 A Primer on the R6 Class System | [Workshop] Targeted Learning in the tlverse">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://tlverse.org/tlverse-workshops/r6.html">
 <meta property="og:description" content="A central goal of the Targeted Learning statistical paradigm is to estimate scientifically relevant parameters in realistic (usually nonparametric) models. The tlverse is designed using basic OOP...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 7 A Primer on the R6 Class System | [Workshop] Targeted Learning in the tlverse">
+<meta name="twitter:title" content="Chapter 8 A Primer on the R6 Class System | [Workshop] Targeted Learning in the tlverse">
 <meta name="twitter:description" content="A central goal of the Targeted Learning statistical paradigm is to estimate scientifically relevant parameters in realistic (usually nonparametric) models. The tlverse is designed using basic OOP...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -60,9 +60,10 @@
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> The Roadmap for Targeted Learning</a></li>
 <li><a class="" href="sl3.html"><span class="header-section-number">3</span> Super (Machine) Learning</a></li>
 <li><a class="" href="tmle3.html"><span class="header-section-number">4</span> The TMLE Framework</a></li>
-<li><a class="" href="optimal-individualized-treatment-regimes-optional.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes (optional)</a></li>
+<li><a class="" href="optimal-individualized-treatment-regimes.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes</a></li>
 <li><a class="" href="stochastic-treatment-regimes-optional.html"><span class="header-section-number">6</span> Stochastic Treatment Regimes (optional)</a></li>
-<li><a class="active" href="r6.html"><span class="header-section-number">7</span> A Primer on the R6 Class System</a></li>
+<li><a class="" href="causal-mediation-analysis.html"><span class="header-section-number">7</span> Causal Mediation Analysis</a></li>
+<li><a class="active" href="r6.html"><span class="header-section-number">8</span> A Primer on the R6 Class System</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -73,7 +74,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="r6" class="section level1">
 <h1>
-<span class="header-section-number">7</span> A Primer on the <code>R6</code> Class System<a class="anchor" aria-label="anchor" href="#r6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> A Primer on the <code>R6</code> Class System<a class="anchor" aria-label="anchor" href="#r6"><i class="fas fa-link"></i></a>
 </h1>
 <p>A central goal of the Targeted Learning statistical paradigm is to estimate
 scientifically relevant parameters in realistic (usually nonparametric) models.</p>
@@ -84,7 +85,7 @@ structured. Here, we briefly outline some key concepts from OOP. Readers
 familiar with OOP basics are invited to skip this section.</p>
 <div id="classes-fields-and-methods" class="section level2">
 <h2>
-<span class="header-section-number">7.1</span> Classes, Fields, and Methods<a class="anchor" aria-label="anchor" href="#classes-fields-and-methods"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1</span> Classes, Fields, and Methods<a class="anchor" aria-label="anchor" href="#classes-fields-and-methods"><i class="fas fa-link"></i></a>
 </h2>
 <p>The key concept of OOP is that of an object, a collection of data and functions
 that corresponds to some conceptual unit. Objects have two main types of
@@ -110,7 +111,7 @@ R</em> <span class="citation">(Wickham <a href="references.html#ref-wickham2014a
 </div>
 <div id="object-oriented-programming-python-and-r" class="section level2">
 <h2>
-<span class="header-section-number">7.2</span> Object Oriented Programming: <code>Python</code> and <code>R</code><a class="anchor" aria-label="anchor" href="#object-oriented-programming-python-and-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2</span> Object Oriented Programming: <code>Python</code> and <code>R</code><a class="anchor" aria-label="anchor" href="#object-oriented-programming-python-and-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>OO concepts (classes with inherentence) were baked into Python from the first
 published version (version 0.9 in 1991). In contrast, <code>R</code> gets its OO “approach”
@@ -127,14 +128,14 @@ be modified by reference.</p>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="stochastic-treatment-regimes-optional.html"><span class="header-section-number">6</span> Stochastic Treatment Regimes (optional)</a></div>
+<div class="prev"><a href="causal-mediation-analysis.html"><span class="header-section-number">7</span> Causal Mediation Analysis</a></div>
 <div class="next"><a href="references.html">References</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#r6"><span class="header-section-number">7</span> A Primer on the R6 Class System</a></li>
-<li><a class="nav-link" href="#classes-fields-and-methods"><span class="header-section-number">7.1</span> Classes, Fields, and Methods</a></li>
-<li><a class="nav-link" href="#object-oriented-programming-python-and-r"><span class="header-section-number">7.2</span> Object Oriented Programming: Python and R</a></li>
+<li><a class="nav-link" href="#r6"><span class="header-section-number">8</span> A Primer on the R6 Class System</a></li>
+<li><a class="nav-link" href="#classes-fields-and-methods"><span class="header-section-number">8.1</span> Classes, Fields, and Methods</a></li>
+<li><a class="nav-link" href="#object-oriented-programming-python-and-r"><span class="header-section-number">8.2</span> Object Oriented Programming: Python and R</a></li>
 </ul>
 
       <div class="book-extra">
@@ -152,7 +153,7 @@ be modified by reference.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: October 13, 2021.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: May 14, 2022.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
