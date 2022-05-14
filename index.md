@@ -202,7 +202,7 @@ produce it.
 
 This book was written using [bookdown](http://bookdown.org/), and the complete
 source is available on [GitHub](https://github.com/tlverse/tlverse-handbook).
-This version of the book was built with R version 4.1.1 (2021-08-10),
+This version of the book was built with R version 4.2.0 (2022-04-22),
 [pandoc](https://pandoc.org/) version 2.7.3, and the
 following packages:
 
@@ -211,25 +211,25 @@ following packages:
 |:------------|:-------|:--------------------------------------|
 |bookdown     |0.24.1  |Github (rstudio/bookdown\@84bde8e)     |
 |bslib        |0.3.1   |Github (rstudio/bslib\@efc475c)        |
-|data.table   |1.14.2  |CRAN (R 4.1.1)                         |
+|data.table   |1.14.2  |CRAN (R 4.2.0)                         |
 |delayed      |0.4.0   |Github (tlverse/delayed\@bf7ca82)      |
-|devtools     |2.4.2   |CRAN (R 4.1.1)                         |
-|downlit      |0.2.1   |CRAN (R 4.1.1)                         |
-|dplyr        |1.0.9   |CRAN (R 4.1.1)                         |
-|ggplot2      |3.3.6   |CRAN (R 4.1.1)                         |
-|here         |1.0.1   |CRAN (R 4.1.1)                         |
-|kableExtra   |1.3.4   |CRAN (R 4.1.1)                         |
-|knitr        |1.36    |CRAN (R 4.1.1)                         |
-|mvtnorm      |1.1-2   |CRAN (R 4.1.1)                         |
+|devtools     |2.4.2   |CRAN (R 4.2.0)                         |
+|downlit      |0.2.1   |CRAN (R 4.2.0)                         |
+|dplyr        |1.0.9   |CRAN (R 4.2.0)                         |
+|ggplot2      |3.3.6   |CRAN (R 4.2.0)                         |
+|here         |1.0.1   |CRAN (R 4.2.0)                         |
+|kableExtra   |1.3.4   |CRAN (R 4.2.0)                         |
+|knitr        |1.36    |CRAN (R 4.2.0)                         |
+|mvtnorm      |1.1-2   |CRAN (R 4.2.0)                         |
 |origami      |1.0.5   |Github (tlverse/origami\@e1b8fe6)      |
-|readr        |2.0.2   |CRAN (R 4.1.1)                         |
-|rmarkdown    |2.11    |CRAN (R 4.1.1)                         |
-|skimr        |2.1.3   |CRAN (R 4.1.1)                         |
+|readr        |2.0.2   |CRAN (R 4.2.0)                         |
+|rmarkdown    |2.11    |CRAN (R 4.2.0)                         |
+|skimr        |2.1.3   |CRAN (R 4.2.0)                         |
 |sl3          |1.4.4   |Github (tlverse/sl3\@6544257)          |
-|stringr      |1.4.0   |CRAN (R 4.1.1)                         |
-|tibble       |3.1.7   |CRAN (R 4.1.1)                         |
-|tidyr        |1.2.0   |CRAN (R 4.1.1)                         |
-|tidyverse    |1.3.1   |CRAN (R 4.1.1)                         |
+|stringr      |1.4.0   |CRAN (R 4.2.0)                         |
+|tibble       |3.1.7   |CRAN (R 4.2.0)                         |
+|tidyr        |1.2.0   |CRAN (R 4.2.0)                         |
+|tidyverse    |1.3.1   |CRAN (R 4.2.0)                         |
 |tmle3        |0.2.0   |Github (tlverse/tmle3\@425e21c)        |
 |tmle3mediate |0.0.3   |Github (tlverse/tmle3mediate\@70d1151) |
 |tmle3mopttx  |0.1.0   |Github (tlverse/tmle3mopttx\@9fb1a3b)  |
