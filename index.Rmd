@@ -153,20 +153,21 @@ of Alan Hubbard.
 
 ### Nima Hejazi {-}
 
-Nima Hejazi is a PhD candidate in biostatistics, working under the collaborative
-direction of Mark van der Laan and Alan Hubbard. Nima is affiliated with UC
-Berkeley's Center for Computational Biology and NIH Biomedical Big Data training
-program, as well as with the Fred Hutchinson Cancer Research Center. Previously,
-he earned an MA in Biostatistics and a BA (with majors in Molecular and Cell
-Biology, Psychology, and Public Health), both at UC Berkeley.  His research
-interests fall at the intersection of causal inference and machine learning,
-drawing on ideas from non/semi-parametric estimation in large, flexible
-statistical models to develop efficient and robust statistical procedures for
-evaluating complex target estimands in observational and randomized studies.
-Particular areas of current emphasis include mediation/path analysis,
-outcome-dependent sampling designs, targeted loss-based estimation, and vaccine
-efficacy trials.  Nima is also passionate about statistical computing and open
-source software development for applied statistics.
+[Nima Hejazi](https://nimahejazi.org), PhD, is an incoming Assistant Professor
+of Biostatistics at the [Harvard T.H. Chan School of Public
+Health](https://www.hsph.harvard.edu/biostatistics/). He received his PhD in
+biostatistics at UC Berkeley, working under the supervision of Mark van der Laan
+and Alan Hubbard, and afterwards held an NSF postdoctoral research fellowship.
+Nima's research interests blend causal inference, machine learning,
+semiparametric estimation, and computational statistics -- areas of recent
+emphasis include causal mediation analysis, efficiency under biased sampling
+designs, non/semi-parametric sieve estimation with machine learning, and
+targeted loss-based estimation. His work is primarily driven by applications in
+clinical trials (esp. vaccine efficacy trials), infectious disease epidemiology,
+and computational biology. Nima is passionate about statistical computing
+and open source software design standards for statistical data science, and he
+has co-led or contributed significantly to many `tlverse` packages (`hal9001`,
+`sl3`, `tmle3`, `origami`, `tmle3shift`, `tmle3mediate`).
 
 ### Ivana Malenica {-}
 
