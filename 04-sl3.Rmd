@@ -605,7 +605,7 @@ weight-for-height Z-score `whz`. For more details on `sl3_Task`, refer to the
 documentation (e.g., by inputting "?sl3_Task" in R). We will instantiate the 
 task in order to examine the pre-processing of `washb_data`. 
 
-```{r task, warning=TRUE}
+```{r task-with-warning, warning=TRUE}
 # create the task (i.e., use washb_data to predict outcome using covariates)
 task <- make_sl3_Task(
   data = washb_data,
