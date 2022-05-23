@@ -41,7 +41,8 @@ Suggests:
   randomForest,
   SuperLearner,
   hal9001 (>= 0.4.3),
-  haldensify (>= 0.2.3)
+  haldensify (>= 0.2.3),
+  earth
 Remotes:
   rstudio/bslib,
   rstudio/bookdown,
