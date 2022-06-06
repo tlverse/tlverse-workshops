@@ -376,8 +376,8 @@ identical(
 
 ## ----cvsl-load, eval = TRUE, echo = FALSE-------------------------------------
 library(here)
-load(cv_sl_fit, file=here("data", "fit_objects", "cv_sl_fit.Rdata"))
-load(runtime_cv_sl_fit, file=here("data", "fit_objects", "runtime_cv_sl_fit.Rdata"))
+load(here("data", "fit_objects", "cv_sl_fit.Rdata"))
+load(here("data", "fit_objects", "runtime_cv_sl_fit.Rdata"))
 runtime_cv_sl_fit
 
 
