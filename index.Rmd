@@ -47,8 +47,10 @@ useful reference to accompany these workshop materials.
 
 ## Important links {-}
 
-* __Software installation__: Please install the relevant software before the
-  workshop using the [installation
+* __Load R environment__: Please set up the `R` virtual environment using the
+  [instructions](https://github.com/tlverse/tlverse-workshops/blob/master/install.md).
+  If you experiencing issues with the `R` environment, you may install the 
+  relevant software packages before the workshop using the [installation
   script](https://github.com/tlverse/tlverse-workshops/blob/master/install.R).
 
 * You will probably exceed the GitHub API rate limit during this installation,
@@ -62,16 +64,16 @@ useful reference to accompany these workshop materials.
 ## About this workshop {-}
 
 This workshop will provide a comprehensive introduction to the field of
-_Targeted Learning_ for causal inference, and the corresponding [`tlverse` software
-ecosystem](https://github.com/tlverse). Emphasis will be placed on targeted
-minimum loss-based estimators of the causal effects of single timepoint
-interventions, including extensions for missing covariate and outcome data.
-These multiply robust, efficient plug-in estimators use state-of-the-art,
-ensemble machine learning tools to flexibly adjust for confounding while
-yielding valid statistical inference. In particular, we will discuss targeted
-estimators of the causal effects of static and dynamic interventions; time
-permitting, additional topics to be discussed will include estimation of the
-causal effects of optimal dynamic and stochastic interventions.
+_Targeted Learning (TL)_ for statistical and causal inference, and the 
+corresponding [`tlverse` software ecosystem](https://github.com/tlverse). 
+Emphasis will be placed on super learning (SL) and targeted minimum loss-based 
+estimation (TMLE) for causal effects of single time point interventions. TMLE 
+represents a finite-sample robust, efficient substitution estimation strategy 
+that uses super (ensemble machine) learning to flexibly adjust for confounding 
+while yielding valid statistical inference. We will discuss TMLE for the causal 
+effects of static and dynamic interventions; time permitting, additional topics 
+to be discussed will include estimation of the causal effects of optimal dynamic 
+and stochastic interventions.
 
 In addition to discussion, this workshop will incorporate both interactive
 activities and hands-on, guided `R` programming exercises, to allow participants
@@ -185,12 +187,10 @@ network) and adaptive sequential designs.
 
 Rachael Phillips is a PhD student in biostatistics, advised by Alan Hubbard and
 Mark van der Laan. She has an MA in Biostatistics, BS in Biology, and BA in
-Mathematics. A student of targeted learning and causal inference, Rachael’s 
-research integrates semiparametric statistical estimation and inference. She is 
-motivated by applied projects and some of her current work involves personalized 
-online learning from data streams of vital signs, human-computer interaction, 
-automated machine learning, and developing statistical analysis plans using 
-targeted learning.
+Mathematics. As a student of targeted learning, Rachael integrates causal 
+inference, machine learning, and statistical theory to answer causal questions 
+with statistical confidence. She is motivated by issues arising in healthcare, 
+and is especially interested in clinical algorithm frameworks and guidelines. 
 
 ## Reproduciblity with the `tlverse` {#repro}
 
