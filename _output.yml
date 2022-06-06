@@ -1,6 +1,6 @@
 bookdown::bs4_book:
   theme:
-    primary: "#26428b"
+    primary: "#800080"
   repo: https://github.com/tlverse/tlverse-workshops
   includes:
     in_header: html_extras/mathjax_header.html
