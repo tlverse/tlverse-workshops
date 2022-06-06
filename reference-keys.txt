@@ -44,9 +44,6 @@ the-wash-benefits-example-dataset
 sl3
 super-learner-sl-introduction
 how-to-fit-a-sl-with-sl3
-load-the-data
-install-the-sl3-software-as-needed
-load-the-sl3-software
 additional-sl3-topics
 obtaining-predictions
 summarizing-sl-fits
