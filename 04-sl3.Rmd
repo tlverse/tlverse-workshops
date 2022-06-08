@@ -344,8 +344,8 @@ runtime_sl_fit <- proc.time() - start_time # end time - start time = run time
 runtime_sl_fit
 ```
 
-It took `r round(as.numeric(runtime_sl_fit["elapsed"]),1)` seconds, `r round(as.numeric(runtime_sl_fit["elapsed"])/60,1)` minutes, to fit the SL 
-prediction function. 
+It took `r round(as.numeric(runtime_sl_fit["elapsed"]),1)` seconds 
+(`r round(as.numeric(runtime_sl_fit["elapsed"])/60,1)` minutes) to fit the SL. 
 
 #### Summary {-}
 
@@ -422,19 +422,19 @@ if (knitr::is_latex_output()) {
     scroll_box(width = "100%", height = "300px")
 }
 ```
-```{r predobs-plot, fig.asp = .55, fig.cap = "Observed and predicted values for weigh-for-height z-score (whz)"}
+```{r predobs-plot, fig.asp = .55, fig.cap = "Observed and predicted values for weight-for-height z-score (whz)"}
 # melt the table so we can plot observed and predicted values
 df_plot$id <- seq(1:nrow(df_plot))
 df_plot_melted <- melt(
   df_plot, id.vars = "id",
-  measure.vars = c("Obs", "SL_Pred", "GLM_Pred", "Mean_Pred")
+  measure.vars = c("Observed", "SL_Pred", "GLM_Pred", "Mean_Pred")
 )
 
 library(ggplot2)
 ggplot(df_plot_melted, aes(id, value, color = variable)) + 
   geom_point(size = 0.1) + 
   labs(x = "Subjects (ordered by increasing whz)", 
-       y = "Weight-for-height z-score") +
+       y = "whz") +
   theme(legend.position = "bottom", legend.title = element_blank(),
         axis.text.x = element_blank(), axis.ticks.x = element_blank()) + 
   guides(color = guide_legend(override.aes = list(size = 1)))
@@ -737,10 +737,9 @@ load(here("data", "fit_objects", "runtime_cv_sl_fit.Rdata"))
 runtime_cv_sl_fit
 ```
 
-It took `r round(as.numeric(runtime_cv_sl_fit["elapsed"]),1)` seconds, `r round(as.numeric(runtime_cv_sl_fit["elapsed"])/60,1)` minutes, to fit the SL 
-prediction function. 
+It took `r round(as.numeric(runtime_cv_sl_fit["elapsed"]),1)` seconds (`r round(as.numeric(runtime_cv_sl_fit["elapsed"])/60,1)` minutes) to fit the CV SL. 
 
-```{r cvsl-risk-summary}
+```{r cvsl-risk-summary, eval = FALSE}
 cv_sl_fit$cv_risk[,c(1:3)]
 ```
 
@@ -762,10 +761,20 @@ than all of the candidates' CV risks.
 
 We can see how the SL fits varied across the folds by the coefficients for the 
 SL on each fold.
-```{r cvsl-risk-summary-coefs}
+```{r cvsl-risk-summary-coefs, eval = FALSE}
 round(cv_sl_fit$coef, 3)
 ```
-
+```{r cvsl-risk-summary-coefs-handbook, echo = FALSE}
+if (knitr::is_latex_output()) {
+  round(cv_sl_fit$coef, 3) %>%
+    kable(format = "latex")
+} else if (knitr::is_html_output()) {
+  round(cv_sl_fit$coef, 3) %>%
+    kable() %>%
+    kableExtra:::kable_styling(fixed_thead = TRUE) %>%
+    scroll_box(width = "100%", height = "300px")
+}
+```
 #### Revere-cross-validated predictive performance of Super Learner
 
 We can also use so-called "revere", to obtain a partial CV risk for the SL, 
@@ -788,7 +797,7 @@ cv_risk_w_sl_revere <- sl_fit$cv_risk(
 cv_risk_w_sl_revere[,c(1:3)]
 ```
 
-```{r sl-revere-risk-handbook, eval = FALSE, echo = FALSE}
+```{r sl-revere-risk-handbook, echo = FALSE}
 if (knitr::is_latex_output()) {
   cv_risk_w_sl_revere[,c(1:3)] %>%
     kable(format = "latex")
@@ -855,7 +864,7 @@ sl_revere_risk_byhand
 
 # check that our calculation by hand equals what is output in cv_risk_table_revere
 sl_revere_risk <- as.numeric(cv_risk_w_sl_revere[learner=="SuperLearner","MSE"])
-identical(sl_revere_risk, sl_revere_risk_byhand)
+sl_revere_risk
 ```
 
 The reason why this is not a fully cross-validated risk estimate is because the 
@@ -874,7 +883,7 @@ the CV risk estimate of the SL and it can thought of as a ballpark lower bound
 on it. This idea holds in our example; that is, with the simple NNLS 
 meta-learner the revere risk estimate of the SL (`r round(sl_revere_risk, 4)`) 
 is very close to, and slightly lower than, the CV risk estimate for the SL 
-(`r round(cv_sl_fit$cv_risk[nrow(cv_sl_fit$cv_risk),3], 4)`). 
+(`r round(cv_sl_fit$cv_risk[nrow(cv_sl_fit$cv_risk),2], 4)`). 
 
 ### Discrete Super Learner
 
@@ -958,7 +967,7 @@ candidates; its predictions are defined by a combination of multiple candidatesâ
 predictions." In the following, we show how to include the eSL, and multiple 
 eSLs, as candidates in the dSL. 
 
-Recall the object, `sl` defined in section 3.2:
+Recall the SL object, `sl`, defined in section 3.2:
 ```{r recall-eSL}
 # in the section 3.2 we defined Lrnr_sl as
 # sl <- Lrnr_sl$new(learners = stack, metalearner = Lrnr_nnls$new())
@@ -1030,7 +1039,7 @@ We included as candidates in the dSL:
    multivariate adaptive regression splines (earth) meta-learner, using 
    `lrn_earth` which was instantiated in section 2; 
 6. an eSL that considered the same candidate learners as (1) and a 
-   ranger meta-learner, using `lrn_ranger` which was instantiated in section 2;
+   ranger meta-learner, using `lrn_ranger` which was instantiated in section 2; and
 7. an eSL that considered the same candidate learners as (1) and a 
    HAL meta-learner, using `lrn_hal` which was instantiated in section 2.
 
@@ -1835,7 +1844,9 @@ chspred <- read_csv(file = db_data, col_names = TRUE)
 ```
 
 Let's take a quick peek at the data:
-
+```{r ex-head, eval = FALSE}
+head(chspred)
+```
 ```{r ex-head-handbook, echo = FALSE}
 if (knitr::is_latex_output()) {
   head(chspred) %>%
@@ -1846,9 +1857,6 @@ if (knitr::is_latex_output()) {
     kableExtra:::kable_styling(fixed_thead = TRUE) %>%
     scroll_box(width = "100%", height = "300px")
 }
-```
-```{r ex-head, eval = FALSE}
-head(chspred)
 ```
 1. Create an `sl3` task, setting myocardial infarction `mi` as the outcome and
    using all available covariate data.

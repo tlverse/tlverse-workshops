@@ -158,19 +158,19 @@ if (knitr::is_latex_output()) {
     scroll_box(width = "100%", height = "300px")
 }
 
-## ----predobs-plot, fig.asp = .55, fig.cap = "Observed and predicted values for weigh-for-height z-score (whz)"----
+## ----predobs-plot, fig.asp = .55, fig.cap = "Observed and predicted values for weight-for-height z-score (whz)"----
 # melt the table so we can plot observed and predicted values
 df_plot$id <- seq(1:nrow(df_plot))
 df_plot_melted <- melt(
   df_plot, id.vars = "id",
-  measure.vars = c("Obs", "SL_Pred", "GLM_Pred", "Mean_Pred")
+  measure.vars = c("Observed", "SL_Pred", "GLM_Pred", "Mean_Pred")
 )
 
 library(ggplot2)
 ggplot(df_plot_melted, aes(id, value, color = variable)) + 
   geom_point(size = 0.1) + 
   labs(x = "Subjects (ordered by increasing whz)", 
-       y = "Weight-for-height z-score") +
+       y = "whz") +
   theme(legend.position = "bottom", legend.title = element_blank(),
         axis.text.x = element_blank(), axis.ticks.x = element_blank()) + 
   guides(color = guide_legend(override.aes = list(size = 1)))
@@ -382,8 +382,8 @@ load(here("data", "fit_objects", "runtime_cv_sl_fit.Rdata"))
 runtime_cv_sl_fit
 
 
-## ----cvsl-risk-summary--------------------------------------------------------
-cv_sl_fit$cv_risk[,c(1:3)]
+## ----cvsl-risk-summary, eval = FALSE------------------------------------------
+## cv_sl_fit$cv_risk[,c(1:3)]
 
 
 ## ----cvsl-risk-summary-handbook, echo = FALSE---------------------------------
@@ -398,8 +398,19 @@ if (knitr::is_latex_output()) {
 }
 
 
-## ----cvsl-risk-summary-coefs--------------------------------------------------
-round(cv_sl_fit$coef, 3)
+## ----cvsl-risk-summary-coefs, eval = FALSE------------------------------------
+## round(cv_sl_fit$coef, 3)
+
+## ----cvsl-risk-summary-coefs-handbook, echo = FALSE---------------------------
+if (knitr::is_latex_output()) {
+  round(cv_sl_fit$coef, 3) %>%
+    kable(format = "latex")
+} else if (knitr::is_html_output()) {
+  round(cv_sl_fit$coef, 3) %>%
+    kable() %>%
+    kableExtra:::kable_styling(fixed_thead = TRUE) %>%
+    scroll_box(width = "100%", height = "300px")
+}
 
 
 ## ----sl-revere-risk-----------------------------------------------------------
@@ -412,16 +423,16 @@ cv_risk_w_sl_revere <- sl_fit$cv_risk(
 ## cv_risk_w_sl_revere[,c(1:3)]
 
 
-## ----sl-revere-risk-handbook, eval = FALSE, echo = FALSE----------------------
-## if (knitr::is_latex_output()) {
-##   cv_risk_w_sl_revere[,c(1:3)] %>%
-##     kable(format = "latex")
-## } else if (knitr::is_html_output()) {
-##   cv_risk_w_sl_revere[,c(1:3)] %>%
-##     kable() %>%
-##     kableExtra:::kable_styling(fixed_thead = TRUE) %>%
-##     scroll_box(width = "100%", height = "300px")
-## }
+## ----sl-revere-risk-handbook, echo = FALSE------------------------------------
+if (knitr::is_latex_output()) {
+  cv_risk_w_sl_revere[,c(1:3)] %>%
+    kable(format = "latex")
+} else if (knitr::is_html_output()) {
+  cv_risk_w_sl_revere[,c(1:3)] %>%
+    kable() %>%
+    kableExtra:::kable_styling(fixed_thead = TRUE) %>%
+    scroll_box(width = "100%", height = "300px")
+}
 
 
 ## ----sl-revere-risk-byhand----------------------------------------------------
@@ -474,7 +485,7 @@ sl_revere_risk_byhand
 
 # check that our calculation by hand equals what is output in cv_risk_table_revere
 sl_revere_risk <- as.numeric(cv_risk_w_sl_revere[learner=="SuperLearner","MSE"])
-identical(sl_revere_risk, sl_revere_risk_byhand)
+sl_revere_risk
 
 
 ## ----make-dSL-----------------------------------------------------------------
@@ -795,6 +806,9 @@ db_data <- url(
 chspred <- read_csv(file = db_data, col_names = TRUE)
 
 
+## ----ex-head, eval = FALSE----------------------------------------------------
+## head(chspred)
+
 ## ----ex-head-handbook, echo = FALSE-------------------------------------------
 if (knitr::is_latex_output()) {
   head(chspred) %>%
@@ -805,9 +819,6 @@ if (knitr::is_latex_output()) {
     kableExtra:::kable_styling(fixed_thead = TRUE) %>%
     scroll_box(width = "100%", height = "300px")
 }
-
-## ----ex-head, eval = FALSE----------------------------------------------------
-## head(chspred)
 
 
 ## ----ex-key, eval=FALSE-------------------------------------------------------
