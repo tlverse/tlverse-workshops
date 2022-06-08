@@ -158,7 +158,7 @@ if (knitr::is_latex_output()) {
     scroll_box(width = "100%", height = "300px")
 }
 
-## ----predobs-plot, out.width = '60%', fig.asp = .62---------------------------
+## ----predobs-plot, fig.asp = .55, fig.cap = "Observed and predicted values for weigh-for-height z-score (whz)"----
 # melt the table so we can plot observed and predicted values
 df_plot$id <- seq(1:nrow(df_plot))
 df_plot_melted <- melt(
@@ -169,10 +169,11 @@ df_plot_melted <- melt(
 library(ggplot2)
 ggplot(df_plot_melted, aes(id, value, color = variable)) + 
   geom_point(size = 0.1) + 
-  labs(x = "Subject id (ordered by increasing whz)", 
-       y = "Weight-for-height z-score (whz)") +
+  labs(x = "Subjects (ordered by increasing whz)", 
+       y = "Weight-for-height z-score") +
   theme(legend.position = "bottom", legend.title = element_blank(),
-        axis.text.x = element_blank(), axis.ticks.x = element_blank())
+        axis.text.x = element_blank(), axis.ticks.x = element_blank()) + 
+  guides(color = guide_legend(override.aes = list(size = 1)))
 
 
 ## ----cv-predictions-----------------------------------------------------------
@@ -397,6 +398,10 @@ if (knitr::is_latex_output()) {
 }
 
 
+## ----cvsl-risk-summary-coefs--------------------------------------------------
+round(cv_sl_fit$coef, 3)
+
+
 ## ----sl-revere-risk-----------------------------------------------------------
 cv_risk_w_sl_revere <- sl_fit$cv_risk(
   eval_fun = loss_squared_error, get_sl_revere_risk = TRUE
@@ -472,26 +477,65 @@ sl_revere_risk <- as.numeric(cv_risk_w_sl_revere[learner=="SuperLearner","MSE"])
 identical(sl_revere_risk, sl_revere_risk_byhand)
 
 
-## ----make-Lrnr-cv-selector----------------------------------------------------
-cv_selector <- Lrnr_cv_selector$new(eval_function = loss_squared_error)
-
-
 ## ----make-dSL-----------------------------------------------------------------
-# recall we defined "sl" as
+cv_selector <- Lrnr_cv_selector$new(eval_function = loss_squared_error)
+dSL <- Lrnr_sl$new(learners = stack, metalearner = cv_selector)
+
+
+## ----fit-dSL------------------------------------------------------------------
+set.seed(4197)
+dSL_fit <- dSL$train(task)
+
+
+## ----summarize-dSL-coefs------------------------------------------------------
+round(dSL_fit$coefficients, 3)
+
+
+## ----summarize-dSL-cv-risk----------------------------------------------------
+dSL_cv_risk_table <- dSL_fit$cv_risk(eval_fun = loss_squared_error)
+
+## ----summarize-dSL-cv-risk-tbl, eval = FALSE----------------------------------
+## dSL_cv_risk_table[,c(1:3)]
+
+## ----summarize-dSL-cv-risk-tbl-handbook, echo = FALSE-------------------------
+if (knitr::is_latex_output()) {
+  dSL_cv_risk_table[,c(1:3)] %>%
+    kable(format = "latex")
+} else if (knitr::is_html_output()) {
+  dSL_cv_risk_table[,c(1:3)] %>%
+    kable() %>%
+    kableExtra:::kable_styling(fixed_thead = TRUE) %>%
+    scroll_box(width = "100%", height = "300px")
+}
+
+
+## ----verify-dSL-preds---------------------------------------------------------
+dSL_pred <- dSL_fit$predict(task)
+earth_pred <- dSL_fit$learner_fits$Lrnr_earth_2_3_backward_0_1_0_0$predict(task)
+identical(dSL_pred, earth_pred)
+
+
+## ----recall-eSL---------------------------------------------------------------
+# in the section 3.2 we defined Lrnr_sl as
 # sl <- Lrnr_sl$new(learners = stack, metalearner = Lrnr_nnls$new())
+
+
+## ----rename-eSL---------------------------------------------------------------
 # let's rename it to clarify that this is an eSL that uses NNLS as meta-learner
 eSL_metaNNLS <- sl
 
-# first we add eSL (that we named "sl") to existing stack (that we named "stack")
-# to create new stack that includes the original candidate learners and the eSL
+
+## ----eSL-in-stack-------------------------------------------------------------
 stack_with_eSL <- Stack$new(stack, eSL_metaNNLS)
 
-# now we define the meta-learner for dSL, and then instantiate Lrnr_sl as a dSL
+
+## ----eSL-in-dSL---------------------------------------------------------------
 cv_selector <- Lrnr_cv_selector$new(eval_function = loss_squared_error)
 dSL <- Lrnr_sl$new(learners = stack_with_eSL, metalearner = cv_selector)
 
 
 ## ----make-sl-discrete-multi-esl-----------------------------------------------
+# instantiate more eSLs
 eSL_metaNNLSconvex <- Lrnr_sl$new(
   learners = stack, metalearner = Lrnr_nnls$new(convex = TRUE)
 )
@@ -499,11 +543,12 @@ eSL_metaLasso <- Lrnr_sl$new(learners = stack, metalearner = lrn_lasso)
 eSL_metaEarth <- Lrnr_sl$new(learners = stack, metalearner = lrn_earth)
 eSL_metaRanger <- Lrnr_sl$new(learners = stack, metalearner = lrn_ranger)
 eSL_metaHAL <- Lrnr_sl$new(learners = stack, metalearner = lrn_hal)
-# now we can create the stack by adding the eSLs to the existing stack
+# adding the eSLs to the stack that defined them
 stack_with_eSLs <- Stack$new(
   stack, eSL_metaNNLS, eSL_metaNNLSconvex, eSL_metaLasso, eSL_metaEarth, 
   eSL_metaRanger, eSL_metaHAL
 )
+# specify dSL
 dSL <- Lrnr_sl$new(learners = stack_with_eSLs, metalearner = cv_selector)
 
 
@@ -708,7 +753,7 @@ if (knitr::is_latex_output()) {
 }
 
 
-## ----varimp-plot, out.width = '60%', fig.asp = .62----------------------------
+## ----varimp-plot, fig.asp = .62, fig.cap = "sl3 variable importance for predicting weight-for-height z-score with WASH Benefits example dataset"----
 # plot variable importance
 importance_plot(x = washb_varimp)
 
