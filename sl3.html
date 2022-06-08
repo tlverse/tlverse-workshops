@@ -1034,9 +1034,9 @@ so the results are reproducible, and we will also time it.</p>
 <span id="cb17-6"><a href="sl3.html#cb17-6"></a>runtime_sl_fit &lt;-<span class="st"> </span><span class="kw">proc.time</span>() <span class="op">-</span><span class="st"> </span>start_time <span class="co"># end time - start time = run time</span></span>
 <span id="cb17-7"><a href="sl3.html#cb17-7"></a>runtime_sl_fit</span>
 <span id="cb17-8"><a href="sl3.html#cb17-8"></a>   user  system elapsed </span>
-<span id="cb17-9"><a href="sl3.html#cb17-9"></a><span class="fl">302.770</span>   <span class="fl">1.851</span> <span class="fl">304.532</span> </span></code></pre></div>
-<p>It took 304.5 seconds, 5.1 minutes, to fit the SL
-prediction function.</p>
+<span id="cb17-9"><a href="sl3.html#cb17-9"></a> <span class="fl">241.95</span>    <span class="fl">1.41</span>  <span class="fl">243.19</span> </span></code></pre></div>
+<p>It took 243.2 seconds
+(4.1 minutes) to fit the SL.</p>
 <div id="summary" class="section level4 unnumbered">
 <h4>Summary<a class="anchor" aria-label="anchor" href="#summary"><i class="fas fa-link"></i></a>
 </h4>
@@ -1216,14 +1216,14 @@ Mean_Pred
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df_plot_melted</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">value</span>, color <span class="op">=</span> <span class="va">variable</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Subjects (ordered by increasing whz)"</span>, 
-       y <span class="op">=</span> <span class="st">"Weight-for-height z-score"</span><span class="op">)</span> <span class="op">+</span>
+       y <span class="op">=</span> <span class="st">"whz"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span>, legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
         axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>, axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>override.aes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:predobs-plot"></span>
-<img src="04-sl3_files/figure-html/predobs-plot-1.png" alt="Observed and predicted values for weigh-for-height z-score (whz)" width="80%"><p class="caption">
-FIGURE 3.1: Observed and predicted values for weigh-for-height z-score (whz)
+<img src="04-sl3_files/figure-html/predobs-plot-1.png" alt="Observed and predicted values for weight-for-height z-score (whz)" width="80%"><p class="caption">
+FIGURE 3.1: Observed and predicted values for weight-for-height z-score (whz)
 </p>
 </div>
 </div>
@@ -1879,10 +1879,10 @@ Column "fold_sd" in the CV risk table is the standard deviation of the V-fold-sp
 </h4>
 <p>We can see from the CV risk table above that the SL is not listed. This is
 because we do not have a CV risk for the SL unless we cross-validate it or
-include it as a candidate in another SL; the latter is shown in <a href="https://tlverse.org/tlverse-workshops/sl3.html#discrete-sl">the next
-subsection</a>. Below,
-we show how to obtain a CV risk estimate for the SL using function <code>cv_sl</code>.
-Like before when we called <code>sl$train</code>, we will set a random number
+include it as a candidate in another SL; the latter is shown in <a href="https://tlverse.org/tlverse-workshops/sl3.html#discrete-super-learner">the next
+subsection</a>.
+Below, we show how to obtain a CV risk estimate for the SL using function
+<code>cv_sl</code>. Like before when we called <code>sl$train</code>, we will set a random number
 generator so the results are reproducible, and we will also time this.</p>
 <!--
 (Note: we did not evaluate this part of the code, as it was 
@@ -1898,22 +1898,9 @@ taking too long).
 <span class="va">runtime_cv_sl_fit</span></code></pre></div>
 <pre><code>   user  system elapsed 
 2792.55  159.65 3051.41 </code></pre>
-<p>It took 3051.4 seconds, 50.9 minutes, to fit the SL
-prediction function.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sl3.html#cb36-1"></a>cv_sl_fit<span class="op">$</span>cv_risk[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)]</span>
-<span id="cb36-2"><a href="sl3.html#cb36-2"></a>                                    learner    MSE       se</span>
-<span id="cb36-3"><a href="sl3.html#cb36-3"></a> <span class="dv">1</span><span class="op">:</span><span class="st">                           </span>Lrnr_glm_TRUE <span class="fl">1.0224</span> <span class="fl">0.023982</span></span>
-<span id="cb36-4"><a href="sl3.html#cb36-4"></a> <span class="dv">2</span><span class="op">:</span><span class="st">                               </span>Lrnr_mean <span class="fl">1.0654</span> <span class="fl">0.025028</span></span>
-<span id="cb36-5"><a href="sl3.html#cb36-5"></a> <span class="dv">3</span><span class="op">:</span><span class="st"> </span>Lrnr_glmnet_NULL_deviance_<span class="dv">10</span>_<span class="dv">0</span>_<span class="dv">100</span>_TRUE <span class="fl">1.0166</span> <span class="fl">0.023738</span></span>
-<span id="cb36-6"><a href="sl3.html#cb36-6"></a> <span class="dv">4</span><span class="op">:</span><span class="st"> </span>Lrnr_glmnet_NULL_deviance_<span class="dv">10</span>_<span class="dv">1</span>_<span class="dv">100</span>_TRUE <span class="fl">1.0141</span> <span class="fl">0.023624</span></span>
-<span id="cb36-7"><a href="sl3.html#cb36-7"></a> <span class="dv">5</span><span class="op">:</span><span class="st">                          </span>Lrnr_polspline <span class="fl">1.0163</span> <span class="fl">0.023654</span></span>
-<span id="cb36-8"><a href="sl3.html#cb36-8"></a> <span class="dv">6</span><span class="op">:</span><span class="st">         </span>Lrnr_earth_<span class="dv">2</span>_<span class="dv">3</span>_backward_<span class="dv">0</span>_<span class="dv">1</span>_<span class="dv">0</span>_<span class="dv">0</span> <span class="fl">1.0131</span> <span class="fl">0.023522</span></span>
-<span id="cb36-9"><a href="sl3.html#cb36-9"></a> <span class="dv">7</span><span class="op">:</span><span class="st">              </span><span class="kw">Lrnr_hal9001_2_1_c</span>(<span class="dv">3</span>, <span class="dv">2</span>)_<span class="dv">5</span> <span class="fl">1.0175</span> <span class="fl">0.023693</span></span>
-<span id="cb36-10"><a href="sl3.html#cb36-10"></a> <span class="dv">8</span><span class="op">:</span><span class="st">             </span>Lrnr_ranger_<span class="dv">500</span>_TRUE_none_<span class="dv">1</span> <span class="fl">1.0142</span> <span class="fl">0.023556</span></span>
-<span id="cb36-11"><a href="sl3.html#cb36-11"></a> <span class="dv">9</span><span class="op">:</span><span class="st">                       </span>Lrnr_xgboost_<span class="dv">20</span>_<span class="dv">1</span> <span class="fl">1.0793</span> <span class="fl">0.024793</span></span>
-<span id="cb36-12"><a href="sl3.html#cb36-12"></a><span class="dv">10</span><span class="op">:</span><span class="st">               </span>Lrnr_gam_NULL_NULL_GCV.Cp <span class="fl">1.0235</span> <span class="fl">0.023942</span></span>
-<span id="cb36-13"><a href="sl3.html#cb36-13"></a><span class="dv">11</span><span class="op">:</span><span class="st">                      </span>Lrnr_bayesglm_TRUE <span class="fl">1.0224</span> <span class="fl">0.023982</span></span>
-<span id="cb36-14"><a href="sl3.html#cb36-14"></a><span class="dv">12</span><span class="op">:</span><span class="st">                            </span>SuperLearner <span class="fl">1.0067</span> <span class="fl">0.023429</span></span></code></pre></div>
+<p>It took 3051.4 seconds (50.9 minutes) to fit the CV SL.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cv_sl_fit</span><span class="op">$</span><span class="va">cv_risk</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -2068,62 +2055,432 @@ SuperLearner
 than all of the candidates’ CV risks.</p>
 <p>We can see how the SL fits varied across the folds by the coefficients for the
 SL on each fold.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sl3.html#cb37-1"></a><span class="kw">round</span>(cv_sl_fit<span class="op">$</span>coef, <span class="dv">3</span>)</span>
-<span id="cb37-2"><a href="sl3.html#cb37-2"></a>      fold Lrnr_glm_TRUE Lrnr_mean Lrnr_glmnet_NULL_deviance_<span class="dv">10</span>_<span class="dv">0</span>_<span class="dv">100</span>_TRUE</span>
-<span id="cb37-3"><a href="sl3.html#cb37-3"></a> [<span class="dv">1</span>,]    <span class="dv">1</span>         <span class="fl">0.000</span>         <span class="dv">0</span>                                   <span class="fl">0.047</span></span>
-<span id="cb37-4"><a href="sl3.html#cb37-4"></a> [<span class="dv">2</span>,]    <span class="dv">2</span>         <span class="fl">0.000</span>         <span class="dv">0</span>                                   <span class="fl">0.000</span></span>
-<span id="cb37-5"><a href="sl3.html#cb37-5"></a> [<span class="dv">3</span>,]    <span class="dv">3</span>         <span class="fl">0.000</span>         <span class="dv">0</span>                                   <span class="fl">0.030</span></span>
-<span id="cb37-6"><a href="sl3.html#cb37-6"></a> [<span class="dv">4</span>,]    <span class="dv">4</span>         <span class="fl">0.050</span>         <span class="dv">0</span>                                   <span class="fl">0.000</span></span>
-<span id="cb37-7"><a href="sl3.html#cb37-7"></a> [<span class="dv">5</span>,]    <span class="dv">5</span>         <span class="fl">0.000</span>         <span class="dv">0</span>                                   <span class="fl">0.075</span></span>
-<span id="cb37-8"><a href="sl3.html#cb37-8"></a> [<span class="dv">6</span>,]    <span class="dv">6</span>         <span class="fl">0.025</span>         <span class="dv">0</span>                                   <span class="fl">0.248</span></span>
-<span id="cb37-9"><a href="sl3.html#cb37-9"></a> [<span class="dv">7</span>,]    <span class="dv">7</span>         <span class="fl">0.000</span>         <span class="dv">0</span>                                   <span class="fl">0.000</span></span>
-<span id="cb37-10"><a href="sl3.html#cb37-10"></a> [<span class="dv">8</span>,]    <span class="dv">8</span>         <span class="fl">0.189</span>         <span class="dv">0</span>                                   <span class="fl">0.007</span></span>
-<span id="cb37-11"><a href="sl3.html#cb37-11"></a> [<span class="dv">9</span>,]    <span class="dv">9</span>         <span class="fl">0.113</span>         <span class="dv">0</span>                                   <span class="fl">0.000</span></span>
-<span id="cb37-12"><a href="sl3.html#cb37-12"></a>[<span class="dv">10</span>,]   <span class="dv">10</span>         <span class="fl">0.000</span>         <span class="dv">0</span>                                   <span class="fl">0.000</span></span>
-<span id="cb37-13"><a href="sl3.html#cb37-13"></a>      Lrnr_glmnet_NULL_deviance_<span class="dv">10</span>_<span class="dv">1</span>_<span class="dv">100</span>_TRUE Lrnr_polspline</span>
-<span id="cb37-14"><a href="sl3.html#cb37-14"></a> [<span class="dv">1</span>,]                                   <span class="fl">0.000</span>          <span class="fl">0.243</span></span>
-<span id="cb37-15"><a href="sl3.html#cb37-15"></a> [<span class="dv">2</span>,]                                   <span class="fl">0.257</span>          <span class="fl">0.161</span></span>
-<span id="cb37-16"><a href="sl3.html#cb37-16"></a> [<span class="dv">3</span>,]                                   <span class="fl">0.000</span>          <span class="fl">0.079</span></span>
-<span id="cb37-17"><a href="sl3.html#cb37-17"></a> [<span class="dv">4</span>,]                                   <span class="fl">0.459</span>          <span class="fl">0.000</span></span>
-<span id="cb37-18"><a href="sl3.html#cb37-18"></a> [<span class="dv">5</span>,]                                   <span class="fl">0.275</span>          <span class="fl">0.000</span></span>
-<span id="cb37-19"><a href="sl3.html#cb37-19"></a> [<span class="dv">6</span>,]                                   <span class="fl">0.000</span>          <span class="fl">0.110</span></span>
-<span id="cb37-20"><a href="sl3.html#cb37-20"></a> [<span class="dv">7</span>,]                                   <span class="fl">0.236</span>          <span class="fl">0.114</span></span>
-<span id="cb37-21"><a href="sl3.html#cb37-21"></a> [<span class="dv">8</span>,]                                   <span class="fl">0.000</span>          <span class="fl">0.196</span></span>
-<span id="cb37-22"><a href="sl3.html#cb37-22"></a> [<span class="dv">9</span>,]                                   <span class="fl">0.103</span>          <span class="fl">0.106</span></span>
-<span id="cb37-23"><a href="sl3.html#cb37-23"></a>[<span class="dv">10</span>,]                                   <span class="fl">0.185</span>          <span class="fl">0.000</span></span>
-<span id="cb37-24"><a href="sl3.html#cb37-24"></a>      Lrnr_earth_<span class="dv">2</span>_<span class="dv">3</span>_backward_<span class="dv">0</span>_<span class="dv">1</span>_<span class="dv">0</span>_<span class="dv">0</span> <span class="kw">Lrnr_hal9001_2_1_c</span>(<span class="dv">3</span>, <span class="dv">2</span>)_<span class="dv">5</span></span>
-<span id="cb37-25"><a href="sl3.html#cb37-25"></a> [<span class="dv">1</span>,]                           <span class="fl">0.253</span>                      <span class="fl">0.000</span></span>
-<span id="cb37-26"><a href="sl3.html#cb37-26"></a> [<span class="dv">2</span>,]                           <span class="fl">0.000</span>                      <span class="fl">0.071</span></span>
-<span id="cb37-27"><a href="sl3.html#cb37-27"></a> [<span class="dv">3</span>,]                           <span class="fl">0.175</span>                      <span class="fl">0.147</span></span>
-<span id="cb37-28"><a href="sl3.html#cb37-28"></a> [<span class="dv">4</span>,]                           <span class="fl">0.111</span>                      <span class="fl">0.020</span></span>
-<span id="cb37-29"><a href="sl3.html#cb37-29"></a> [<span class="dv">5</span>,]                           <span class="fl">0.315</span>                      <span class="fl">0.000</span></span>
-<span id="cb37-30"><a href="sl3.html#cb37-30"></a> [<span class="dv">6</span>,]                           <span class="fl">0.351</span>                      <span class="fl">0.000</span></span>
-<span id="cb37-31"><a href="sl3.html#cb37-31"></a> [<span class="dv">7</span>,]                           <span class="fl">0.084</span>                      <span class="fl">0.139</span></span>
-<span id="cb37-32"><a href="sl3.html#cb37-32"></a> [<span class="dv">8</span>,]                           <span class="fl">0.029</span>                      <span class="fl">0.207</span></span>
-<span id="cb37-33"><a href="sl3.html#cb37-33"></a> [<span class="dv">9</span>,]                           <span class="fl">0.129</span>                      <span class="fl">0.000</span></span>
-<span id="cb37-34"><a href="sl3.html#cb37-34"></a>[<span class="dv">10</span>,]                           <span class="fl">0.154</span>                      <span class="fl">0.000</span></span>
-<span id="cb37-35"><a href="sl3.html#cb37-35"></a>      Lrnr_ranger_<span class="dv">500</span>_TRUE_none_<span class="dv">1</span> Lrnr_xgboost_<span class="dv">20</span>_<span class="dv">1</span> Lrnr_gam_NULL_NULL_GCV.Cp</span>
-<span id="cb37-36"><a href="sl3.html#cb37-36"></a> [<span class="dv">1</span>,]                       <span class="fl">0.456</span>             <span class="fl">0.000</span>                     <span class="fl">0.000</span></span>
-<span id="cb37-37"><a href="sl3.html#cb37-37"></a> [<span class="dv">2</span>,]                       <span class="fl">0.473</span>             <span class="fl">0.038</span>                     <span class="fl">0.000</span></span>
-<span id="cb37-38"><a href="sl3.html#cb37-38"></a> [<span class="dv">3</span>,]                       <span class="fl">0.415</span>             <span class="fl">0.000</span>                     <span class="fl">0.154</span></span>
-<span id="cb37-39"><a href="sl3.html#cb37-39"></a> [<span class="dv">4</span>,]                       <span class="fl">0.360</span>             <span class="fl">0.000</span>                     <span class="fl">0.000</span></span>
-<span id="cb37-40"><a href="sl3.html#cb37-40"></a> [<span class="dv">5</span>,]                       <span class="fl">0.318</span>             <span class="fl">0.000</span>                     <span class="fl">0.017</span></span>
-<span id="cb37-41"><a href="sl3.html#cb37-41"></a> [<span class="dv">6</span>,]                       <span class="fl">0.267</span>             <span class="fl">0.000</span>                     <span class="fl">0.000</span></span>
-<span id="cb37-42"><a href="sl3.html#cb37-42"></a> [<span class="dv">7</span>,]                       <span class="fl">0.406</span>             <span class="fl">0.000</span>                     <span class="fl">0.020</span></span>
-<span id="cb37-43"><a href="sl3.html#cb37-43"></a> [<span class="dv">8</span>,]                       <span class="fl">0.372</span>             <span class="fl">0.000</span>                     <span class="fl">0.000</span></span>
-<span id="cb37-44"><a href="sl3.html#cb37-44"></a> [<span class="dv">9</span>,]                       <span class="fl">0.548</span>             <span class="fl">0.000</span>                     <span class="fl">0.000</span></span>
-<span id="cb37-45"><a href="sl3.html#cb37-45"></a>[<span class="dv">10</span>,]                       <span class="fl">0.661</span>             <span class="fl">0.000</span>                     <span class="fl">0.000</span></span>
-<span id="cb37-46"><a href="sl3.html#cb37-46"></a>      Lrnr_bayesglm_TRUE</span>
-<span id="cb37-47"><a href="sl3.html#cb37-47"></a> [<span class="dv">1</span>,]                  <span class="dv">0</span></span>
-<span id="cb37-48"><a href="sl3.html#cb37-48"></a> [<span class="dv">2</span>,]                  <span class="dv">0</span></span>
-<span id="cb37-49"><a href="sl3.html#cb37-49"></a> [<span class="dv">3</span>,]                  <span class="dv">0</span></span>
-<span id="cb37-50"><a href="sl3.html#cb37-50"></a> [<span class="dv">4</span>,]                  <span class="dv">0</span></span>
-<span id="cb37-51"><a href="sl3.html#cb37-51"></a> [<span class="dv">5</span>,]                  <span class="dv">0</span></span>
-<span id="cb37-52"><a href="sl3.html#cb37-52"></a> [<span class="dv">6</span>,]                  <span class="dv">0</span></span>
-<span id="cb37-53"><a href="sl3.html#cb37-53"></a> [<span class="dv">7</span>,]                  <span class="dv">0</span></span>
-<span id="cb37-54"><a href="sl3.html#cb37-54"></a> [<span class="dv">8</span>,]                  <span class="dv">0</span></span>
-<span id="cb37-55"><a href="sl3.html#cb37-55"></a> [<span class="dv">9</span>,]                  <span class="dv">0</span></span>
-<span id="cb37-56"><a href="sl3.html#cb37-56"></a>[<span class="dv">10</span>,]                  <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cv_sl_fit</span><span class="op">$</span><span class="va">coef</span>, <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+fold
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_glm_TRUE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_mean
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_glmnet_NULL_deviance_10_0_100_TRUE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_glmnet_NULL_deviance_10_1_100_TRUE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_polspline
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_earth_2_3_backward_0_1_0_0
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_hal9001_2_1_c(3, 2)_5
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_ranger_500_TRUE_none_1
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_xgboost_20_1
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_gam_NULL_NULL_GCV.Cp
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Lrnr_bayesglm_TRUE
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.047
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.243
+</td>
+<td style="text-align:right;">
+0.253
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.456
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.257
+</td>
+<td style="text-align:right;">
+0.161
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.071
+</td>
+<td style="text-align:right;">
+0.473
+</td>
+<td style="text-align:right;">
+0.038
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.030
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.079
+</td>
+<td style="text-align:right;">
+0.175
+</td>
+<td style="text-align:right;">
+0.147
+</td>
+<td style="text-align:right;">
+0.415
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.154
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.050
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.459
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.111
+</td>
+<td style="text-align:right;">
+0.020
+</td>
+<td style="text-align:right;">
+0.360
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.075
+</td>
+<td style="text-align:right;">
+0.275
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.315
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.318
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.017
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.025
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.248
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.110
+</td>
+<td style="text-align:right;">
+0.351
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.267
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.236
+</td>
+<td style="text-align:right;">
+0.114
+</td>
+<td style="text-align:right;">
+0.084
+</td>
+<td style="text-align:right;">
+0.139
+</td>
+<td style="text-align:right;">
+0.406
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.020
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0.189
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.007
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.196
+</td>
+<td style="text-align:right;">
+0.029
+</td>
+<td style="text-align:right;">
+0.207
+</td>
+<td style="text-align:right;">
+0.372
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0.113
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.103
+</td>
+<td style="text-align:right;">
+0.106
+</td>
+<td style="text-align:right;">
+0.129
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.548
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.185
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.154
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.661
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
 </div>
 <div id="revere-cross-validated-predictive-performance-of-super-learner" class="section level4">
 <h4>
@@ -2144,6 +2501,155 @@ like NNLS. We can output the revere-based CV risk estimate by setting
 <span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cv_risk_w_sl_revere</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+learner
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+coefficients
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+MSE
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Lrnr_glm_TRUE
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+1.0224
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_mean
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+1.0654
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_glmnet_NULL_deviance_10_0_100_TRUE
+</td>
+<td style="text-align:right;">
+0.09566
+</td>
+<td style="text-align:right;">
+1.0168
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_glmnet_NULL_deviance_10_1_100_TRUE
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+1.0148
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_polspline
+</td>
+<td style="text-align:right;">
+0.16780
+</td>
+<td style="text-align:right;">
+1.0163
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_earth_2_3_backward_0_1_0_0
+</td>
+<td style="text-align:right;">
+0.39929
+</td>
+<td style="text-align:right;">
+1.0131
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_hal9001_2_1_c(3, 2)_5
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+1.0176
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_ranger_500_TRUE_none_1
+</td>
+<td style="text-align:right;">
+0.33725
+</td>
+<td style="text-align:right;">
+1.0141
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_xgboost_20_1
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+1.0793
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_gam_NULL_NULL_GCV.Cp
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+1.0235
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lrnr_bayesglm_TRUE
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+1.0224
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SuperLearner
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0033
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
 <div id="revere-cross-validated-predictive-performance-of-super-learner-by-hand" class="section level5 unnumbered">
 <h5>Revere-cross-validated predictive performance of Super Learner by hand<a class="anchor" aria-label="anchor" href="#revere-cross-validated-predictive-performance-of-super-learner-by-hand"><i class="fas fa-link"></i></a>
 </h5>
@@ -2201,8 +2707,8 @@ SL.</p>
 <span id="cb40-48"><a href="sl3.html#cb40-48"></a></span>
 <span id="cb40-49"><a href="sl3.html#cb40-49"></a><span class="co"># check that our calculation by hand equals what is output in cv_risk_table_revere</span></span>
 <span id="cb40-50"><a href="sl3.html#cb40-50"></a>sl_revere_risk &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(cv_risk_w_sl_revere[learner<span class="op">==</span><span class="st">"SuperLearner"</span>,<span class="st">"MSE"</span>])</span>
-<span id="cb40-51"><a href="sl3.html#cb40-51"></a><span class="kw">identical</span>(sl_revere_risk, sl_revere_risk_byhand)</span>
-<span id="cb40-52"><a href="sl3.html#cb40-52"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span></span></code></pre></div>
+<span id="cb40-51"><a href="sl3.html#cb40-51"></a>sl_revere_risk</span>
+<span id="cb40-52"><a href="sl3.html#cb40-52"></a>[<span class="dv">1</span>] <span class="fl">1.0033</span></span></code></pre></div>
 <p>The reason why this is not a fully cross-validated risk estimate is because the
 <code>cv_meta_fit</code> object above (which is the trained meta-learner), was previously
 fit to the <em>entire</em> matrix of CV predictions from <em>every</em> fold (i.e., the
@@ -2219,7 +2725,7 @@ the CV risk estimate of the SL and it can thought of as a ballpark lower bound
 on it. This idea holds in our example; that is, with the simple NNLS
 meta-learner the revere risk estimate of the SL (1.0033)
 is very close to, and slightly lower than, the CV risk estimate for the SL
-(0.0234).</p>
+(1.0067).</p>
 </div>
 </div>
 </div>
@@ -2434,7 +2940,7 @@ meta-learner. Therefore, the eSL is defined by a combination of multiple
 candidates; its predictions are defined by a combination of multiple candidates’
 predictions.” In the following, we show how to include the eSL, and multiple
 eSLs, as candidates in the dSL.</p>
-<p>Recall the object, <code>sl</code> defined in section 3.2:</p>
+<p>Recall the SL object, <code>sl</code>, defined in section 3.2:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># in the section 3.2 we defined Lrnr_sl as</span>
 <span class="co"># sl &lt;- Lrnr_sl$new(learners = stack, metalearner = Lrnr_nnls$new())</span></code></pre></div>
@@ -2496,7 +3002,7 @@ meta-learner, using <code>lrn_lasso</code> which was instantiated in section 2;<
 multivariate adaptive regression splines (earth) meta-learner, using
 <code>lrn_earth</code> which was instantiated in section 2;</li>
 <li>an eSL that considered the same candidate learners as (1) and a
-ranger meta-learner, using <code>lrn_ranger</code> which was instantiated in section 2;</li>
+ranger meta-learner, using <code>lrn_ranger</code> which was instantiated in section 2; and</li>
 <li>an eSL that considered the same candidate learners as (1) and a
 HAL meta-learner, using <code>lrn_hal</code> which was instantiated in section 2.</li>
 </ol>
@@ -2513,7 +3019,8 @@ to speed up the run time.</p>
 <span class="header-section-number">3.3.4</span> Parallel Processing<a class="anchor" aria-label="anchor" href="#parallel-processing"><i class="fas fa-link"></i></a>
 </h3>
 <p>It’s straightforward to take advantage of <code>sl3</code>’s built-in parallel processing
-support, which draws on the <a href="https://cran.r-project.org/web/packages/future/index.html"><code>future</code> R package</a>, which
+support, which draws on the <a href="https://cran.r-project.org/web/packages/future/index.html"><code>future</code> R
+package</a>, which
 provides a lightweight, unified Future API for sequential and parallel
 processing of R expressions via futures. From the <code>future</code> package
 documentation: “This package implements sequential, multicore, multisession, and cluster futures. With these, R expressions can be evaluated on the local
@@ -2544,7 +3051,7 @@ below.</p>
 <span id="cb52-15"><a href="sl3.html#cb52-15"></a>runtime_sl_fit_parallel &lt;-<span class="st"> </span><span class="kw">proc.time</span>() <span class="op">-</span><span class="st"> </span>start_time</span>
 <span id="cb52-16"><a href="sl3.html#cb52-16"></a>runtime_sl_fit_parallel</span>
 <span id="cb52-17"><a href="sl3.html#cb52-17"></a>   user  system elapsed </span>
-<span id="cb52-18"><a href="sl3.html#cb52-18"></a> <span class="fl">300.26</span>    <span class="fl">2.08</span>  <span class="fl">301.71</span> </span></code></pre></div>
+<span id="cb52-18"><a href="sl3.html#cb52-18"></a><span class="fl">232.868</span>   <span class="fl">1.603</span> <span class="fl">233.999</span> </span></code></pre></div>
 </div>
 <div id="default-data-pre-processing" class="section level3">
 <h3>
@@ -4591,6 +5098,8 @@ making the this Cardiovascular Health Study (CHS) data accessible.</p>
 <span class="op">)</span>
 <span class="va">chspred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">db_data</span>, col_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>Let’s take a quick peek at the data:</p>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">chspred</span><span class="op">)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -5199,8 +5708,6 @@ mi
 </tbody>
 </table></div>
 </div>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">chspred</span><span class="op">)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Create an <code>sl3</code> task, setting myocardial infarction <code>mi</code> as the outcome and
 using all available covariate data.</li>
