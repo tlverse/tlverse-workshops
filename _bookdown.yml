@@ -14,14 +14,16 @@ language:
 
 rmd_files: [
   "index.Rmd",
-  "01-motivation.Rmd",
-  "02-intro-tlverse.Rmd",
-  "03-intro-roadmap.Rmd",
-  "04-sl3.Rmd",
-  "05-tmle3.Rmd",
-  "06-tmle3mopttx.Rmd",
-  "07-tmle3shift.Rmd",
-  "08-tmle3mediate.Rmd",
-  "99-primer_R6.Rmd",
+  "01-introduction.Rmd",
+  "02-preliminaries.Rmd",
+  "03-intro-tlverse.Rmd",
+  "04-intro-roadmap.Rmd",
+  "05-data.Rmd",
+  "06-origami.Rmd",
+  "07-sl3.Rmd",
+  "08-tmle3.Rmd",
+  "09-tmle3mopttx.Rmd",
+  "10-tmle3shift.Rmd",
+  "11-tmle3mediate.Rmd",
   "references.Rmd"
 ]
