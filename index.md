@@ -4,7 +4,7 @@ title: "[Workshop] Targeted Learning in the `tlverse`"
 subtitle: "Causal Inference Meets Machine Learning"
 author: "Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana
   Malenica, Rachael Phillips"
-date: "updated: June 08, 2022"
+date: "updated: March 01, 2023"
 documentclass: book
 site: bookdown::bookdown_site
 bibliography: [book.bib, packages.bib]
@@ -26,7 +26,7 @@ description: "Open source, reproducible teaching materials accompanying a
 
 # Welcome! {-}
 
-This open source, reproducible vignette is for a half-day workshop on the
+This open source, reproducible vignette is for a workshop on the
 Targeted Learning framework for statistical and causal inference with machine
 learning.  Beyond introducing Targeted Learning, the workshop focuses on
 applying the methodology in practice using the [`tlverse` software
@@ -187,137 +187,11 @@ network) and adaptive sequential designs.
 
 Rachael Phillips is a PhD student in biostatistics, advised by Alan Hubbard and
 Mark van der Laan. She has an MA in Biostatistics, BS in Biology, and BA in
-Mathematics. As a student of targeted learning, Rachael integrates causal 
-inference, machine learning, and statistical theory to answer causal questions 
-with statistical confidence. She is motivated by issues arising in healthcare, 
-and is especially interested in clinical algorithm frameworks and guidelines. 
-
-## Reproduciblity with the `tlverse` {#repro}
-
-The `tlverse` software ecosystem is a growing collection of packages, several of
-which are quite early on in the software lifecycle. The team does its best to
-maintain backwards compatibility. Once this work reaches completion, the
-specific versions of the `tlverse` packages used will be archived and tagged to
-produce it.
-
-This book was written using [bookdown](http://bookdown.org/), and the complete
-source is available on [GitHub](https://github.com/tlverse/tlverse-handbook).
-This version of the book was built with R version 4.2.0 (2022-04-22),
-[pandoc](https://pandoc.org/) version 2.7.3, and the
-following packages:
-
-
-|package      |version    |source                                                                  |
-|:------------|:----------|:-----------------------------------------------------------------------|
-|bookdown     |0.26.3     |Github (rstudio/bookdown\@169c43b6bb95213f2af63a95acd4e977a58a3e1f)     |
-|bslib        |0.3.1.9000 |Github (rstudio/bslib\@a4946a49499438e71dce29c810a41e2d05170376)        |
-|data.table   |1.14.2     |CRAN (R 4.2.0)                                                          |
-|delayed      |0.3.0      |CRAN (R 4.2.0)                                                          |
-|devtools     |2.4.3      |CRAN (R 4.2.0)                                                          |
-|downlit      |0.4.0      |CRAN (R 4.2.0)                                                          |
-|dplyr        |1.0.9      |CRAN (R 4.2.0)                                                          |
-|ggplot2      |3.3.6      |CRAN (R 4.2.0)                                                          |
-|here         |1.0.1      |CRAN (R 4.2.0)                                                          |
-|kableExtra   |1.3.4      |CRAN (R 4.2.0)                                                          |
-|knitr        |1.39       |CRAN (R 4.2.0)                                                          |
-|mvtnorm      |1.1-3      |CRAN (R 4.2.0)                                                          |
-|origami      |1.0.5      |Github (tlverse/origami\@e1b8fe6f5e75fff1d48eed115bb81475c9bd506e)      |
-|readr        |2.1.2      |CRAN (R 4.2.0)                                                          |
-|rmarkdown    |2.14       |CRAN (R 4.2.0)                                                          |
-|skimr        |2.1.4      |CRAN (R 4.2.0)                                                          |
-|sl3          |1.4.5      |Github (tlverse/sl3\@de445c210eefa5aa9dd4c0d1fab8126f0d7c5eeb)          |
-|stringr      |1.4.0      |CRAN (R 4.2.0)                                                          |
-|tibble       |3.1.7      |CRAN (R 4.2.0)                                                          |
-|tidyr        |1.2.0      |CRAN (R 4.2.0)                                                          |
-|tidyverse    |1.3.1      |CRAN (R 4.2.0)                                                          |
-|tmle3        |0.2.0      |Github (tlverse/tmle3\@ed72f8a20e64c914ab25ffe015d865f7a9963d27)        |
-|tmle3mediate |0.0.3      |Github (tlverse/tmle3mediate\@70d1151c4adb54d044f355d06d07bcaeb7f8ae07) |
-|tmle3mopttx  |1.0.0      |Github (tlverse/tmle3mopttx\@c8c675f051bc5ee6d51fa535fe6dc80791d4d1b7)  |
-|tmle3shift   |0.2.0      |Github (tlverse/tmle3shift\@4ed52b50af501a5fa2e6257b568d17fd485d3f42)   |
-
-## Setup instructions {#setup}
-
-### R and RStudio
-
-**R** and **RStudio** are separate downloads and installations. R is the
-underlying statistical computing environment. RStudio is a graphical integrated
-development environment (IDE) that makes using R much easier and more
-interactive. You need to install R before you install RStudio.
-
-#### Windows
-
-##### If you already have R and RStudio installed
-
-* Open RStudio, and click on "Help" > "Check for updates". If a new version is
-  available, quit RStudio, and download the latest version for RStudio.
-* To check which version of R you are using, start RStudio and the first thing
-  that appears in the console indicates the version of R you are
-  running. Alternatively, you can type `sessionInfo()`, which will also display
-  which version of R you are running. Go on the [CRAN
-  website](https://cran.r-project.org/bin/windows/base/) and check whether a
-  more recent version is available. If so, please download and install it. You
-  can [check here](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f)
-  for more information on how to remove old versions from your system if you
-  wish to do so.
-
-##### If you don't have R and RStudio installed
-
-* Download R from
-  the [CRAN website](http://cran.r-project.org/bin/windows/base/release.htm).
-* Run the `.exe` file that was just downloaded
-* Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
-* Under *Installers* select **RStudio x.yy.zzz - Windows
-  XP/Vista/7/8** (where x, y, and z represent version numbers)
-* Double click the file to install it
-* Once it's installed, open RStudio to make sure it works and you don't get any
-  error messages.
-
-#### macOS / Mac OS X
-
-##### If you already have R and RStudio installed
-
-* Open RStudio, and click on "Help" > "Check for updates". If a new version is
-  available, quit RStudio, and download the latest version for RStudio.
-* To check the version of R you are using, start RStudio and the first thing
-  that appears on the terminal indicates the version of R you are running.
-  Alternatively, you can type `sessionInfo()`, which will also display which
-  version of R you are running. Go on the [CRAN
-  website](https://cran.r-project.org/bin/macosx/) and check whether a more
-  recent version is available. If so, please download and install it.
-
-##### If you don't have R and RStudio installed
-
-* Download R from
-  the [CRAN website](http://cran.r-project.org/bin/macosx).
-* Select the `.pkg` file for the latest R version
-* Double click on the downloaded file to install R
-* It is also a good idea to install [XQuartz](https://www.xquartz.org/) (needed
-  by some packages)
-* Go to the [RStudio download
-  page](https://www.rstudio.com/products/rstudio/download/#download)
-* Under *Installers* select **RStudio x.yy.zzz - Mac OS X 10.6+ (64-bit)**
-  (where x, y, and z represent version numbers)
-* Double click the file to install RStudio
-* Once it's installed, open RStudio to make sure it works and you don't get any
-  error messages.
-
-#### Linux
-
-* Follow the instructions for your distribution
-  from [CRAN](https://cloud.r-project.org/bin/linux), they provide information
-  to get the most recent version of R for common distributions. For most
-  distributions, you could use your package manager (e.g., for Debian/Ubuntu run
-  `sudo apt-get install r-base`, and for Fedora `sudo yum install R`), but we
-  don't recommend this approach as the versions provided by this are
-  usually out of date. In any case, make sure you have at least R 3.3.1.
-* Go to the [RStudio download
-  page](https://www.rstudio.com/products/rstudio/download/#download)
-* Under *Installers* select the version that matches your distribution, and
-  install it with your preferred method (e.g., with Debian/Ubuntu `sudo dpkg -i
-  rstudio-x.yy.zzz-amd64.deb` at the terminal).
-* Once it's installed, open RStudio to make sure it works and you don't get any
-  error messages.
-
-These setup instructions are adapted from those written for [Data Carpentry: R
-for Data Analysis and Visualization of Ecological
-Data](http://www.datacarpentry.org/R-ecology-lesson/).
+Mathematics. Her research integrates causal inference, machine learning, and 
+nonparametric statistics to realistically approximate answers to causal questions 
+with statistical confidence. Motivated by issues arising in healthcare, the 
+projects she's pursued include the development of (i) clinical algorithm frameworks 
+and guidelines; (ii) real-world data analysis methodologies for generating and 
+evaluating real-world evidence; (iii) open-source software, including key contributions to 
+`sl3`, `origami` and `hal9001` packages; and (iv) biostatistics graduate-level 
+courses and other educational material for targeted learning and causal inference.

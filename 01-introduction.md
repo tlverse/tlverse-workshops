@@ -1,4 +1,4 @@
-# Motivation {-}
+# Introduction {-}
 
 > "One enemy of robust science is our humanity — our appetite for
 > being right, and our tendency to find patterns in noise, to see supporting
@@ -84,30 +84,34 @@ completely reproducible, and estimators are efficient, minimally biased, and
 provide formal statistical inference.
 
 Just as the conscientious use of modern statistical methodology is necessary to
-ensure that scientific practice thrives, it remains critical to acknowledge the
-role that robust software plays in allowing practitioners direct access to
-published results. We recall that "an article...in a scientific publication is
-not the scholarship itself, it is merely advertising of the scholarship. The
-actual scholarship is the complete software development environment and the
-complete set of instructions which generated the figures," thus making the
-availability and adoption of robust statistical software key to enhancing the
-transparency that is an inherent aspect of science [@buckheit1995wavelab].
+ensure that scientific practice thrives --- robust, well-tested software plays a
+critical role in allowing practitioners to access the published results of a
+given scientific investigation. We concur with the view put forth by
+@buckheit1995wavelab that "an article... in a scientific publication is not the
+scholarship itself, it is merely advertising of the scholarship. The actual
+scholarship is the complete software development environment and the complete
+set of instructions which generated the figures," making the availability and
+adoption of robust statistical software key to enhancing the transparency that
+is an inherent (and assumed) aspect of the scientific process.
 
 For a statistical methodology to be readily accessible in practice, it is
-crucial that it is accompanied by robust user-friendly software
+crucial that it is accompanied by user-friendly software
 [@pullenayegum2016knowledge; @stromberg2004write]. The `tlverse` software
-ecosystem was developed to fulfill this need for the Targeted Learning
-methodology. Not only does this software facilitate computationally reproducible
-and efficient analyses, it is also a tool for Targeted Learning education since
-its workflow mirrors that of the methodology. In particular, the `tlverse`
-paradigm does not focus on implementing a specific estimator or a small set of
-related estimators. Instead, the focus is on exposing the statistical framework
-of Targeted Learning itself --- all `R` packages in the `tlverse` ecosystem
-directly model the key objects defined in the mathematical and theoretical
-framework of Targeted Learning. What's more, the `tlverse` `R` packages share a
-core set of design principles centered on extensibility, allowing for them to be
-used in conjunction with each other and built upon one other in a cohesive
-fashion.
+ecosystem, composed of a set of packages for the `R` language and environment for
+statistical computing [@R], was developed to fulfill this need for the TL
+methodological framework. Not only does this suite of software tools
+facilitate computationally reproducible and efficient analyses, it is also a
+tool for TL education. Rather than focusing on implementing a specific estimator
+or a small set of related estimators, the design paradigm of the `tlverse`
+ecosystem focuses on exposing the statistical framework of Targeted Learning
+itself: all software packages in the `tlverse` ecosystem directly model the key
+objects defined in the mathematical and theoretical framework of Targeted
+Learning. What's more, the `tlverse` software packages share a core set of
+design principles centered on extensibility, allowing for them to be used in
+conjunction with each other and used cohesively as building blocks for
+formulating sophisticated statistical analyses. For an introduction to the TL
+framework, we recommend @coyle2021targeted's [recent review
+paper](https://arxiv.org/abs/2006.07333).
 
 In this workshop, the reader will embark on a journey through the `tlverse`
 ecosystem. Guided by `R` programming exercises, case studies, and
@@ -121,19 +125,3 @@ hypothesis tests, and regression. Advanced knowledge of mathematical statistics
 may be useful but is not necessary. Familiarity with the `R` programming
 language will be essential. We also recommend an understanding of introductory
 causal inference.
-
-For introductory materials for learning the `R` programming language we recommend the following free resources:
-
-* [Software Carpentry's _Programming with
-   `R`_](http://swcarpentry.github.io/r-novice-inflammation/)
-* [Software Carpentry's _`R` for Reproducible Scientific
-    Analysis_](http://swcarpentry.github.io/r-novice-gapminder/)
-* [Grolemund and Wickham's _`R` for Data
-    Science_](https://r4ds.had.co.nz)
-
-For causal inference learning materials we recommend the following resources:
-
-* [Hernán MA, Robins JM (2019). _Causal
-Inference_.](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)
-* [Jason A. Roy's coursera Course _A Crash Course in Causality: Inferring
-Causal Effects from Observational Data_](https://www.coursera.org/learn/crash-course-in-causality)

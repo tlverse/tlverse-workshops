@@ -97,7 +97,7 @@ available knowledge about the data-generating experiment should be incorporated
 into this model -- for example, if the data from a randomized controlled trial
 (RCT), the form of $f_A$ may be known. The SCM corresponds to the following DAG:
 
-<img src="08-tmle3mediate_files/figure-html/mediation-DAG-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="11-tmle3mediate_files/figure-html/mediation-DAG-1.png" width="60%" style="display: block; margin: auto;" />
 
 By factorizing the likelihood of the data $O$, we can express $p_0$, the
 density of $O$ with respect to the product measure, when evaluated on a
@@ -572,15 +572,15 @@ washb_NIE <- tmle3(
 )
 washb_NIE
 A tmle3_Fit that took 1 step(s)
-   type                  param  init_est  tmle_est       se     lower    upper
-1:  NIE NIE[Y_{A=1} - Y_{A=0}] 0.0024187 0.0033757 0.043421 -0.081727 0.088478
+   type                  param  init_est  tmle_est       se     lower   upper
+1:  NIE NIE[Y_{A=1} - Y_{A=0}] 0.0028004 0.0025696 0.043348 -0.082391 0.08753
    psi_transformed lower_transformed upper_transformed
-1:       0.0033757         -0.081727          0.088478
+1:       0.0025696         -0.082391           0.08753
 ```
 
 Based on the output, we conclude that the indirect effect of the treatment
 through the mediators (sex, month, aged) is
-0.00338.
+0.00257.
 
 ### Targeted Estimation of the Natural Direct Effect
 
@@ -601,18 +601,18 @@ washb_NDE <- tmle3(
 washb_NDE
 A tmle3_Fit that took 1 step(s)
    type                  param init_est tmle_est       se    lower   upper
-1:  NDE NDE[Y_{A=1} - Y_{A=0}] 0.014245 0.014245 0.085702 -0.15373 0.18222
+1:  NDE NDE[Y_{A=1} - Y_{A=0}] 0.017372 0.017372 0.085848 -0.15089 0.18563
    psi_transformed lower_transformed upper_transformed
-1:        0.014245          -0.15373           0.18222
+1:        0.017372          -0.15089           0.18563
 ```
 
 From this, we can draw the conclusion that the direct effect of the treatment
 (through all paths not involving the mediators (sex, month, aged)) is
-0.01424. Note that, together, the estimates of
+0.01737. Note that, together, the estimates of
 the natural direct and indirect effects approximately recover the _average
 treatment effect_, that is, based on these estimates of the NDE and NIE, the
 ATE is roughly
-0.01762.
+0.01994.
 
 ### Targeted Estimation of the Population Intervention Direct Effect
 

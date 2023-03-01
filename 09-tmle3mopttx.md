@@ -1,3 +1,5 @@
+# (PART) Part 4: Advanced Topics {-}
+
 # Optimal Individualized Treatment Regimes
 
 _Ivana Malenica_
@@ -5,7 +7,7 @@ _Ivana Malenica_
 Based on the [`tmle3mopttx` `R` package](https://github.com/tlverse/tmle3mopttx)
 by _Ivana Malenica, Jeremy Coyle, and Mark van der Laan_.
 
-Updated: 2022-06-08
+Updated: 2023-03-01
 
 ## Learning Objectives
 By the end of this lesson you will be able to:
