@@ -18,28 +18,26 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       #- name: Setup upterm session
         #uses: lhotari/action-upterm@v1
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: ${{ matrix.config.r }}
 
       - name: Install pandoc
-        uses: r-lib/actions/setup-pandoc@v1
+        uses: r-lib/actions/setup-pandoc@v2
 
       - name: Install tinyTeX
-        uses: r-lib/actions/setup-tinytex@v1
+        uses: r-lib/actions/setup-tinytex@v2
 
       - name: Install system dependencies
         run: |
           sudo apt install -y curl libcurl4-doc libcurl4-openssl-dev libmagick++-dev libpoppler-cpp-dev texlive-extra-utils ghostscript
 
       - name: Cache R packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ env.RENV_PATHS_ROOT }}
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
@@ -53,7 +51,7 @@ jobs:
           renv::restore()
 
       - name: Cache bookdown results
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _bookdown_files
           key: bookdown-2-${{ hashFiles('**/*Rmd') }}
@@ -68,7 +66,7 @@ jobs:
         #run: |
           #Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v3
         with:
           name: _book
           path: _book/
@@ -82,10 +80,10 @@ jobs:
     needs: bookdown
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Download Artifact
-        uses: actions/download-artifact@v1.0.0
+        uses: actions/download-artifact@v3
         with:
           # Artifact name
           name: _book                      # optional
