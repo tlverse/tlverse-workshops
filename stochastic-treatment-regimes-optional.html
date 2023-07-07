@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse</title>
+<title>Chapter 7 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
-<meta name="description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-07  6.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
+<meta name="description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-07  7.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
 <meta name="generator" content="bookdown 0.34.2 with bs4_book()">
-<meta property="og:title" content="Chapter 6 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse">
+<meta property="og:title" content="Chapter 7 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://tlverse.org/tlverse-workshops/stochastic-treatment-regimes-optional.html">
-<meta property="og:description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-07  6.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
+<meta property="og:description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-07  7.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse">
-<meta name="twitter:description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-07  6.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
+<meta name="twitter:title" content="Chapter 7 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse">
+<meta name="twitter:description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-07  7.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0.9000/transition.js"></script><script src="libs/bs3compat-0.5.0.9000/tabs.js"></script><script src="libs/bs3compat-0.5.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -86,21 +86,21 @@
 <li><a class="" href="introduction.html">Introduction</a></li>
 <li class="book-part">Part 1: Preliminaries</li>
 <li><a class="" href="setting-up-r-and-rstudio.html">Setting up R and RStudio</a></li>
-<li><a class="" href="install-tlverse-software-installtlverse.html">Install tlverse software {#installtlverse}</a></li>
+<li><a class="" href="installtlverse.html"><span class="header-section-number">1</span> Install tlverse software</a></li>
 <li><a class="" href="supplemental-learning-resources.html">Supplemental learning resources</a></li>
 <li class="book-part">Part 2: The tlverse</li>
 <li><a class="" href="what-is-the-tlverse.html">What is the tlverse?</a></li>
 <li><a class="" href="primer-on-the-r6-class-system.html">Primer on the R6 Class System</a></li>
 <li class="book-part">Part 3: Foundations</li>
-<li><a class="" href="intro.html"><span class="header-section-number">1</span> The Roadmap for Targeted Learning</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">2</span> The Roadmap for Targeted Learning</a></li>
 <li><a class="" href="example-dataset.html">Example Dataset</a></li>
-<li><a class="" href="origami.html"><span class="header-section-number">2</span> Cross-validation</a></li>
-<li><a class="" href="sl3.html"><span class="header-section-number">3</span> Super Learning</a></li>
-<li><a class="" href="tmle3.html"><span class="header-section-number">4</span> The TMLE Framework</a></li>
+<li><a class="" href="origami.html"><span class="header-section-number">3</span> Cross-validation</a></li>
+<li><a class="" href="sl3.html"><span class="header-section-number">4</span> Super Learning</a></li>
+<li><a class="" href="tmle3.html"><span class="header-section-number">5</span> The TMLE Framework</a></li>
 <li class="book-part">Part 4: Advanced Topics</li>
-<li><a class="" href="optimal-individualized-treatment-regimes.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes</a></li>
-<li><a class="active" href="stochastic-treatment-regimes-optional.html"><span class="header-section-number">6</span> Stochastic Treatment Regimes (optional)</a></li>
-<li><a class="" href="causal-mediation-analysis.html"><span class="header-section-number">7</span> Causal Mediation Analysis</a></li>
+<li><a class="" href="optimal-individualized-treatment-regimes.html"><span class="header-section-number">6</span> Optimal Individualized Treatment Regimes</a></li>
+<li><a class="active" href="stochastic-treatment-regimes-optional.html"><span class="header-section-number">7</span> Stochastic Treatment Regimes (optional)</a></li>
+<li><a class="" href="causal-mediation-analysis.html"><span class="header-section-number">8</span> Causal Mediation Analysis</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -109,16 +109,16 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="stochastic-treatment-regimes-optional" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="stochastic-treatment-regimes-optional" class="section level1" number="7">
 <h1>
-<span class="header-section-number">6</span> Stochastic Treatment Regimes (optional)<a class="anchor" aria-label="anchor" href="#stochastic-treatment-regimes-optional"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Stochastic Treatment Regimes (optional)<a class="anchor" aria-label="anchor" href="#stochastic-treatment-regimes-optional"><i class="fas fa-link"></i></a>
 </h1>
 <p><em>Nima Hejazi</em></p>
 <p>Based on the <a href="https://github.com/tlverse/tmle3shift"><code>tmle3shift</code> <code>R</code> package</a>.</p>
 <p>Updated: 2023-07-07</p>
-<div id="learning-objectives-4" class="section level2" number="6.1">
+<div id="learning-objectives-4" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">6.1</span> Learning Objectives<a class="anchor" aria-label="anchor" href="#learning-objectives-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Learning Objectives<a class="anchor" aria-label="anchor" href="#learning-objectives-4"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>Differentiate stochastic treatment regimes from static, dynamic, and optimal
@@ -141,9 +141,9 @@ shifting each individual to a value that’s supported by the data.</li>
 package.</li>
 </ol>
 </div>
-<div id="introduction-5" class="section level2" number="6.2">
+<div id="introduction-5" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">6.2</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this section, we examine a simple example of stochastic treatment regimes in
 the context of a continuous treatment variable of interest, defining an
@@ -158,9 +158,9 @@ that shifts the natural value of the treatment based on a shifting function
 for variable importance measures, implement shift interventions at the
 individual level, and define novel shift intervention functions.</p>
 </div>
-<div id="stochastic-interventions" class="section level2" number="6.3">
+<div id="stochastic-interventions" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">6.3</span> Stochastic Interventions<a class="anchor" aria-label="anchor" href="#stochastic-interventions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Stochastic Interventions<a class="anchor" aria-label="anchor" href="#stochastic-interventions"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><p>Present a relatively simple yet extremely flexible manner by which <em>realistic</em>
@@ -191,9 +191,9 @@ interventions of this variety may be referred to as depending on the
 </ol>
 </li>
 </ul>
-<div id="identifying-the-causal-effect-of-a-stochastic-intervention" class="section level3" number="6.3.1">
+<div id="identifying-the-causal-effect-of-a-stochastic-intervention" class="section level3" number="7.3.1">
 <h3>
-<span class="header-section-number">6.3.1</span> Identifying the Causal Effect of a Stochastic Intervention<a class="anchor" aria-label="anchor" href="#identifying-the-causal-effect-of-a-stochastic-intervention"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.1</span> Identifying the Causal Effect of a Stochastic Intervention<a class="anchor" aria-label="anchor" href="#identifying-the-causal-effect-of-a-stochastic-intervention"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li><p>The stochastic intervention generates a counterfactual random variable
@@ -218,10 +218,10 @@ distribution of the observed data <span class="math inline">\(O\)</span>:
 of the causal parameter from the observed data via the statistical functional
 above. These were</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-1" class="definition"><strong>Definition 6.1  (Strong Ignorability) </strong></span><span class="math inline">\(A_i \perp \!\!\! \perp Y^{d(a_i, w_i)}_i \mid W_i\)</span>, for <span class="math inline">\(i = 1, \ldots, n\)</span>.</p>
+<p><span id="def:unlabeled-div-1" class="definition"><strong>Definition 7.1  (Strong Ignorability) </strong></span><span class="math inline">\(A_i \perp \!\!\! \perp Y^{d(a_i, w_i)}_i \mid W_i\)</span>, for <span class="math inline">\(i = 1, \ldots, n\)</span>.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-2" class="definition"><strong>Definition 6.2  (Treatment Positivity (or Overlap)) </strong></span><span class="math inline">\(a_i \in \mathcal{A} \implies d(a_i, w_i) \in \mathcal{A}\)</span> for all
+<p><span id="def:unlabeled-div-2" class="definition"><strong>Definition 7.2  (Treatment Positivity (or Overlap)) </strong></span><span class="math inline">\(a_i \in \mathcal{A} \implies d(a_i, w_i) \in \mathcal{A}\)</span> for all
 <span class="math inline">\(w \in \mathcal{W}\)</span>, where <span class="math inline">\(\mathcal{A}\)</span> denotes the support of
 <span class="math inline">\(A \mid W = w_i \quad \forall i = 1, \ldots n\)</span>.</p>
 </div>
@@ -246,21 +246,21 @@ in the case that the treatment is in the limits that arise from conditioning
 on <span class="math inline">\(W\)</span>, i.e., for <span class="math inline">\(A_i \in (u(w) - \delta, u(w))\)</span>.</p></li>
 </ul>
 </div>
-<div id="interpreting-the-causal-effect-of-a-stochastic-intervention" class="section level3" number="6.3.2">
+<div id="interpreting-the-causal-effect-of-a-stochastic-intervention" class="section level3" number="7.3.2">
 <h3>
-<span class="header-section-number">6.3.2</span> Interpreting the Causal Effect of a Stochastic Intervention<a class="anchor" aria-label="anchor" href="#interpreting-the-causal-effect-of-a-stochastic-intervention"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.2</span> Interpreting the Causal Effect of a Stochastic Intervention<a class="anchor" aria-label="anchor" href="#interpreting-the-causal-effect-of-a-stochastic-intervention"><i class="fas fa-link"></i></a>
 </h3>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="img/gif/shift_animation.gif" alt="Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention" width="80%"><p class="caption">
-FIGURE 2.1: Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention
+FIGURE 3.1: Animation of how a counterfactual outcome changes as the natural treatment distribution is subjected to a simple stochastic intervention
 </p>
 </div>
 </div>
 </div>
-<div id="estimating-the-causal-effect-of-a-stochastic-intervention-with-tmle3shift" class="section level2" number="6.4">
+<div id="estimating-the-causal-effect-of-a-stochastic-intervention-with-tmle3shift" class="section level2" number="7.4">
 <h2>
-<span class="header-section-number">6.4</span> Estimating the Causal Effect of a Stochastic Intervention with <code>tmle3shift</code><a class="anchor" aria-label="anchor" href="#estimating-the-causal-effect-of-a-stochastic-intervention-with-tmle3shift"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> Estimating the Causal Effect of a Stochastic Intervention with <code>tmle3shift</code><a class="anchor" aria-label="anchor" href="#estimating-the-causal-effect-of-a-stochastic-intervention-with-tmle3shift"><i class="fas fa-link"></i></a>
 </h2>
 <p>We use <code>tmle3shift</code> to construct a targeted maximum likelihood (TML) estimator of
 of a causal effect of a stochastic treatment regime that shifts the natural
@@ -358,9 +358,9 @@ estimator of our target parameter of interest:</p>
 <code class="sourceCode R"><span class="va">Q_learner</span> <span class="op">&lt;-</span> <span class="va">sl_regression_learner</span>
 <span class="va">g_learner</span> <span class="op">&lt;-</span> <span class="va">sl_density_learner</span>
 <span class="va">learner_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">Q_learner</span>, A <span class="op">=</span> <span class="va">g_learner</span><span class="op">)</span></code></pre></div>
-<div id="simulate-data-1" class="section level3" number="6.4.1">
+<div id="simulate-data-1" class="section level3" number="7.4.1">
 <h3>
-<span class="header-section-number">6.4.1</span> Simulate Data<a class="anchor" aria-label="anchor" href="#simulate-data-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.1</span> Simulate Data<a class="anchor" aria-label="anchor" href="#simulate-data-1"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="stochastic-treatment-regimes-optional.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate simple data for tmle-shift sketch</span></span>
 <span id="cb179-2"><a href="stochastic-treatment-regimes-optional.html#cb179-2" aria-hidden="true" tabindex="-1"></a>n_obs <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of observations</span></span>
@@ -420,9 +420,9 @@ if this criterion does not hold. We discuss this in greater detail in the
 sequel.
 -->
 </div>
-<div id="targeted-estimation-of-stochastic-interventions-effects" class="section level3" number="6.4.2">
+<div id="targeted-estimation-of-stochastic-interventions-effects" class="section level3" number="7.4.2">
 <h3>
-<span class="header-section-number">6.4.2</span> Targeted Estimation of Stochastic Interventions Effects<a class="anchor" aria-label="anchor" href="#targeted-estimation-of-stochastic-interventions-effects"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.2</span> Targeted Estimation of Stochastic Interventions Effects<a class="anchor" aria-label="anchor" href="#targeted-estimation-of-stochastic-interventions-effects"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="stochastic-treatment-regimes-optional.html#cb181-1" aria-hidden="true" tabindex="-1"></a>tmle_fit <span class="ot">&lt;-</span> <span class="fu">tmle3</span>(tmle_spec, data, node_list, learner_list)</span>
 <span id="cb181-2"><a href="stochastic-treatment-regimes-optional.html#cb181-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -439,9 +439,9 @@ sequel.
 results from computing our TML estimator.</p>
 </div>
 </div>
-<div id="stochastic-interventions-over-a-grid-of-counterfactual-shifts" class="section level2" number="6.5">
+<div id="stochastic-interventions-over-a-grid-of-counterfactual-shifts" class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">6.5</span> Stochastic Interventions over a Grid of Counterfactual Shifts<a class="anchor" aria-label="anchor" href="#stochastic-interventions-over-a-grid-of-counterfactual-shifts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Stochastic Interventions over a Grid of Counterfactual Shifts<a class="anchor" aria-label="anchor" href="#stochastic-interventions-over-a-grid-of-counterfactual-shifts"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><p>Consider an arbitrary scalar <span class="math inline">\(\delta\)</span> that defines a counterfactual outcome
@@ -476,9 +476,9 @@ density <span class="math inline">\(g_{A,0}(a \mid w)\)</span> (that is, <span c
 stochastic intervention policy does not apply to the given unit and they
 remain at their natural value of treatment <span class="math inline">\(a\)</span>.</p></li>
 </ul>
-<div id="initializing-vimshift-through-its-tmle3_spec" class="section level3" number="6.5.1">
+<div id="initializing-vimshift-through-its-tmle3_spec" class="section level3" number="7.5.1">
 <h3>
-<span class="header-section-number">6.5.1</span> Initializing <code>vimshift</code> through its <code>tmle3_Spec</code><a class="anchor" aria-label="anchor" href="#initializing-vimshift-through-its-tmle3_spec"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.1</span> Initializing <code>vimshift</code> through its <code>tmle3_Spec</code><a class="anchor" aria-label="anchor" href="#initializing-vimshift-through-its-tmle3_spec"><i class="fas fa-link"></i></a>
 </h3>
 <p>To start, we will initialize a specification for the TMLE of our parameter of
 interest (called a <code>tmle3_Spec</code> in the <code>tlverse</code> nomenclature) simply by calling
@@ -495,9 +495,9 @@ in assessing the mean counterfactual outcome over a grid of shifts -1, 0, 1 on t
   max_shifted_ratio <span class="op">=</span> <span class="fl">2</span>
 <span class="op">)</span></code></pre></div>
 </div>
-<div id="targeted-estimation-of-stochastic-intervention-effects" class="section level3" number="6.5.2">
+<div id="targeted-estimation-of-stochastic-intervention-effects" class="section level3" number="7.5.2">
 <h3>
-<span class="header-section-number">6.5.2</span> Targeted Estimation of Stochastic Intervention Effects<a class="anchor" aria-label="anchor" href="#targeted-estimation-of-stochastic-intervention-effects"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.2</span> Targeted Estimation of Stochastic Intervention Effects<a class="anchor" aria-label="anchor" href="#targeted-estimation-of-stochastic-intervention-effects"><i class="fas fa-link"></i></a>
 </h3>
 <p>One may walk through the step-by-step procedure for fitting the TML estimator
 of the mean counterfactual outcome under each shift in the grid, using the
@@ -527,9 +527,9 @@ For convenience, we choose the latter:</p>
 <p><em>Remark</em>: The <code>print</code> method of the resultant <code>tmle_fit</code> object conveniently
 displays the results from computing our TML estimator.</p>
 </div>
-<div id="inference-with-marginal-structural-models" class="section level3" number="6.5.3">
+<div id="inference-with-marginal-structural-models" class="section level3" number="7.5.3">
 <h3>
-<span class="header-section-number">6.5.3</span> Inference with Marginal Structural Models<a class="anchor" aria-label="anchor" href="#inference-with-marginal-structural-models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.3</span> Inference with Marginal Structural Models<a class="anchor" aria-label="anchor" href="#inference-with-marginal-structural-models"><i class="fas fa-link"></i></a>
 </h3>
 <p>Since we consider estimating the mean counterfactual outcome <span class="math inline">\(\psi_n\)</span> under
 several values of the intervention <span class="math inline">\(\delta\)</span>, taken from the aforementioned
@@ -557,9 +557,9 @@ for <span class="math inline">\(m_{\beta}(\delta)\)</span> may be expressed <spa
 <span id="cb184-6"><a href="stochastic-treatment-regimes-optional.html#cb184-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span>         <span class="fl">0.73418</span>           <span class="fl">0.70958</span>           <span class="fl">0.75878</span></span>
 <span id="cb184-7"><a href="stochastic-treatment-regimes-optional.html#cb184-7" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span>         <span class="fl">0.11664</span>           <span class="fl">0.10802</span>           <span class="fl">0.12527</span></span></code></pre></div>
 </div>
-<div id="directly-targeting-the-msm-parameter-beta" class="section level3" number="6.5.4">
+<div id="directly-targeting-the-msm-parameter-beta" class="section level3" number="7.5.4">
 <h3>
-<span class="header-section-number">6.5.4</span> Directly Targeting the MSM Parameter <span class="math inline">\(\beta\)</span><a class="anchor" aria-label="anchor" href="#directly-targeting-the-msm-parameter-beta"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.4</span> Directly Targeting the MSM Parameter <span class="math inline">\(\beta\)</span><a class="anchor" aria-label="anchor" href="#directly-targeting-the-msm-parameter-beta"><i class="fas fa-link"></i></a>
 </h3>
 <p>Note that in the above, a working MSM is fit to the individual TML estimates of
 the mean counterfactual outcome under a given value of the shift <span class="math inline">\(\delta\)</span> in
@@ -600,9 +600,9 @@ appears above):</p>
 <span id="cb185-19"><a href="stochastic-treatment-regimes-optional.html#cb185-19" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span>         <span class="fl">0.73345</span>           <span class="fl">0.70877</span>           <span class="fl">0.75813</span></span>
 <span id="cb185-20"><a href="stochastic-treatment-regimes-optional.html#cb185-20" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span>         <span class="fl">0.11823</span>           <span class="fl">0.10978</span>           <span class="fl">0.12669</span></span></code></pre></div>
 </div>
-<div id="example-with-the-wash-benefits-data" class="section level3" number="6.5.5">
+<div id="example-with-the-wash-benefits-data" class="section level3" number="7.5.5">
 <h3>
-<span class="header-section-number">6.5.5</span> Example with the WASH Benefits Data<a class="anchor" aria-label="anchor" href="#example-with-the-wash-benefits-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.5</span> Example with the WASH Benefits Data<a class="anchor" aria-label="anchor" href="#example-with-the-wash-benefits-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>To complete our walk through, let’s turn to using stochastic interventions to
 investigate the data from the WASH Benefits trial. To start, let’s load the
@@ -733,33 +733,33 @@ a simple call to our <code>tmle3</code> wrapper function:</p>
 <hr>
 </div>
 </div>
-<div id="exercises-3" class="section level2" number="6.6">
+<div id="exercises-3" class="section level2" number="7.6">
 <h2>
-<span class="header-section-number">6.6</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-3"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 6.1  </strong></span>Set the <code>sl3</code> library of algorithms for the Super Learner to a simple,
+<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 7.1  </strong></span>Set the <code>sl3</code> library of algorithms for the Super Learner to a simple,
 interpretable library and use this new library to estimate the counterfactual
 mean of mother’s age at child’s birth (<code>momage</code>) under a shift <span class="math inline">\(\delta = 0\)</span>.
 What does this counterfactual mean equate to in terms of the observed data?</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-4" class="exercise"><strong>Exercise 6.2  </strong></span>Describe two (equivalent) ways in which the causal effects of stochastic
+<p><span id="exr:unlabeled-div-4" class="exercise"><strong>Exercise 7.2  </strong></span>Describe two (equivalent) ways in which the causal effects of stochastic
 interventions may be interpreted.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-5" class="exercise"><strong>Exercise 6.3  </strong></span>Using a grid of values of the shift parameter <span class="math inline">\(\delta\)</span> (e.g., <span class="math inline">\(\{-1, 0, +1\}\)</span>),
+<p><span id="exr:unlabeled-div-5" class="exercise"><strong>Exercise 7.3  </strong></span>Using a grid of values of the shift parameter <span class="math inline">\(\delta\)</span> (e.g., <span class="math inline">\(\{-1, 0, +1\}\)</span>),
 repeat the analysis on the variable of interest (<code>momage</code>), summarizing the
 trend for this sequence of shifts using a marginal structural model.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-6" class="exercise"><strong>Exercise 6.4  </strong></span>For either the grid of shifts in the example preceding the exercises or that
+<p><span id="exr:unlabeled-div-6" class="exercise"><strong>Exercise 7.4  </strong></span>For either the grid of shifts in the example preceding the exercises or that
 estimated in (3) above, plot the resultant estimates against their respective
 counterfactual shifts. Graphically add to the scatterplot a line with slope and
 intercept equivalent to the MSM fit through the individual TML estimates.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 6.5  </strong></span>How does the marginal structural model we used to summarize the trend along the
+<p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 7.5  </strong></span>How does the marginal structural model we used to summarize the trend along the
 sequence of shifts previously help to contextualize the estimated effect for a
 single shift? That is, how does access to estimates across several shifts and
 the marginal structural model parameters allow us to more richly interpret our
@@ -769,36 +769,36 @@ findings?</p>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="optimal-individualized-treatment-regimes.html"><span class="header-section-number">5</span> Optimal Individualized Treatment Regimes</a></div>
-<div class="next"><a href="causal-mediation-analysis.html"><span class="header-section-number">7</span> Causal Mediation Analysis</a></div>
+<div class="prev"><a href="optimal-individualized-treatment-regimes.html"><span class="header-section-number">6</span> Optimal Individualized Treatment Regimes</a></div>
+<div class="next"><a href="causal-mediation-analysis.html"><span class="header-section-number">8</span> Causal Mediation Analysis</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#stochastic-treatment-regimes-optional"><span class="header-section-number">6</span> Stochastic Treatment Regimes (optional)</a></li>
-<li><a class="nav-link" href="#learning-objectives-4"><span class="header-section-number">6.1</span> Learning Objectives</a></li>
-<li><a class="nav-link" href="#introduction-5"><span class="header-section-number">6.2</span> Introduction</a></li>
+<li><a class="nav-link" href="#stochastic-treatment-regimes-optional"><span class="header-section-number">7</span> Stochastic Treatment Regimes (optional)</a></li>
+<li><a class="nav-link" href="#learning-objectives-4"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
+<li><a class="nav-link" href="#introduction-5"><span class="header-section-number">7.2</span> Introduction</a></li>
 <li>
-<a class="nav-link" href="#stochastic-interventions"><span class="header-section-number">6.3</span> Stochastic Interventions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#identifying-the-causal-effect-of-a-stochastic-intervention"><span class="header-section-number">6.3.1</span> Identifying the Causal Effect of a Stochastic Intervention</a></li>
-<li><a class="nav-link" href="#interpreting-the-causal-effect-of-a-stochastic-intervention"><span class="header-section-number">6.3.2</span> Interpreting the Causal Effect of a Stochastic Intervention</a></li>
+<a class="nav-link" href="#stochastic-interventions"><span class="header-section-number">7.3</span> Stochastic Interventions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#identifying-the-causal-effect-of-a-stochastic-intervention"><span class="header-section-number">7.3.1</span> Identifying the Causal Effect of a Stochastic Intervention</a></li>
+<li><a class="nav-link" href="#interpreting-the-causal-effect-of-a-stochastic-intervention"><span class="header-section-number">7.3.2</span> Interpreting the Causal Effect of a Stochastic Intervention</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#estimating-the-causal-effect-of-a-stochastic-intervention-with-tmle3shift"><span class="header-section-number">6.4</span> Estimating the Causal Effect of a Stochastic Intervention with tmle3shift</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simulate-data-1"><span class="header-section-number">6.4.1</span> Simulate Data</a></li>
-<li><a class="nav-link" href="#targeted-estimation-of-stochastic-interventions-effects"><span class="header-section-number">6.4.2</span> Targeted Estimation of Stochastic Interventions Effects</a></li>
+<a class="nav-link" href="#estimating-the-causal-effect-of-a-stochastic-intervention-with-tmle3shift"><span class="header-section-number">7.4</span> Estimating the Causal Effect of a Stochastic Intervention with tmle3shift</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#simulate-data-1"><span class="header-section-number">7.4.1</span> Simulate Data</a></li>
+<li><a class="nav-link" href="#targeted-estimation-of-stochastic-interventions-effects"><span class="header-section-number">7.4.2</span> Targeted Estimation of Stochastic Interventions Effects</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#stochastic-interventions-over-a-grid-of-counterfactual-shifts"><span class="header-section-number">6.5</span> Stochastic Interventions over a Grid of Counterfactual Shifts</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#initializing-vimshift-through-its-tmle3_spec"><span class="header-section-number">6.5.1</span> Initializing vimshift through its tmle3_Spec</a></li>
-<li><a class="nav-link" href="#targeted-estimation-of-stochastic-intervention-effects"><span class="header-section-number">6.5.2</span> Targeted Estimation of Stochastic Intervention Effects</a></li>
-<li><a class="nav-link" href="#inference-with-marginal-structural-models"><span class="header-section-number">6.5.3</span> Inference with Marginal Structural Models</a></li>
-<li><a class="nav-link" href="#directly-targeting-the-msm-parameter-beta"><span class="header-section-number">6.5.4</span> Directly Targeting the MSM Parameter \(\beta\)</a></li>
-<li><a class="nav-link" href="#example-with-the-wash-benefits-data"><span class="header-section-number">6.5.5</span> Example with the WASH Benefits Data</a></li>
+<a class="nav-link" href="#stochastic-interventions-over-a-grid-of-counterfactual-shifts"><span class="header-section-number">7.5</span> Stochastic Interventions over a Grid of Counterfactual Shifts</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#initializing-vimshift-through-its-tmle3_spec"><span class="header-section-number">7.5.1</span> Initializing vimshift through its tmle3_Spec</a></li>
+<li><a class="nav-link" href="#targeted-estimation-of-stochastic-intervention-effects"><span class="header-section-number">7.5.2</span> Targeted Estimation of Stochastic Intervention Effects</a></li>
+<li><a class="nav-link" href="#inference-with-marginal-structural-models"><span class="header-section-number">7.5.3</span> Inference with Marginal Structural Models</a></li>
+<li><a class="nav-link" href="#directly-targeting-the-msm-parameter-beta"><span class="header-section-number">7.5.4</span> Directly Targeting the MSM Parameter \(\beta\)</a></li>
+<li><a class="nav-link" href="#example-with-the-wash-benefits-data"><span class="header-section-number">7.5.5</span> Example with the WASH Benefits Data</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#exercises-3"><span class="header-section-number">6.6</span> Exercises</a></li>
+<li><a class="nav-link" href="#exercises-3"><span class="header-section-number">7.6</span> Exercises</a></li>
 </ul>
 
       <div class="book-extra">
