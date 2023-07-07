@@ -86,12 +86,13 @@ These setup instructions are adapted from those written for [Data Carpentry: R
 for Data Analysis and Visualization of Ecological
 Data](http://www.datacarpentry.org/R-ecology-lesson/).
 
-# Install `tlverse` software {#installtlverse} {-}
+# Install `tlverse` software {#installtlverse}
 
 The `tlverse` ecosystem of packages are currently hosted at
-https://github.com/tlverse, not fully on [CRAN](https://CRAN.R-project.org/) yet. 
-You can use the [`usethis` package](https://usethis.r-lib.org/) to install all 
-tlverse packages or specific packages:
+https://github.com/tlverse, not fully available on
+[CRAN](https://CRAN.R-project.org/) yet. You can use the [`usethis`
+package](https://usethis.r-lib.org/) to install all `tlverse` packages or
+specific packages:
 
 ```{r installation, eval=FALSE}
 install.packages("devtools")
