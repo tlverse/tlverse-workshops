@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 6 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
-<meta name="description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-06  6.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
-<meta name="generator" content="bookdown 0.26.3 with bs4_book()">
+<meta name="description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-07  6.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
+<meta name="generator" content="bookdown 0.34.2 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://tlverse.org/tlverse-workshops/stochastic-treatment-regimes-optional.html">
-<meta property="og:description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-06  6.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
+<meta property="og:description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-07  6.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 6 Stochastic Treatment Regimes (optional) | [Workshop] Targeted Learning in the tlverse">
-<meta name="twitter:description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-06  6.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
+<meta name="twitter:description" content="Nima Hejazi Based on the tmle3shift R package. Updated: 2023-07-07  6.1 Learning Objectives Differentiate stochastic treatment regimes from static, dynamic, and optimal treatment regimes. Describe...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0.9000/transition.js"></script><script src="libs/bs3compat-0.5.0.9000/tabs.js"></script><script src="libs/bs3compat-0.5.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -115,7 +115,7 @@
 </h1>
 <p><em>Nima Hejazi</em></p>
 <p>Based on the <a href="https://github.com/tlverse/tmle3shift"><code>tmle3shift</code> <code>R</code> package</a>.</p>
-<p>Updated: 2023-07-06</p>
+<p>Updated: 2023-07-07</p>
 <div id="learning-objectives-4" class="section level2" number="6.1">
 <h2>
 <span class="header-section-number">6.1</span> Learning Objectives<a class="anchor" aria-label="anchor" href="#learning-objectives-4"><i class="fas fa-link"></i></a>
@@ -187,7 +187,7 @@ regime <span class="math inline">\(d\)</span> depends on the treatment level <sp
 absence of the regime as well as the covariates <span class="math inline">\(W\)</span>. Stochastic
 interventions of this variety may be referred to as depending on the
 <em>natural value of treatment</em> or as <em>modified treatment policies</em>
-<span class="citation">(<a href="references.html#ref-haneuse2013estimation" role="doc-biblioref">Haneuse and Rotnitzky 2013</a>; <a href="references.html#ref-young2014identification" role="doc-biblioref">Young, Hernán, and Robins 2014</a>)</span>.</p></li>
+<span class="citation">(<a href="references.html#ref-haneuse2013estimation" role="doc-biblioref">Haneuse and Rotnitzky, 2013</a>; <a href="references.html#ref-young2014identification" role="doc-biblioref">Young <em>et al.</em>, 2014</a>)</span>.</p></li>
 </ol>
 </li>
 </ul>
@@ -204,7 +204,7 @@ outcome variable <span class="math inline">\(Y_{d(A, W)}\)</span>. The statistic
 denoted <span class="math inline">\(\Psi(P_0) = \mathbb{E}_{P_0}{\overline{Q}_{Y,0}(d(A, W), W)}\)</span>, where
 <span class="math inline">\(\overline{Q}_{Y,0}(d(A, W), W)\)</span> is the counterfactual outcome value of a
 given individual under the stochastic intervention distribution
-<span class="citation">(<a href="references.html#ref-diaz2018stochastic" role="doc-biblioref">Dı́az and van der Laan 2018</a>)</span>.</p></li>
+<span class="citation">(<a href="references.html#ref-diaz2018stochastic" role="doc-biblioref">Dı́az and van der Laan, 2018</a>)</span>.</p></li>
 <li><p>In prior work, <span class="citation">Dı́az and van der Laan (<a href="references.html#ref-diaz2012population" role="doc-biblioref">2012</a>)</span> showed that the causal quantity of interest
 <span class="math inline">\(\mathbb{E}_{P_0} \{Y_{d(A, W)}\}\)</span> is identified by a functional of the
 distribution of the observed data <span class="math inline">\(O\)</span>:
@@ -326,7 +326,7 @@ using <code><a href="https://tlverse.org/sl3/reference/list_learners.html">sl3_l
 <span id="cb176-4"><a href="stochastic-treatment-regimes-optional.html#cb176-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">5</span>] <span class="st">"Lrnr_solnp_density"</span>         </span></code></pre></div>
 <p>To proceed, we’ll select two of the above learners, <code>Lrnr_haldensify</code> for using
 the highly adaptive lasso for conditional density estimation, based on an
-algorithm given by <span class="citation">Dı́az and van der Laan (<a href="references.html#ref-diaz2011super" role="doc-biblioref">2011</a>)</span> and implemented in <span class="citation">Hejazi, Benkeser, and van der Laan (<a href="references.html#ref-hejazi2020haldensify" role="doc-biblioref">2022</a>)</span>, and
+algorithm given by <span class="citation">Dı́az and van der Laan (<a href="references.html#ref-diaz2011super" role="doc-biblioref">2011</a>)</span> and implemented in <span class="citation">Hejazi, Benkeser, <em>et al.</em> (<a href="references.html#ref-hejazi2020haldensify" role="doc-biblioref">2022</a>)</span>, and
 semiparametric location-scale conditional density estimators implemented in the
 <a href="https://github.com/tlverse/sl3"><code>sl3</code> package</a>. A Super Learner may be
 constructed by pooling estimates from each of these modified conditional
@@ -664,7 +664,7 @@ created to include just one of the semiparametric location-scale conditional
 density estimators, as fitting of these estimators is much faster than the more
 computationally intensive approach implemented in the
 <a href="ihttps://CRAN.R-project.org/package=haldensify"><code>haldensify</code> package</a>
-<span class="citation">(<a href="references.html#ref-hejazi2020haldensify" role="doc-biblioref">Hejazi, Benkeser, and van der Laan 2022</a>)</span>.</p>
+<span class="citation">(<a href="references.html#ref-hejazi2020haldensify" role="doc-biblioref">Hejazi, Benkeser, <em>et al.</em>, 2022</a>)</span>.</p>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># learners used for conditional density regression (i.e., propensity score),</span>
 <span class="co"># but we need to turn on cross-validation for this conditional density learner</span>
@@ -816,7 +816,7 @@ findings?</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: July 06, 2023.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: July 07, 2023.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -829,7 +829,7 @@ findings?</p>
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

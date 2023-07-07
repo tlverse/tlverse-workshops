@@ -7,7 +7,7 @@
 <title>Chapter 2 Cross-validation | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
 <meta name="description" content="Ivana Malenica Based on the origami R package by Jeremy Coyle, Nima Hejazi, Ivana Malenica and Rachael Phillips. Learning Objectives By the end of this chapter you will be able to: Differentiate...">
-<meta name="generator" content="bookdown 0.26.3 with bs4_book()">
+<meta name="generator" content="bookdown 0.34.2 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Cross-validation | [Workshop] Targeted Learning in the tlverse">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://tlverse.org/tlverse-workshops/origami.html">
@@ -169,7 +169,7 @@ Our goal, as further detailed in the next chapter, will be to estimate the
 performance of a library of algorithms in order to choose the best-performing
 one. In the following, we propose a method to do so using the observed data and
 <strong>cross-validation</strong> procedures implemented in the <code>origami</code> package
-<span class="citation">(<a href="references.html#ref-coyle2018origami" role="doc-biblioref">Coyle and Hejazi 2018</a>; <a href="references.html#ref-coyle-cran-origami" role="doc-biblioref">Coyle et al., n.d.</a>)</span>.
+<span class="citation">(<a href="references.html#ref-coyle-cran-origami" role="doc-biblioref">Coyle <em>et al.</em>, n.d.</a>; <a href="references.html#ref-coyle2018origami" role="doc-biblioref">Coyle and Hejazi, 2018</a>)</span>.
 <!--
 RP:
 The text before read:
@@ -262,8 +262,8 @@ properties. The asymptotic optimality results state that the cross-validated
 selector performs (in terms of risk) asymptotically as well as an optimal oracle
 selector, a hypothetical procedure with free access to the true, unknown
 data-generating distribution. For further details on the theoretical results, we
-suggest consulting <span class="citation">van der Laan and Dudoit (<a href="references.html#ref-vdl2003unified" role="doc-biblioref">2003</a>)</span>, <span class="citation">van der Laan, Dudoit, and Keles (<a href="references.html#ref-vdl2004asymptotic" role="doc-biblioref">2004</a>)</span>, <span class="citation">Dudoit and van der Laan (<a href="references.html#ref-dudoit2005asymptotics" role="doc-biblioref">2005</a>)</span>
-and <span class="citation">van der Vaart, Dudoit, and van der Laan (<a href="references.html#ref-vaart2006oracle" role="doc-biblioref">2006</a>)</span>.</p>
+suggest consulting <span class="citation">van der Laan and Dudoit (<a href="references.html#ref-vdl2003unified" role="doc-biblioref">2003</a>)</span>, <span class="citation">van der Laan <em>et al.</em> (<a href="references.html#ref-vdl2004asymptotic" role="doc-biblioref">2004</a>)</span>, <span class="citation">Dudoit and van der Laan (<a href="references.html#ref-dudoit2005asymptotics" role="doc-biblioref">2005</a>)</span>
+and <span class="citation">van der Vaart <em>et al.</em> (<a href="references.html#ref-vaart2006oracle" role="doc-biblioref">2006</a>)</span>.</p>
 <p>Cross-validation works by partitioning a sample into complementary subsets: a
 training (sub)set, to which a particular learning algorithm is applied, and a
 complementary validation (sub)set, used to evaluate the given algorithm’s
@@ -302,7 +302,7 @@ procedures in applied settings.
 </h2>
 <p>Similarly to how we defined the <a href="#roadmap"><em>Roadmap for Targeted Learning</em></a>, we
 can define the <strong>Estimation Roadmap</strong> as a guide for the estimation process. In
-particular, the unified loss-based estimation framework <span class="citation">(<a href="references.html#ref-vdl2003unified" role="doc-biblioref">van der Laan and Dudoit 2003</a>; <a href="references.html#ref-vdl2004asymptotic" role="doc-biblioref">van der Laan, Dudoit, and Keles 2004</a>; <a href="references.html#ref-dudoit2005asymptotics" role="doc-biblioref">Dudoit and van der Laan 2005</a>; <a href="references.html#ref-vaart2006oracle" role="doc-biblioref">van der Vaart, Dudoit, and van der Laan 2006</a>; <a href="references.html#ref-vdl2007super" role="doc-biblioref">van der Laan, Polley, and Hubbard 2007</a>)</span>,
+particular, the unified loss-based estimation framework <span class="citation">(<a href="references.html#ref-dudoit2005asymptotics" role="doc-biblioref">Dudoit and van der Laan, 2005</a>; <a href="references.html#ref-vdl2004asymptotic" role="doc-biblioref">van der Laan <em>et al.</em>, 2004</a>, <a href="references.html#ref-vdl2007super" role="doc-biblioref">2007</a>; <a href="references.html#ref-vdl2003unified" role="doc-biblioref">van der Laan and Dudoit, 2003</a>; <a href="references.html#ref-vaart2006oracle" role="doc-biblioref">van der Vaart <em>et al.</em>, 2006</a>)</span>,
 which relies on cross-validation for estimator construction,
 selection, and performance assessment, consists of three main steps:</p>
 <ol style="list-style-type: decimal">
@@ -1320,7 +1320,7 @@ random) new training and validation partitions of the dataset each time. In
 contrast to the Monte Carlo cross-validation scheme, the total number of sampled
 units in training and validation sets (i.e., the sizes of the two partitions)
 across folds is not held constant. Also, as the name suggests, sampling is
-performed with replacement (as in the bootstrap <span class="citation">(<a href="references.html#ref-davison1997bootstrap" role="doc-biblioref">Davison and Hinkley 1997</a>)</span>), hence
+performed with replacement (as in the bootstrap <span class="citation">(<a href="references.html#ref-davison1997bootstrap" role="doc-biblioref">Davison and Hinkley, 1997</a>)</span>), hence
 the exact same observational units may be included in multiple training sets.
 The proportion of observational units in the validation sets is a random
 variable, with expectation <span class="math inline">\(\sim 0.368\)</span>.
@@ -1672,7 +1672,7 @@ containing whatever fold-specific outputs are desired.</p>
 <code>future_lapply()</code> (a parallelized variant of the same). In this way,
 <code><a href="http://tlverse.org/origami/reference/cross_validate.html">cross_validate()</a></code> can be easily parallelized by specifying a parallelization
 scheme (i.e., a <code>plan</code> from the <a href="https://Cran.R-project.org/package=future">future parallelization framework for
-<code>R</code></a> <span class="citation">(<a href="references.html#ref-bengtsson2021unifying" role="doc-biblioref">Bengtsson 2021</a>)</span>). The
+<code>R</code></a> <span class="citation">(<a href="references.html#ref-bengtsson2021unifying" role="doc-biblioref">Bengtsson, 2021</a>)</span>). The
 application of <code><a href="http://tlverse.org/origami/reference/cross_validate.html">cross_validate()</a></code> generates a list of results, matching the
 customized <code>list</code> specified in the relevant <code>cv_fun()</code>. As noted above, each
 call to <code>cv_fun()</code> itself returns a <code>list</code> of results, with different named
@@ -2528,7 +2528,7 @@ estimate of the linear regression model’s error is larger!</p>
 </h3>
 <p>To examine <code>origami</code> further, let’s return to our example analysis using the
 WASH Benefits dataset. Here, we will write a new <code>cv_fun()</code> function. As an
-example, we will use Breiman’s random forest algorithm <span class="citation">(<a href="references.html#ref-breiman2001random" role="doc-biblioref">Breiman 2001</a>)</span>,
+example, we will use Breiman’s random forest algorithm <span class="citation">(<a href="references.html#ref-breiman2001random" role="doc-biblioref">Breiman, 2001</a>)</span>,
 implemented in the <code><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest()</a></code> function (from the <code>randomForest</code> package):</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make sure to load the package!</span>
@@ -2856,7 +2856,7 @@ performance of the learning algorithm.</li>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: July 06, 2023.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: July 07, 2023.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -2869,7 +2869,7 @@ performance of the learning algorithm.</li>
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

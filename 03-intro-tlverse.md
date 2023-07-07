@@ -122,7 +122,7 @@ following packages:
 
 |package      |version    |source                                                                  |
 |:------------|:----------|:-----------------------------------------------------------------------|
-|bookdown     |0.26.3     |Github (rstudio/bookdown\@169c43b6bb95213f2af63a95acd4e977a58a3e1f)     |
+|bookdown     |0.34.2     |Github (rstudio/bookdown\@e3cae95282f497c55864057e9e8255e2aed75120)     |
 |bslib        |0.5.0.9000 |Github (rstudio/bslib\@64de13aa5634146e996e8874a87b91f48503f8bc)        |
 |dagitty      |0.3-1      |CRAN (R 4.3.1)                                                          |
 |data.table   |1.14.8     |CRAN (R 4.3.1)                                                          |

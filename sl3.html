@@ -7,7 +7,7 @@
 <title>Chapter 3 Super Learning | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
 <meta name="description" content="Rachael Phillips Based on the sl3 R package by Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips, and Oleg Sofrygin. Learning Objectives By the end of this chapter you will be able to:...">
-<meta name="generator" content="bookdown 0.26.3 with bs4_book()">
+<meta name="generator" content="bookdown 0.34.2 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Super Learning | [Workshop] Targeted Learning in the tlverse">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://tlverse.org/tlverse-workshops/sl3.html">
@@ -166,15 +166,15 @@ set and prediction problem.</p>
 consider many of them, from the simplest parametric regressions to the most
 complex machine learning algorithms (e.g., neural nets, support vector machines,
 etc). Additionally, it is proven to perform as well as possible in large
-samples, given the learners specified <span class="citation">(<a href="references.html#ref-vdl2007super" role="doc-biblioref">van der Laan, Polley, and Hubbard 2007</a>)</span>. The SL represents an
+samples, given the learners specified <span class="citation">(<a href="references.html#ref-vdl2007super" role="doc-biblioref">van der Laan <em>et al.</em>, 2007</a>)</span>. The SL represents an
 entirely pre-specified, flexible, and theoretically grounded approach for
 predictive modeling. It has been shown to be adaptive and robust in a variety of
 applications, and in even in very small samples. Detailed descriptions outlining
-the SL procedure are widely available <span class="citation">(<a href="references.html#ref-polley2010super" role="doc-biblioref">Polley and van der Laan 2010</a>; <a href="references.html#ref-naimi2018stacked" role="doc-biblioref">Naimi and Balzer 2018</a>)</span>.
+the SL procedure are widely available <span class="citation">(<a href="references.html#ref-naimi2018stacked" role="doc-biblioref">Naimi and Balzer, 2018</a>; <a href="references.html#ref-polley2010super" role="doc-biblioref">Polley and van der Laan, 2010</a>)</span>.
 Practical considerations for specifying the SL, including how to specify a rich
 and diverse library of learners, choose a performance metric for the SL, and
 specify a cross-validation (CV) scheme, are described in a pre-print article
-<span class="citation">(<a href="references.html#ref-rvp2022super" role="doc-biblioref">Phillips et al. 2022</a>)</span>. Here, we focus on introducing <code>sl3</code>, the standard <code>tlverse</code>
+<span class="citation">(<a href="references.html#ref-rvp2022super" role="doc-biblioref">Phillips <em>et al.</em>, 2022</a>)</span>. Here, we focus on introducing <code>sl3</code>, the standard <code>tlverse</code>
 software package for SL.</p>
 <!--
 Add more about sl3: how it's different from SuperLearner, supported features,
@@ -944,7 +944,7 @@ meta-learner, which is the algorithm that ensembles the learners, but this is
 optional since there are already defaults set up in <code>sl3</code>. See “Practical
 considerations for specifying a super learner” for step-by-step guidelines for
 tailoring the SL specification, including the library and meta-learner(s), to
-perform well for the prediction task at hand <span class="citation">(<a href="references.html#ref-rvp2022super" role="doc-biblioref">Phillips et al. 2022</a>)</span>.</p>
+perform well for the prediction task at hand <span class="citation">(<a href="references.html#ref-rvp2022super" role="doc-biblioref">Phillips <em>et al.</em>, 2022</a>)</span>.</p>
 <p>Learners have properties that indicate what features they support. We may use
 the <code><a href="https://tlverse.org/sl3/reference/list_learners.html">sl3_list_properties()</a></code> function to get a list of all properties supported
 by at least one learner:</p>
@@ -1071,9 +1071,9 @@ so the results are reproducible, and we will also time it.</p>
 <span id="cb39-6"><a href="sl3.html#cb39-6" aria-hidden="true" tabindex="-1"></a>runtime_sl_fit <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> start_time <span class="co"># end time - start time = run time</span></span>
 <span id="cb39-7"><a href="sl3.html#cb39-7" aria-hidden="true" tabindex="-1"></a>runtime_sl_fit</span>
 <span id="cb39-8"><a href="sl3.html#cb39-8" aria-hidden="true" tabindex="-1"></a>   user  system elapsed </span>
-<span id="cb39-9"><a href="sl3.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="fl">304.796</span>   <span class="fl">6.102</span> <span class="fl">301.596</span> </span></code></pre></div>
-<p>It took 301.6 seconds
-(5 minutes) to fit the SL.</p>
+<span id="cb39-9"><a href="sl3.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="fl">256.545</span>   <span class="fl">5.881</span> <span class="fl">253.619</span> </span></code></pre></div>
+<p>It took 253.6 seconds
+(4.2 minutes) to fit the SL.</p>
 <div id="summary" class="section level4 unnumbered">
 <h4>Summary<a class="anchor" aria-label="anchor" href="#summary"><i class="fas fa-link"></i></a>
 </h4>
@@ -1084,7 +1084,7 @@ illustrated. This consists of the following three steps:</p>
 <li>Instantiate the SL with <code>Lrnr_sl</code>.</li>
 <li>Fit the SL to the task with <code>train</code>.</li>
 </ol>
-<p>This example was for demonstrative purposes only. See <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span> for
+<p>This example was for demonstrative purposes only. See <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span> for
 step-by-step guidelines for constructing a SL that is well-specified for the
 prediction task at hand.</p>
 </div>
@@ -1115,7 +1115,7 @@ we obtain predictions for the GLM learner.</p>
 <p>Note that the predicted values for the SL correspond to so-called “full fits”
 of the candidate learners, in which the candidates are fit to the entire
 analytic dataset, i.e., all of the data supplied as <code>data</code> to <code>make_sl3_Task</code>.
-Figure 2 in <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span> provides a visual overview of the SL fitting
+Figure 2 in <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span> provides a visual overview of the SL fitting
 procedure.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sl3.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can also access the candidate learner full fits directly and obtain</span></span>
 <span id="cb42-2"><a href="sl3.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the same "full fit" candidate predictions from there </span></span>
@@ -1772,7 +1772,7 @@ squared error (MSE) as the metric to summarize predictive performance. The
 reason why we use the MSE is because it is a valid metric for estimating the
 conditional mean, which is what we’re learning the prediction function for in
 the WASH Benefits example. For more information on selecting an appropriate
-performance metric, see <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>.</p>
+performance metric, see <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>.</p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cv_risk_table</span> <span class="op">&lt;-</span> <span class="va">sl_fit</span><span class="op">$</span><span class="fu">cv_risk</span><span class="op">(</span>eval_fun <span class="op">=</span> <span class="va">loss_squared_error</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
@@ -2831,7 +2831,7 @@ SL.</p>
 <p>The reason why this is not a fully cross-validated risk estimate is because the
 <code>cv_meta_fit</code> object above (which is the trained meta-learner), was previously
 fit to the <em>entire</em> matrix of CV predictions from <em>every</em> fold (i.e., the
-meta-level dataset; see Figure 2 in <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span> for more detail). This is why
+meta-level dataset; see Figure 2 in <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span> for more detail). This is why
 revere-based risks are not a true CV risk. If the meta-learner is not a simple
 regression function, and instead a more flexible learner (e.g., random
 forest) is used as the meta-learner, then the revere-CV risk estimate of the
@@ -2852,7 +2852,7 @@ is very close to, and slightly lower than, the CV risk estimate for the SL
 <h2>
 <span class="header-section-number">3.5</span> Discrete Super Learner<a class="anchor" aria-label="anchor" href="#discrete-super-learner"><i class="fas fa-link"></i></a>
 </h2>
-<p>From the glossary (Table 1) entry for discrete SL (dSL) in <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>,
+<p>From the glossary (Table 1) entry for discrete SL (dSL) in <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>,
 the dSL is “a SL that uses a winner-take-all meta-learner called
 the cross-validated selector. The dSL is therefore identical to the candidate
 with the best cross-validated performance; its predictions will be the same as
@@ -3053,7 +3053,7 @@ best cross-validated predictive performance. When the ensemble SL (eSL) and
 its candidate learners are considered in a dSL as candidates, the eSL’s CV
 performance can be compared to that from the learners from which it was
 constructed, and the final SL will be the candidate that achieved the lowest CV
-risk. From the glossary (Table 1) entry for eSL in <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, an
+risk. From the glossary (Table 1) entry for eSL in <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, an
 eSL is “a SL that uses any parametric or non-parametric algorithm as its
 meta-learner. Therefore, the eSL is defined by a combination of multiple
 candidates; its predictions are defined by a combination of multiple candidates’
@@ -3088,7 +3088,7 @@ between including the eSL as a candidate in the dSL and calling <code>cv_sl</cod
 the former automates a procedure for the final SL to be the learner that
 achieved the best CV predictive performance, i.e., lowest CV risk. If the eSL
 outperforms any other candidate, the dSL will end up selecting it and the
-resulting SL will be the eSL. As mentioned in <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, “another advantage
+resulting SL will be the eSL. As mentioned in <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, “another advantage
 of this approach is that multiple eSLs that use more flexible meta-learner
 methods (e.g., non-parametric machine learning algorithms like HAL) can be
 evaluated simultaneously.”</p>
@@ -3170,7 +3170,7 @@ below.</p>
 <span id="cb76-15"><a href="sl3.html#cb76-15" aria-hidden="true" tabindex="-1"></a>runtime_sl_fit_parallel <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> start_time</span>
 <span id="cb76-16"><a href="sl3.html#cb76-16" aria-hidden="true" tabindex="-1"></a>runtime_sl_fit_parallel</span>
 <span id="cb76-17"><a href="sl3.html#cb76-17" aria-hidden="true" tabindex="-1"></a>   user  system elapsed </span>
-<span id="cb76-18"><a href="sl3.html#cb76-18" aria-hidden="true" tabindex="-1"></a><span class="fl">297.665</span>   <span class="fl">6.083</span> <span class="fl">294.918</span> </span></code></pre></div>
+<span id="cb76-18"><a href="sl3.html#cb76-18" aria-hidden="true" tabindex="-1"></a><span class="fl">260.987</span>   <span class="fl">6.155</span> <span class="fl">258.515</span> </span></code></pre></div>
 </div>
 <div id="default-data-pre-processing" class="section level2" number="3.7">
 <h2>
@@ -3184,7 +3184,7 @@ of this internally; specifically, this data pre-processing occurs when
 <code>make_sl3_Task</code> is called.</p>
 <p>Users can also perform any pre-processing before creating the <code>sl3_Task</code>
 (as needed) to bypass the default functionality discussed in the following.
-See <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, section “Preliminaries: Analytic dataset pre-processing”
+See <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, section “Preliminaries: Analytic dataset pre-processing”
 for more information and general guidelines to follow for pre-processing of the
 analytic dataset, including considerations for pre-processing in high
 dimensional settings.</p>
@@ -4579,7 +4579,7 @@ very helpful to consider different tuning parameter specifications. However,
 this is time consuming, so computational feasibility should be considered.
 Also, when the effective sample size is small, highly flexible learners
 will likely not perform well since they typically require a lot of data to fit
-their models. See <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span> for information on the effective sample size,
+their models. See <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span> for information on the effective sample size,
 and step-by-step guidelines for tailoring the SL specification to perform well
 for the prediction task at hand.</p>
 <p>We show two ways to customize learners over a grid of tuning parameters. The
@@ -4662,7 +4662,7 @@ learner “NNET_autotune”.</p>
 <h2>
 <span class="header-section-number">3.11</span> Learners with Interactions and <code>formula</code> Interface<a class="anchor" aria-label="anchor" href="#learners-with-interactions-and-formula-interface"><i class="fas fa-link"></i></a>
 </h2>
-<p>As described in in <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, if it’s known/possible that there are
+<p>As described in in <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, if it’s known/possible that there are
 interactions among covariates then we can include learners that pick up on that
 explicitly (e.g., by including in the library a parametric regression learner
 with interactions specified in a formula) or implicitly (e.g., by including in
@@ -4688,12 +4688,12 @@ will appear in the Help tab).</p>
 <p>One characteristic of a rich library of learners is that it is effective at
 handling covariates of high dimension. When there are many covariates in the
 data relative to the effective sample size (see Figure 1 Flowchart in
-<span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>), candidate learners should be coupled with a range of so-called
+<span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>), candidate learners should be coupled with a range of so-called
 “screeners”. A screener is simply a function that returns a subset of
 covariates. A screener is intended to be coupled with a candidate learner, to
 define a new candidate learner that considers the reduced set of
 screener-returned covariates as its covariates.</p>
-<p>As stated in <span class="citation">Phillips et al. (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, “covariate screening is essential when the
+<p>As stated in <span class="citation">Phillips <em>et al.</em> (<a href="references.html#ref-rvp2022super" role="doc-biblioref">2022</a>)</span>, “covariate screening is essential when the
 dimensionality of the data is very large, and it can be practically useful in
 any SL or machine learning application. Screening of covariates that considers
 associations with the outcome must be cross validated to avoid biasing the
@@ -5165,16 +5165,16 @@ across bins.</li>
 </ol>
 <p>A key element of this proposal is the flexibility to use any binary regression
 procedure or appropriate machine learning algorithm to estimate <span class="math inline">\(\mathbb{P}(Y \in [\alpha_{t-1}, \alpha_t) \mid X)\)</span>, facilitating the incorporation of
-flexibletechniques like ensemble learning <span class="citation">(<a href="references.html#ref-breiman1996stacked" role="doc-biblioref">Breiman 1996</a>; <a href="references.html#ref-vdl2007super" role="doc-biblioref">van der Laan, Polley, and Hubbard 2007</a>)</span>.
+flexibletechniques like ensemble learning <span class="citation">(<a href="references.html#ref-breiman1996stacked" role="doc-biblioref">Breiman, 1996</a>; <a href="references.html#ref-vdl2007super" role="doc-biblioref">van der Laan <em>et al.</em>, 2007</a>)</span>.
 This extreme degree of flexibility integrates perfectly with the underlying
 design principles of <code>sl3</code>; however, we have not yet implemented this approach
 in its full generality. A version of this CDE approach, which limits the
 original proposal by replacing the use of arbitrary binary regression with the
-highly adaptive lasso (HAL) algorithm <span class="citation">(<a href="references.html#ref-benkeser2016hal" role="doc-biblioref">Benkeser and van der Laan 2016</a>)</span> is supported in the
+highly adaptive lasso (HAL) algorithm <span class="citation">(<a href="references.html#ref-benkeser2016hal" role="doc-biblioref">Benkeser and van der Laan, 2016</a>)</span> is supported in the
 <a href="https://github.com/nhejazi/haldensify"><code>haldensify</code> package</a>
-<span class="citation">(<a href="references.html#ref-hejazi2020haldensify" role="doc-biblioref">Hejazi, Benkeser, and van der Laan 2022</a>)</span> (the HAL implementation in <code>haldensify</code> is provided the
+<span class="citation">(<a href="references.html#ref-hejazi2020haldensify" role="doc-biblioref">Hejazi, Benkeser, <em>et al.</em>, 2022</a>)</span> (the HAL implementation in <code>haldensify</code> is provided the
 <a href="https://github.com%20tlverse/hal9001"><code>hal9001</code> package</a>
-<span class="citation">(<a href="references.html#ref-coyle2020hal9001" role="doc-biblioref">Coyle et al. 2022</a>; <a href="references.html#ref-hejazi2020hal9001" role="doc-biblioref">Hejazi, Coyle, and van der Laan 2020</a>)</span>). This CDE algorithm that uses
+<span class="citation">(<a href="references.html#ref-coyle2020hal9001" role="doc-biblioref">Coyle <em>et al.</em>, 2022</a>; <a href="references.html#ref-hejazi2020hal9001" role="doc-biblioref">Hejazi <em>et al.</em>, 2020</a>)</span>). This CDE algorithm that uses
 <code>haldensify</code> is incorporated as learner <code>Lrnr_haldensify</code> in <code>sl3</code>, as we
 demonstrate below.</p>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
@@ -6085,7 +6085,7 @@ Infarction with
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: July 06, 2023.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: July 07, 2023.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -6098,7 +6098,7 @@ Infarction with
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
