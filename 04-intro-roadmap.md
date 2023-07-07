@@ -221,6 +221,7 @@ following ordering of the variables in the observed data $O$.
 <script type="application/json" data-for="htmlwidget-f24f61b14a52b30b1486">{"x":{"nodes":{"id":["W","A","Y"],"label":["W","A","Y"]},"edges":{"from":["W","W","A"],"to":["A","Y","Y"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"arrows":{"to":true}},"layout":{"randomSeed":25}},"groups":null,"width":"200px","height":"300px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
 ```
 
+
 While directed acyclic graphs (DAGs) like above provide a convenient means by 
 which to visualize causal relations between variables, the same causal 
 relations among variables can be represented via a set of structural equations, 

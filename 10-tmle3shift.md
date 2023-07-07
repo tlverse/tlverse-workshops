@@ -4,7 +4,7 @@ _Nima Hejazi_
 
 Based on the [`tmle3shift` `R` package](https://github.com/tlverse/tmle3shift).
 
-Updated: 2023-03-01
+Updated: 2023-07-06
 
 ## Learning Objectives
 

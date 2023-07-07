@@ -109,6 +109,8 @@ Table: (\#tab:skim_washb_data)Data summary
 |asset_moto     |         0|          1.00|   0.07|  0.25|   0.00|   0.00|   0.0|   0.00|   1.00|▇▁▁▁▁ |
 |asset_sewmach  |         0|          1.00|   0.06|  0.25|   0.00|   0.00|   0.0|   0.00|   1.00|▇▁▁▁▁ |
 |asset_mobile   |         0|          1.00|   0.86|  0.35|   0.00|   1.00|   1.0|   1.00|   1.00|▁▁▁▁▇ |
+
+
 A convenient summary of the relevant variables appears above, complete with a
 sparkline visualizations describing the marginal characteristics of each
 covariate. Note that the *asset* variables reflect socioeconomic status of the

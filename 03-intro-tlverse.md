@@ -114,44 +114,47 @@ produce it.
 
 This book was written using [bookdown](http://bookdown.org/), and the complete
 source is available on [GitHub](https://github.com/tlverse/tlverse-handbook).
-This version of the book was built with R version 4.2.2 (2022-10-31),
-[pandoc](https://pandoc.org/) version 2.7.3, and the
+This version of the book was built with R version 4.3.1 (2023-06-16),
+[pandoc](https://pandoc.org/) version 2.19.2, and the
 following packages:
+
 
 
 |package      |version    |source                                                                  |
 |:------------|:----------|:-----------------------------------------------------------------------|
 |bookdown     |0.26.3     |Github (rstudio/bookdown\@169c43b6bb95213f2af63a95acd4e977a58a3e1f)     |
-|bslib        |0.3.1.9000 |Github (rstudio/bslib\@a4946a49499438e71dce29c810a41e2d05170376)        |
-|dagitty      |0.3-1      |CRAN (R 4.2.2)                                                          |
-|data.table   |1.14.6     |CRAN (R 4.2.2)                                                          |
-|delayed      |0.4.0      |CRAN (R 4.2.2)                                                          |
-|devtools     |2.4.3      |CRAN (R 4.2.2)                                                          |
-|downlit      |0.4.0      |CRAN (R 4.2.2)                                                          |
-|dplyr        |1.0.10     |CRAN (R 4.2.2)                                                          |
-|forecast     |8.16       |CRAN (R 4.2.2)                                                          |
-|future       |1.30.0     |CRAN (R 4.2.2)                                                          |
-|ggdag        |0.2.4      |CRAN (R 4.2.2)                                                          |
-|ggfortify    |0.4.15     |CRAN (R 4.2.2)                                                          |
-|ggplot2      |3.4.0      |CRAN (R 4.2.2)                                                          |
-|here         |1.0.1      |CRAN (R 4.2.2)                                                          |
-|kableExtra   |1.3.4      |CRAN (R 4.2.2)                                                          |
-|knitr        |1.39       |CRAN (R 4.2.2)                                                          |
-|mvtnorm      |1.1-3      |CRAN (R 4.2.2)                                                          |
+|bslib        |0.5.0.9000 |Github (rstudio/bslib\@64de13aa5634146e996e8874a87b91f48503f8bc)        |
+|dagitty      |0.3-1      |CRAN (R 4.3.1)                                                          |
+|data.table   |1.14.8     |CRAN (R 4.3.1)                                                          |
+|delayed      |0.4.0      |CRAN (R 4.3.1)                                                          |
+|devtools     |2.4.3      |CRAN (R 4.3.1)                                                          |
+|downlit      |0.4.0      |CRAN (R 4.3.1)                                                          |
+|dplyr        |1.0.10     |CRAN (R 4.3.1)                                                          |
+|forecast     |8.16       |CRAN (R 4.3.1)                                                          |
+|future       |1.30.0     |CRAN (R 4.3.1)                                                          |
+|ggdag        |0.2.4      |CRAN (R 4.3.1)                                                          |
+|ggfortify    |0.4.15     |CRAN (R 4.3.1)                                                          |
+|ggplot2      |3.4.0      |CRAN (R 4.3.1)                                                          |
+|here         |1.0.1      |CRAN (R 4.3.1)                                                          |
+|kableExtra   |1.3.4.9000 |Github (kupietz/kableExtra\@3bf9b21a769c9e6c21c955689bf5f8175dc83350)   |
+|knitr        |1.43       |CRAN (R 4.3.1)                                                          |
+|mvtnorm      |1.1-3      |CRAN (R 4.3.1)                                                          |
 |origami      |1.0.7      |Github (tlverse/origami\@2c4476fefd80cf125e942a6f8ab98600b52955e8)      |
-|randomForest |4.7-1.1    |CRAN (R 4.2.2)                                                          |
-|readr        |2.1.2      |CRAN (R 4.2.2)                                                          |
-|rmarkdown    |2.14       |CRAN (R 4.2.2)                                                          |
-|skimr        |2.1.4      |CRAN (R 4.2.2)                                                          |
+|randomForest |4.7-1.1    |CRAN (R 4.3.1)                                                          |
+|readr        |2.1.2      |CRAN (R 4.3.1)                                                          |
+|rmarkdown    |2.23       |CRAN (R 4.3.1)                                                          |
+|skimr        |2.1.4      |CRAN (R 4.3.1)                                                          |
 |sl3          |1.4.5      |Github (tlverse/sl3\@de445c210eefa5aa9dd4c0d1fab8126f0d7c5eeb)          |
-|stringr      |1.5.0      |CRAN (R 4.2.2)                                                          |
-|tibble       |3.1.8      |CRAN (R 4.2.2)                                                          |
-|tidyr        |1.2.1      |CRAN (R 4.2.2)                                                          |
-|tidyverse    |1.3.1      |CRAN (R 4.2.2)                                                          |
+|stringr      |1.5.0      |CRAN (R 4.3.1)                                                          |
+|tibble       |3.2.1      |CRAN (R 4.3.1)                                                          |
+|tidyr        |1.2.1      |CRAN (R 4.3.1)                                                          |
+|tidyverse    |1.3.1      |CRAN (R 4.3.1)                                                          |
 |tmle3        |0.2.0      |Github (tlverse/tmle3\@ed72f8a20e64c914ab25ffe015d865f7a9963d27)        |
 |tmle3mediate |0.0.3      |Github (tlverse/tmle3mediate\@70d1151c4adb54d044f355d06d07bcaeb7f8ae07) |
 |tmle3mopttx  |1.0.0      |Github (tlverse/tmle3mopttx\@c8c675f051bc5ee6d51fa535fe6dc80791d4d1b7)  |
 |tmle3shift   |0.2.0      |Github (tlverse/tmle3shift\@4ed52b50af501a5fa2e6257b568d17fd485d3f42)   |
+
+
 
 # Primer on the `R6` Class System {-}
 

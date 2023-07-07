@@ -532,6 +532,8 @@ washb_data <- fread(
 </tbody>
 </table></div>
 
+
+
 Above is a look at the first 30 of the data.
 
 ### Cross-validation for i.i.d. data
@@ -1483,6 +1485,8 @@ Here's a look at the data:
   </tr>
 </tbody>
 </table></div>
+
+
 
 Let's remind ourselves of the covariates to be used in the prediction step:
 
