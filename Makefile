@@ -1,4 +1,4 @@
-all: style book code
+all: style book
 
 book:
 	Rscript -e "bookdown::clean_book(TRUE)"
@@ -6,10 +6,3 @@ book:
 
 style:
 	Rscript -e "styler::style_dir(filetype = 'rmd')"
-
-code:
-	rm -f R_code/*.R
-	R CMD BATCH purl.R
-	rm purl.Rout .RData
-
-.PHONY: book code
