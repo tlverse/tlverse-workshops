@@ -42,7 +42,8 @@ options(
   crayon.enabled = FALSE,
   bookdown.clean_book = TRUE,
   knitr.kable.NA = "NA",
-  repos = structure(c(CRAN = "https://cran.rstudio.com/"))
+  repos = structure(c(CRAN = "https://cran.rstudio.com/")),
+  future.globals.maxSize = 10^24
 )
 
 # overwrite options by output type

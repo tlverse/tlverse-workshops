@@ -1051,10 +1051,13 @@ predictions." In the following, we show how to include the eSL, and multiple
 eSLs, as candidates in the dSL. 
 
 Recall the SL object, `sl`, defined in section 2:
+
+
 ```{r recall-eSL}
 # in the section 2 we defined Lrnr_sl as
 # sl <- Lrnr_sl$new(learners = stack, metalearner = Lrnr_nnls$new())
-````
+```
+
 `sl` is an eSL since it used NNLS as the meta-learner. We rename `sl` to 
 `eSL_metaNNLS` below to clarify that this is an eSL that uses NNLS as its 
 meta-learner. Note that the candidate learners in this eSL are those passed 
@@ -1079,6 +1082,7 @@ a new `Lrnr_sl` that considers `stack_with_eSL` as candidates and
 cv_selector <- Lrnr_cv_selector$new(eval_function = loss_squared_error)
 dSL <- Lrnr_sl$new(learners = stack_with_eSL, metalearner = cv_selector)
 ```
+
 When we include an eSL as a candidate in the dSL, this allows the eSL’s CV
 performance to be compared to that from the other learners from which it was
 constructed. This is similar to calling CV SL, `cv_sl`, above. The difference
@@ -1103,7 +1107,7 @@ eSL_metaRanger <- Lrnr_sl$new(learners = stack, metalearner = lrn_ranger)
 eSL_metaHAL <- Lrnr_sl$new(learners = stack, metalearner = lrn_hal)
 # adding the eSLs to the stack that defined them
 stack_with_eSLs <- Stack$new(
-  stack, eSL_metaNNLS, eSL_metaNNLSconvex, eSL_metaLasso, eSL_metaEarth, 
+  stack, eSL_metaNNLS, eSL_metaNNLSconvex, eSL_metaLasso, eSL_metaEarth,
   eSL_metaRanger, eSL_metaHAL
 )
 # specify dSL
@@ -1140,14 +1144,15 @@ support, which draws on the [`future` R
 package](https://cran.r-project.org/web/packages/future/index.html), which
 provides a lightweight, unified Future API for sequential and parallel 
 processing of R expressions via futures. From the `future` package 
-documentation: "This package implements sequential, multicore, multisession, and cluster futures. With these, R expressions can be evaluated on the local 
-machine, in parallel a set of local machines, or distributed on a mix of local 
-and remote machines. Extensions to this package implement additional backends 
-for processing futures via compute cluster schedulers, etc. Because of its 
-unified API, there is no need to modify any code in order switch from 
-sequential on the local machine to, say, distributed processing on a remote 
-compute cluster. Another strength of this package is that global variables and 
-functions are automatically identified and exported as needed, making it 
+documentation: "This package implements sequential, multicore, multisession,
+and cluster futures. With these, R expressions can be evaluated on the local
+machine, in parallel a set of local machines, or distributed on a mix of local
+and remote machines. Extensions to this package implement additional backends
+for processing futures via compute cluster schedulers, etc. Because of its
+unified API, there is no need to modify any code in order switch from
+sequential on the local machine to, say, distributed processing on a remote
+compute cluster. Another strength of this package is that global variables and
+functions are automatically identified and exported as needed, making it
 straightforward to tweak existing code to make use of futures."
 
 To use `future` with `sl3`, you can simply choose a futures `plan()`, as shown
