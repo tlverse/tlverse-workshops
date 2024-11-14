@@ -7,7 +7,7 @@
 <title>Chapter 1 Install tlverse software | [Workshop] Targeted Learning in the tlverse</title>
 <meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips">
 <meta name="description" content="The tlverse ecosystem of packages are currently hosted at https://github.com/tlverse, not fully available on CRAN yet. You can use the usethis package to install all tlverse packages or specific...">
-<meta name="generator" content="bookdown 0.34.2 with bs4_book()">
+<meta name="generator" content="bookdown 0.41.1 with bs4_book()">
 <meta property="og:title" content="Chapter 1 Install tlverse software | [Workshop] Targeted Learning in the tlverse">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://tlverse.org/tlverse-workshops/installtlverse.html">
@@ -17,8 +17,8 @@
 <meta name="twitter:description" content="The tlverse ecosystem of packages are currently hosted at https://github.com/tlverse, not fully available on CRAN yet. You can use the usethis package to install all tlverse packages or specific...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0.9000/transition.js"></script><script src="libs/bs3compat-0.5.0.9000/tabs.js"></script><script src="libs/bs3compat-0.5.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.2/visNetwork.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
@@ -100,7 +100,6 @@
 <li class="book-part">Part 4: Advanced Topics</li>
 <li><a class="" href="optimal-individualized-treatment-regimes.html"><span class="header-section-number">6</span> Optimal Individualized Treatment Regimes</a></li>
 <li><a class="" href="stochastic-treatment-regimes-optional.html"><span class="header-section-number">7</span> Stochastic Treatment Regimes (optional)</a></li>
-<li><a class="" href="causal-mediation-analysis.html"><span class="header-section-number">8</span> Causal Mediation Analysis</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -119,17 +118,17 @@
 package</a> to install all <code>tlverse</code> packages or
 specific packages:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-
-<span class="co"># install all tlverse packages </span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"tlverse/tlverse"</span><span class="op">)</span>
-
-<span class="co"># install a specific package (example is sl3)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"tlverse/sl3"</span><span class="op">)</span>
-
-<span class="co"># install a specific branch of package (example is devel branch of sl3)</span>
-<span class="co"># (first clear workspace and restart R)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"tlverse/sl3@devel"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># install all tlverse packages </span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"tlverse/tlverse"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># install a specific package (example is sl3)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"tlverse/sl3"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># install a specific branch of package (example is devel branch of sl3)</span></span>
+<span><span class="co"># (first clear workspace and restart R)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"tlverse/sl3@devel"</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>tlverse</code> packages depend on other packages that are also hosted on GitHub.
 Because of this, you may see the following error:</p>
 <pre><code>Error: HTTP error 403.
@@ -147,7 +146,7 @@ Because of this, you may see the following error:</p>
 short of a window. To fix this, you need to tell <code>R</code> how to use GitHub as your
 user (you’ll need a GitHub user account). Follow these two steps:</p>
 <ol style="list-style-type: decimal">
-<li><p>Type <code><a href="https://usethis.r-lib.org/reference/usethis-defunct.html">usethis::browse_github_pat()</a></code> in your <code>R</code> console, which will direct
+<li><p>Type <code>usethis::browse_github_pat()</code> in your <code>R</code> console, which will direct
 you to GitHub’s page to create a New Personal Access Token (PAT).</p></li>
 <li><p>Create a PAT simply by clicking “Generate token” at the bottom of the page.</p></li>
 <li><p>Copy your PAT, a long string of lowercase letters and numbers.</p></li>
@@ -169,7 +168,7 @@ ends with a new line.</p></li>
 look.</p></li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">GITHUB_PAT</span><span class="op">=</span><span class="va">yourPAT</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">GITHUB_PAT</span><span class="op">=</span><span class="va">yourPAT</span></span></code></pre></div>
 <ol start="8" style="list-style-type: decimal">
 <li>Restart R. You can restart <code>R</code> via the drop-down menu on RStudio’s “Session”
 tab, which is located at the top of the RStudio interface. You have to
@@ -200,7 +199,7 @@ package which threw the error above.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: July 07, 2023.</p>
+    <p>"<strong>[Workshop] Targeted Learning in the <code>tlverse</code></strong>: Causal Inference Meets Machine Learning" was written by Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips. It was last built on updated: November 14, 2024.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

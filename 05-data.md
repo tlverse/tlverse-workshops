@@ -27,7 +27,7 @@ interest. For reference, this trial was registered with ClinicalTrials.gov under
 registration number NCT01590095.
 
 
-```r
+``` r
 library(readr)
 # read in data via readr::read_csv
 dat <- read_csv(

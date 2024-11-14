@@ -95,7 +95,7 @@ package](https://usethis.r-lib.org/) to install all `tlverse` packages or
 specific packages:
 
 
-```r
+``` r
 install.packages("devtools")
 
 # install all tlverse packages 
@@ -151,7 +151,7 @@ user (you'll need a GitHub user account). Follow these two steps:
    look.
 
   
-  ```r
+  ``` r
   GITHUB_PAT=yourPAT
   
   ```

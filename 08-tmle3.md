@@ -144,7 +144,7 @@ introduced earlier and estimating an average treatment effect.
 We'll use the same WASH Benefits data as the earlier chapters:
 
 
-```r
+``` r
 library(data.table)
 library(dplyr)
 library(tmle3)
@@ -167,7 +167,7 @@ it. We call this a "Node List" as it corresponds to the nodes in a Directed
 Acyclic Graph (DAG), a way of displaying causal relationships between variables.
 
 
-```r
+``` r
 node_list <- list(
   W = c(
     "month", "aged", "sex", "momage", "momedu",
@@ -200,7 +200,7 @@ Currently, missingness in `tmle3` is handled in a fairly simple way:
 These steps are implemented in the `process_missing` function in `tmle3`:
 
 
-```r
+``` r
 processed <- process_missing(washb_data, node_list)
 washb_data <- processed$data
 node_list <- processed$node_list
@@ -218,7 +218,7 @@ We'll start with using one of the specs, and then work our way down into the
 internals of `tmle3`.
 
 
-```r
+``` r
 ate_spec <- tmle_ATE(
   treatment_level = "Nutrition + WSH",
   control_level = "Control"
@@ -234,7 +234,7 @@ This takes the form of a list of `sl3` learners, one for each likelihood factor
 to be estimated with `sl3`:
 
 
-```r
+``` r
 # choose base learners
 lrnr_mean <- make_learner(Lrnr_mean)
 lrnr_rf <- make_learner(Lrnr_ranger)
@@ -264,14 +264,16 @@ we plan to include reasonable defaults learners.
 We now have everything we need to fit the tmle using `tmle3`:
 
 
-```r
+``` r
 tmle_fit <- tmle3(ate_spec, washb_data, node_list, learner_list)
 print(tmle_fit)
 A tmle3_Fit that took 1 step(s)
-   type                                    param   init_est  tmle_est       se
-1:  ATE ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] -0.0031624 0.0077013 0.050351
-       lower   upper psi_transformed lower_transformed upper_transformed
-1: -0.090985 0.10639       0.0077013         -0.090985           0.10639
+     type                                    param   init_est tmle_est       se
+   <char>                                   <char>      <num>    <num>    <num>
+1:    ATE ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] -0.0070486 0.010803 0.050255
+       lower  upper psi_transformed lower_transformed upper_transformed
+       <num>  <num>           <num>             <num>             <num>
+1: -0.087695 0.1093        0.010803         -0.087695            0.1093
 ```
 
 ### Evaluate the Estimates
@@ -279,10 +281,10 @@ A tmle3_Fit that took 1 step(s)
 We can see the summary results by printing the fit object. Alternatively, we
 can extra results from the summary by indexing into it:
 
-```r
+``` r
 estimates <- tmle_fit$summary$psi_transformed
 print(estimates)
-[1] 0.0077013
+[1] 0.010803
 ```
 
 ## `tmle3` Components
@@ -298,12 +300,12 @@ fitting the TMLE to, as well as an NPSEM generated from the `node_list`
 defined above, describing the variables and their relationships.
 
 
-```r
+``` r
 tmle_task <- ate_spec$make_tmle_task(washb_data, node_list)
 ```
 
 
-```r
+``` r
 tmle_task$npsem
 $W
 tmle3_Node: W
@@ -327,7 +329,7 @@ Next, is an object representing the likelihood, factorized according to the
 NPSEM described above:
 
 
-```r
+``` r
 initial_likelihood <- ate_spec$make_initial_likelihood(
   tmle_task,
   learner_list
@@ -346,20 +348,21 @@ the `learner_list`) above.
 We can use this in tandem with the `tmle_task` object to obtain likelihood
 estimates for each observation:
 
-```r
+``` r
 initial_likelihood$get_likelihoods(tmle_task)
                W       A        Y
-   1: 0.00021299 0.32505 -0.32484
-   2: 0.00021299 0.34513 -0.88033
-   3: 0.00021299 0.32492 -0.79111
-   4: 0.00021299 0.31674 -0.88973
-   5: 0.00021299 0.32039 -0.63280
+           <num>   <num>    <num>
+   1: 0.00021299 0.33779 -0.37546
+   2: 0.00021299 0.36064 -0.91707
+   3: 0.00021299 0.32319 -0.79574
+   4: 0.00021299 0.33434 -0.93901
+   5: 0.00021299 0.32580 -0.67690
   ---                            
-4691: 0.00021299 0.21683 -0.60898
-4692: 0.00021299 0.21904 -0.21317
-4693: 0.00021299 0.20192 -0.79035
-4694: 0.00021299 0.24234 -0.94138
-4695: 0.00021299 0.18462 -1.08026
+4691: 0.00021299 0.23030 -0.59651
+4692: 0.00021299 0.21570 -0.22788
+4693: 0.00021299 0.21758 -0.78058
+4694: 0.00021299 0.26712 -0.89977
+4695: 0.00021299 0.19681 -1.05735
 ```
 
 <!-- TODO: make helper to get learners out of fit objects -->
@@ -372,7 +375,7 @@ object defines the update strategy (e.g., submodel, loss function, CV-TMLE or
 not).
 
 
-```r
+``` r
 targeted_likelihood <- Targeted_Likelihood$new(initial_likelihood)
 ```
 
@@ -382,7 +385,7 @@ options. For example, you can disable CV-TMLE (the default in `tmle3`) as
 follows:
 
 
-```r
+``` r
 targeted_likelihood_no_cv <-
   Targeted_Likelihood$new(initial_likelihood,
     updater = list(cvtmle = FALSE)
@@ -396,7 +399,7 @@ single parameter, the ATE. In the next section, we'll see how to add additional
 parameters.
 
 
-```r
+``` r
 tmle_params <- ate_spec$make_params(tmle_task, targeted_likelihood)
 print(tmle_params)
 [[1]]
@@ -409,17 +412,19 @@ Having used the spec to manually generate all these components, we can now
 manually fit a `tmle3`:
 
 
-```r
+``` r
 tmle_fit_manual <- fit_tmle3(
   tmle_task, targeted_likelihood, tmle_params,
   targeted_likelihood$updater
 )
 print(tmle_fit_manual)
 A tmle3_Fit that took 1 step(s)
-   type                                    param   init_est tmle_est       se
-1:  ATE ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] -0.0062355 0.015165 0.050251
+     type                                    param   init_est tmle_est       se
+   <char>                                   <char>      <num>    <num>    <num>
+1:    ATE ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] -0.0050243 0.014321 0.050524
        lower   upper psi_transformed lower_transformed upper_transformed
-1: -0.083325 0.11365        0.015165         -0.083325           0.11365
+       <num>   <num>           <num>             <num>             <num>
+1: -0.084705 0.11335        0.014321         -0.084705           0.11335
 ```
 
 The result is equivalent to fitting using the `tmle3` function as above.
@@ -431,7 +436,7 @@ multiple parameters simultaneously. To illustrate this, we'll use the
 `tmle_TSM_all` spec:
 
 
-```r
+``` r
 tsm_spec <- tmle_TSM_all()
 targeted_likelihood <- Targeted_Likelihood$new(initial_likelihood)
 all_tsm_params <- tsm_spec$make_params(tmle_task, targeted_likelihood)
@@ -470,7 +475,7 @@ parameters. For instance, we can estimate a ATE using the delta method and two
 of the above TSM parameters:
 
 
-```r
+``` r
 ate_param <- define_param(
   Param_delta, targeted_likelihood,
   delta_param_ATE,
@@ -489,7 +494,7 @@ We can now fit a TMLE simultaneously for all TSM parameters, as well as the
 above defined ATE parameter
 
 
-```r
+``` r
 all_params <- c(all_tsm_params, ate_param)
 
 tmle_fit_multiparam <- fit_tmle3(
@@ -499,33 +504,36 @@ tmle_fit_multiparam <- fit_tmle3(
 
 print(tmle_fit_multiparam)
 A tmle3_Fit that took 1 step(s)
-   type                                       param   init_est  tmle_est
-1:  TSM                            E[Y_{A=Control}] -0.5933495 -0.620280
-2:  TSM                        E[Y_{A=Handwashing}] -0.6160188 -0.658211
-3:  TSM                          E[Y_{A=Nutrition}] -0.6100132 -0.605369
-4:  TSM                    E[Y_{A=Nutrition + WSH}] -0.5995850 -0.605361
-5:  TSM                         E[Y_{A=Sanitation}] -0.5846449 -0.581303
-6:  TSM                                E[Y_{A=WSH}] -0.5192872 -0.449822
-7:  TSM                              E[Y_{A=Water}] -0.5633611 -0.535410
-8:  ATE E[Y_{A=Nutrition + WSH}] - E[Y_{A=Control}] -0.0062355  0.014918
+     type                                       param   init_est  tmle_est
+   <char>                                      <char>      <num>     <num>
+1:    TSM                            E[Y_{A=Control}] -0.5957269 -0.622616
+2:    TSM                        E[Y_{A=Handwashing}] -0.6180522 -0.652680
+3:    TSM                          E[Y_{A=Nutrition}] -0.6150755 -0.600273
+4:    TSM                    E[Y_{A=Nutrition + WSH}] -0.6007511 -0.608339
+5:    TSM                         E[Y_{A=Sanitation}] -0.5847701 -0.579687
+6:    TSM                                E[Y_{A=WSH}] -0.5148863 -0.450096
+7:    TSM                              E[Y_{A=Water}] -0.5639776 -0.535829
+8:    ATE E[Y_{A=Nutrition + WSH}] - E[Y_{A=Control}] -0.0050243  0.014277
          se     lower    upper psi_transformed lower_transformed
-1: 0.029908 -0.678899 -0.56166       -0.620280         -0.678899
-2: 0.041635 -0.739815 -0.57661       -0.658211         -0.739815
-3: 0.041415 -0.686541 -0.52420       -0.605369         -0.686541
-4: 0.040619 -0.684974 -0.52575       -0.605361         -0.684974
-5: 0.042091 -0.663800 -0.49880       -0.581303         -0.663800
-6: 0.044845 -0.537717 -0.36193       -0.449822         -0.537717
-7: 0.039068 -0.611983 -0.45884       -0.535410         -0.611983
-8: 0.050253 -0.083575  0.11341        0.014918         -0.083575
+      <num>     <num>    <num>           <num>             <num>
+1: 0.029746 -0.680918 -0.56431       -0.622616         -0.680918
+2: 0.041652 -0.734316 -0.57104       -0.652680         -0.734316
+3: 0.041720 -0.682043 -0.51850       -0.600273         -0.682043
+4: 0.041058 -0.688811 -0.52787       -0.608339         -0.688811
+5: 0.042113 -0.662226 -0.49715       -0.579687         -0.662226
+6: 0.044683 -0.537673 -0.36252       -0.450096         -0.537673
+7: 0.039064 -0.612392 -0.45927       -0.535829         -0.612392
+8: 0.050524 -0.084748  0.11330        0.014277         -0.084748
    upper_transformed
-1:          -0.56166
-2:          -0.57661
-3:          -0.52420
-4:          -0.52575
-5:          -0.49880
-6:          -0.36193
-7:          -0.45884
-8:           0.11341
+               <num>
+1:          -0.56431
+2:          -0.57104
+3:          -0.51850
+4:          -0.52787
+5:          -0.49715
+6:          -0.36252
+7:          -0.45927
+8:           0.11330
 ```
 
 ## Exercises
@@ -540,7 +548,7 @@ binary outcome, `haz01` -- an indicator of having an above average height for
 age.
 
 
-```r
+``` r
 # load the data set
 data(cpp)
 cpp <- cpp %>%
@@ -591,7 +599,7 @@ but also tailored to have robust finite sample performance.
 4. Define the metalearner like below.
 
 
-```r
+``` r
 metalearner <- make_learner(
   Lrnr_solnp,
   loss_function = loss_loglik_binomial,
@@ -649,7 +657,7 @@ covariates was created.
    strata specific ATEs according to geographical region (`REGION`).
 
 
-```r
+``` r
 ist_data <- fread(
   paste0(
     "https://raw.githubusercontent.com/tlverse/deming2019-workshop/",
